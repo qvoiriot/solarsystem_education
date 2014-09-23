@@ -25,16 +25,14 @@ function init() {
   //add background using a camera
   cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
   cameraBG.position.z = 50;
+
   sceneBG = new THREE.Scene();
-
   var materialColor = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background.jpg"), depthTest: false});
-
   var bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), materialColor);
   bgPlane.position.z = -100;
   bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
 
   sceneBG.add(bgPlane);
-
 
   //texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k.jpg");
@@ -55,44 +53,51 @@ function init() {
   var materialSun = new THREE.MeshPhongMaterial({map: matextureSun, transparent: true});
 
   //texture de la lune
-  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap4k.jpg");
+  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap1k.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap1k.jpg");
   var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: true});
 
+  materialLune.bumpMap = bumpMapLune;
 
   //texture mars
-  var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/mars.jpg");
-  var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/MarsElevation_2500x1250.jpg");
+  var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap1k.jpg");
+  var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbump1K.jpg");
   var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
 
   materialMars.bumpMap = bumpMapMars;
 
   //texture jupiter
-  var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupiter.jpg");
+  var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupitermap.jpg");
   var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: true});
 
   //texture saturn
-  var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturn.jpg");
-
+  var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
   var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: true});
 
   //texture Anneausaturn
-  var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/anneau.jpg");
+  var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
   var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.5});
 
   //texture mercure
-  var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercure.jpg");
+  var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap.jpg");
+  var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybump.jpg");
   var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
 
+  materialMercure.bumpMap = bumpMapMercure;
+
   //texture venus
-  var matextureVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venus.jpg");
+  var matextureVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusmap.jpg");
+  var bumpMapVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusbump.jpg");
   var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: true});
 
+  materialVenus.bumpMap = bumpMapVenus;
+
   //texture uranus
-  var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranus.jpg");
+  var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusmap.jpg");
   var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: true});
 
   //texture neptune
-  var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptune.jpg");
+  var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
   var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
 
 
@@ -219,7 +224,7 @@ function init() {
   scene.add(saturn);
 
   //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 43, 63, 1, 80 );
+  var anneauGeometry = new THREE.CylinderGeometry( 53, 63, 1, 80 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   //anneau.receiveShadow = true;
 
@@ -284,9 +289,9 @@ function init() {
   addStatsObject();
 
   // position and point the camera to the center of the scene
-  camera.position.x = 15;
-  camera.position.y = 16;
-  camera.position.z = 13;
+  camera.position.x = -600;
+  camera.position.y = 300;
+  camera.position.z = -500;
   camera.lookAt(scene.position);
 
   //addcontrols
