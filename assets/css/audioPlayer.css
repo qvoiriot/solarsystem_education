@@ -1,0 +1,29 @@
+#audioPlayer{
+	position: absolute;
+	z-index: 100;
+}
+
+#volume{
+	z-index: 100;
+	position: absolute;
+}
+
+progress[value]{
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 10px;
+}
+
+progress[value]::-webkit-progress-bar{
+  background-color: #333;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value{
+  background-color: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
