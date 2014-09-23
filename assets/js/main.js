@@ -271,22 +271,34 @@ function init() {
   scene.add(directionalLight);
 
 
+// ajout de navette
+  var loader = new THREE.OBJMTLLoader();
+  loader.addEventListener( 'load', function ( event ) {
+   
+     var object = event.content;
+   
+     object.position.x = 190;
+     object.position.y = -2;
+     object.position.z = 0//position de l'objet
+   
+     object.traverse( function( node ) {
+        if( node.material ) {
+           node.material.side = THREE.DoubleSide;
+        }
+     });
+     scene.add( object );
+   
+  });
 
-  //setup the control object for the control gui
-  control = new function(){
-      this.rotationSpeed = 0.0005;
-      this.opacity = 1;
-      this.color = materialTerre.color.getHex();
-  }
+loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl' );
 
-  //add extras
-  //addControlGui(control);
+
   addStatsObject();
 
   // position and point the camera to the center of the scene
-  camera.position.x = 15;
-  camera.position.y = 16;
-  camera.position.z = 13;
+  camera.position.x = 250;
+  camera.position.y = -2;
+  camera.position.z = 20;
   camera.lookAt(scene.position);
 
   //addcontrols
