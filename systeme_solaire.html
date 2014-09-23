@@ -22,10 +22,20 @@
       overflow: hidden;
     }
   </style>
+  <link rel="stylesheet" href="assets/css/audioPlayer.css">
 </head>
 
   <script src="assets/js/main.js"></script>
 
-<body></body>
-
+<body>
+  <audio id="audioPlayer" autoplay volume="0.5">
+    <source src="assets/sound/Nova.mp3"></source>
+  </audio>
+  <div id="volume">
+    <button id="volume_plus" onclick="volume('minus')">M</button>
+    <progress max="1" value="0.5"></progress>
+    <button id="volume_moins" onclick="volume('plus')">P</button>
+  </div>
+  <script src="assets/js/audioPlayer.js"></script>
+</body>
 </html>
