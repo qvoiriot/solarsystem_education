@@ -9,13 +9,16 @@ var directionalLight;
 var sphere;
 var nuage;
 var lune;
-var cameraBG;
-var sceneBG;
 var composer;
 var mars;
 var jupiter;
 var anneau;
 var espace;
+var mercure;
+var venus;
+var neptune;
+var uranus;
+var saturne;
 
 /**
  * Initializes the scene, camera and objects. Called when the window is
@@ -23,25 +26,10 @@ var espace;
  */
 function init() {
 
-  /* 
-  //add background using a camera
-  cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
-  cameraBG.position.z = 50;
-
-  sceneBG = new THREE.Scene();
-  var materialColor = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background.jpg"), depthTest: false});
-  var bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), materialColor);
-  bgPlane.position.z = -100;
-  bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
-
-  sceneBG.add(bgPlane);
-  */
-
   //texture espace
   var matextureEspace = THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background_1.jpg");
   var materialEspace = new THREE.MeshPhongMaterial({map: matextureEspace, transparent: true});
   materialEspace.side = THREE.DoubleSide;
-
 
 
   //texture de la terre
@@ -63,7 +51,7 @@ function init() {
   //texture du soleil
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var materialSun = new THREE.MeshPhongMaterial({map: matextureSun, transparent: true});
-  materialSun.side = THREE.FaceSide;
+  materialSun.side = THREE.BackSide;
 
   //texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
@@ -153,8 +141,6 @@ function init() {
 
   scene.add(espace);
 
-
-
   //create mercure
   var mercureGeometry = new THREE.SphereGeometry(4, 60, 60);
   mercure = new THREE.Mesh (mercureGeometry, materialMercure);
@@ -164,7 +150,6 @@ function init() {
   mercure.position.y = -2;
   mercure.position.z = 0;
   mercure.name='mercure';
-  //add the plane to the scene
   scene.add(mercure);
 
   //create venus
@@ -176,7 +161,6 @@ function init() {
   venus.position.y = -2;
   venus.position.z = 0;
   venus.name='venus';
-  //add the plane to the scene
   scene.add(venus);
 
 
@@ -190,20 +174,17 @@ function init() {
   terre.position.y = -2;
   terre.position.z = 0;
   terre.name='sphere';
-  //add the plane to the scene
   scene.add(terre);
 
 
   //create nuage
   var nuageGeometry = new THREE.SphereGeometry(10.05, 60, 60);
   nuage = new THREE.Mesh (nuageGeometry, materialNuage);
-  //nuage.receiveShadow = true;
 
   nuage.position.x = 200.2;
   nuage.position.y = -2;
   nuage.position.z = 0;
   nuage.name='nuage';
-  //add the plane to the scene
   scene.add(nuage);
 
   var luneGeometry = new THREE.SphereGeometry(5, 60, 60);
@@ -214,15 +195,12 @@ function init() {
   lune.position.y = -2;
   lune.position.z = 0;
   lune.name='lune';
-  //add the plane to the scene
   scene.add(lune);
 
 
   //add soleil
   var soleilGeometry = new THREE.SphereGeometry(50, 60, 60);
   soleil = new THREE.Mesh (soleilGeometry, materialSun);
-
-
 
   soleil.position.x = 0;
   soleil.position.y = 0;
@@ -284,7 +262,6 @@ function init() {
   var anneauGeometry = new THREE.CylinderGeometry( 53, 63, 1, 80 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   //anneau.receiveShadow = true;
-
   anneau.position.x = 761;
   anneau.position.y = -2;
   anneau.position.z = 0;
@@ -318,41 +295,30 @@ function init() {
 
 
   // add ambient light
-  ambientLight = new THREE.AmbientLight(0xffffff,1);
+  ambientLight = new THREE.AmbientLight(0x666666);
   ambientLight.position = new THREE.Vector3(11,11,11);
   ambientLight.name='ambient';
 
   scene.add(ambientLight);
 
-
-  //add directional light
-  directionalLight = new THREE.DirectionalLight(0xffffff,1);
-  directionalLight.position = new THREE.Vector3(0,0,0);
-  directionalLight.name='directional';
-
-  scene.add(directionalLight);
+  var light = new THREE.PointLight( 0xfffffff, 1, 2500 );
+  light.position.set( 0, 0, 0 );
+  scene.add( light );
 
 
 // ajout de navette
-
-        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+       // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
         var loader = new THREE.OBJMTLLoader();
         loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl', function ( object ) {
 
           object.position.x = 190;
-         object.position.y = -2;
-         object.position.z = 0//position de l'objet   
+          object.position.y = -2;
+          object.position.z = 0//position de l'objet   
           scene.add( object );
-
         } );
 
-
-
-  addStatsObject();
-
   // position and point the camera to the center of the scene
-
   camera.position.x = -600;
   camera.position.y = 300;
   camera.position.z = -500;
@@ -362,9 +328,6 @@ function init() {
   //addcontrols
   cameraControl = new THREE.OrbitControls(camera);
 
-  //setup the composer steps
-  //first render the background
-  //var bgPass = new THREE.RenderPass(sceneBG, cameraBG);                                       // commmter pour test sans BG
 
   //next render the scene (rotating earth), without clearing the current output
   var renderPass = new THREE.RenderPass(scene, camera);
@@ -376,14 +339,11 @@ function init() {
 
   //add these passes to the composer
   composer = new THREE.EffectComposer(renderer);
-  //composer.addPass(bgPass);                                                                  // commmter pour test sans BG
   composer.addPass(renderPass);
   composer.addPass(effectCopy);
 
   // add the output of the renderer to the html element
   document.body.appendChild(renderer.domElement);
-
-
 
   // call the render function, after the first render, interval is determined
   // by requestAnimationFrame
@@ -391,24 +351,11 @@ function init() {
 }
 
 
-function addStatsObject(){
-  stats = new Stats();
-  stats.setMode(0);
-
-  stats.domElement.style.position ='absolute';
-  stats.domElement.style.left = '0px';
-  stats.domElement.style.top = '0px';
-
-  //document.body.appendChild(stats.domElement);
-}
-
 /**
  * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
  * for future renders
  */
 function render() {
-
-  //update camera
 
   // definition des vitesses de revolution autour soleil
   //control.rotationSpeed;
@@ -441,7 +388,7 @@ function render() {
   terre.rotation.y = terre.rotation.y+ rotTerre;
   nuage.rotation.y = nuage.rotation.y + rotNuage;
   lune.rotation.y = lune.rotation.y + rotLune;
-  soleil.rotation.y = soleil.rotation.y+ rotSun;
+  //soleil.rotation.y = soleil.rotation.y+ rotSun;
   mars.rotation.y = mars.rotation.y+rotMars;
   jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
   saturn.rotation.y= saturn.rotation.y+rotSaturn;
@@ -497,10 +444,6 @@ function render() {
 
 
   camera.lookAt(scene.position);
-
-
-  //update stats
-  stats.update();
 
   //update the camera
   cameraControl.update();
