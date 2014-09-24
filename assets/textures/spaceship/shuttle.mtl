@@ -1,90 +1,5 @@
 # Blender MTL File: 'shuttle.blend'
-# Material Count: 11
-
-newmtl Material
-Ns 66.666667
-Ka 0.000000 0.000000 0.000000
-Kd 0.653631 0.637847 0.618089
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd Untitled
-
-newmtl Material.001
-Ns 23.529412
-Ka 0.000000 0.000000 0.000000
-Kd 0.054138 0.054138 0.054138
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-
-newmtl Material.002
-Ns 23.529412
-Ka 0.000000 0.000000 0.000000
-Kd 0.094502 0.099430 0.109322
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd Untitled
-
-newmtl Material.002_NONE
-Ns 23.529412
-Ka 0.000000 0.000000 0.000000
-Kd 0.094502 0.099430 0.109322
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-
-newmtl Material.002_devship_AO2.tga
-Ns 23.529412
-Ka 0.000000 0.000000 0.000000
-Kd 0.094502 0.099430 0.109322
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd D:\Mr David Hignett\Infinity\DEVSHIP\devship_AO2.tga
-
-newmtl Material.003
-Ns 23.529412
-Ka 0.000000 0.000000 0.000000
-Kd 0.054138 0.054138 0.054138
-Ks 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-
-newmtl Material.004
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.000000 0.000000 0.000000
-Ks 0.990056 0.990056 0.990056
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Untitled
-
-newmtl Material.005
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.264191 0.250173 0.234977
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Untitled
-
-newmtl None
-Ns 0
-Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
-illum 2
+# Material Count: 2
 
 newmtl shuttle
 Ns 184.313725
@@ -94,11 +9,11 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd D:\Bureau\3D\61208_shuttle\shuttle_d.tga
-map_Bump D:\\Bureau\\3D\\61208_shuttle\\shuttle_s.tga
-map_Ke D:\\Bureau\\3D\\61208_shuttle\\shuttle_l.tga
+map_Kd C:\wamp\www\EPSI\Mr David Hignett\Infinity\DEVSHIP\devship_AO2.tga
+map_Bump shuttle_s.tga
+map_Ke shuttle_l.tga
 
-newmtl shuttle_devship_AO2.tga
+newmtl shuttle_devship_AO.tga
 Ns 184.313725
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
@@ -106,6 +21,6 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd D:\Mr David Hignett\Infinity\DEVSHIP\devship_AO2.tga
-map_Bump D:\\Bureau\\3D\\61208_shuttle\\shuttle_s.tga
-map_Ke D:\\Bureau\\3D\\61208_shuttle\\shuttle_l.tga
+map_Kd shuttle_d.tga
+map_Bump shuttle_s.tga
+map_Ke shuttle_l.tga

@@ -63,7 +63,7 @@ function init() {
   //texture du soleil
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var materialSun = new THREE.MeshPhongMaterial({map: matextureSun, transparent: true});
-  materialSun.side = THREE.BackSide;
+  materialSun.side = THREE.FaceSide;
 
   //texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
@@ -334,25 +334,19 @@ function init() {
 
 
 // ajout de navette
-  var loader = new THREE.OBJMTLLoader();
-  loader.addEventListener( 'load', function ( event ) {
-   
-     var object = event.content;
-   
-     object.position.x = 190;
-     object.position.y = -2;
-     object.position.z = 0//position de l'objet
-   
-     object.traverse( function( node ) {
-        if( node.material ) {
-           node.material.side = THREE.DoubleSide;
-        }
-     });
-     scene.add( object );
-   
-  });
 
-loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl' );
+        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+        var loader = new THREE.OBJMTLLoader();
+        loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl', function ( object ) {
+
+          object.position.x = 190;
+         object.position.y = -2;
+         object.position.z = 0//position de l'objet   
+          scene.add( object );
+
+        } );
+
 
 
   addStatsObject();
