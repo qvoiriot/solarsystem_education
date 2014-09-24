@@ -1,17 +1,19 @@
-#audioPlayer{
-	position: absolute;
-	z-index: 100;
-}
-
 #volume{
 	z-index: 100;
 	position: absolute;
+}
+
+.volume_button{
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 8px;
 }
 
 progress[value]{
   /* Reset the default appearance */
   -webkit-appearance: none;
   appearance: none;
+  vertical-align: 7px;
   width: 100px;
   height: 10px;
 }

@@ -16,27 +16,19 @@
    <script src="libs/DDSLoader.js"></script>
    <script src="libs/OBJMTLLoader.js"></script>
   <script src="libs/detector.js"></script>
-
-  <style>
-    body {
-      /* set margin to 0 and overflow to hidden, to go fullscreen */
-      margin: 0;
-      overflow: hidden;
-    }
-  </style>
+   <script src="libs/OBJMTLLoader.js"></script>
+  <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="assets/css/audioPlayer.css">
-</head>
-
   <script src="assets/js/main.js"></script>
-
+</head>
 <body>
-  <audio id="audioPlayer" autoplay volume="0.5">
+  <audio id="audioPlayer" autoplay loop>
     <source src="assets/sound/Nova.mp3"></source>
   </audio>
   <div id="volume">
-    <button id="volume_plus" onclick="volume('minus')">M</button>
-    <progress max="1" value="0.5"></progress>
-    <button id="volume_moins" onclick="volume('plus')">P</button>
+    <img src="assets/img/volume_minus.png" class="volume_button" id="volume_plus" onclick="volume('minus')">
+    <progress id="volumeProgress" max="1" value="0.5"></progress>
+    <img src="assets/img/volume_plus.png" class="volume_button" id="volume_moins" onclick="volume('plus')">
   </div>
   <script src="assets/js/audioPlayer.js"></script>
 </body>
