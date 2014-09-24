@@ -15,6 +15,7 @@ var composer;
 var mars;
 var jupiter;
 var anneau;
+var espace;
 
 /**
  * Initializes the scene, camera and objects. Called when the window is
@@ -22,6 +23,7 @@ var anneau;
  */
 function init() {
 
+  /* 
   //add background using a camera
   cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
   cameraBG.position.z = 50;
@@ -33,14 +35,24 @@ function init() {
   bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
 
   sceneBG.add(bgPlane);
+  */
+
+  //texture espace
+  var matextureEspace = THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background_1.jpg");
+  var materialEspace = new THREE.MeshPhongMaterial({map: matextureEspace, transparent: true});
+  materialEspace.side = THREE.DoubleSide;
+
+
 
   //texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k.jpg");
-  var normalMap = THREE.ImageUtils.loadTexture("assets/textures/planets/earth_normalmap_flat4k.jpg");
+  //var normalMap = THREE.ImageUtils.loadTexture("assets/textures/planets/earth_normalmap_flat4k.jpg");
+  var bumpMapTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthbumpMap.jpg");
   var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k.jpg");
   var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: true});
 
-  materialTerre.normalMap = normalMap;
+  //materialTerre.normalMap = normalMap;
+  materialTerre.bumpMap = bumpMapTerre;
   materialTerre.specularMap = specularMapEarth;
   materialTerre.specular = new THREE.Color(0x262626);
 
@@ -51,28 +63,41 @@ function init() {
   //texture du soleil
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var materialSun = new THREE.MeshPhongMaterial({map: matextureSun, transparent: true});
+  materialSun.side = THREE.BackSide;
 
   //texture de la lune
-  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap1k.jpg");
-  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap1k.jpg");
+  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
   var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: true});
 
   materialLune.bumpMap = bumpMapLune;
 
   //texture mars
-  var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap1k.jpg");
-  var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbump1K.jpg");
+  var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap_1.jpg");
+  var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbumpMap.jpg");
   var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
 
   materialMars.bumpMap = bumpMapMars;
 
   //texture jupiter
   var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupitermap.jpg");
+  var bumpMapJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupiterbumpMap.jpg");
   var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: true});
+  
+  materialJupiter.bumpMap =bumpMapJupiter;
+
+
+  //texture des nuages jupiter
+  var matextureNuageJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/Jupiter_Clouds.jpg");
+  var materialNuageJupiter = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
+  
 
   //texture saturn
   var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
+  var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
   var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: true});
+
+  materialSaturn.bumpMap =bumpMapSaturn;
 
   //texture Anneausaturn
   var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
@@ -80,7 +105,7 @@ function init() {
 
   //texture mercure
   var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap.jpg");
-  var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybump.jpg");
+  var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybumpMap.jpg");
   var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
 
   materialMercure.bumpMap = bumpMapMercure;
@@ -94,24 +119,40 @@ function init() {
 
   //texture uranus
   var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusmap.jpg");
+  var bumpMapUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusbumpMap.jpg");
   var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: true});
+
+  materialUranus.bumpMap = bumpMapUranus;
 
   //texture neptune
   var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
+  var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
   var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
+
+  materialNeptune.bumpMap = bumpMapNeptune;
 
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   scene = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 9000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 8000);
 
   // create a render, sets the background color and the size
   renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(0x000000, 1.0);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMapEnabled = true;
+
+  //create espace
+  var espaceGeometry = new THREE.SphereGeometry(4000, 90,90);
+  espace = new THREE.Mesh (espaceGeometry, materialEspace);
+  espace.position.x= 0;
+  espace.position.y=0;
+  espace.position.z=0;
+
+  scene.add(espace);
+
 
 
   //create mercure
@@ -182,6 +223,7 @@ function init() {
   soleil = new THREE.Mesh (soleilGeometry, materialSun);
 
 
+
   soleil.position.x = 0;
   soleil.position.y = 0;
   soleil.position.z = 0;
@@ -211,6 +253,21 @@ function init() {
   jupiter.position.z = 0;
   jupiter.name='jupiter';
   scene.add(jupiter);
+
+
+/*
+  //add nuage jupiter
+  var jupiterNuageGeometry = new THREE.SphereGeometry(44.2, 60, 60);
+  nuagejupiter = new THREE.Mesh (jupiterNuageGeometry, materialNuageJupiter);
+  nuagejupiter.receiveShadow = true;
+
+  nuagejupiter.position.x = 416;
+  nuagejupiter.position.y = -2;
+  nuagejupiter.position.z = 0;
+  nuagejupiter.name='jupiter';
+  scene.add(nuagejupiter);
+  */
+  
 
   //add saturn
   var saturnGeometry = new THREE.SphereGeometry(37, 60, 60);
@@ -276,22 +333,36 @@ function init() {
   scene.add(directionalLight);
 
 
+// ajout de navette
+  var loader = new THREE.OBJMTLLoader();
+  loader.addEventListener( 'load', function ( event ) {
+   
+     var object = event.content;
+   
+     object.position.x = 190;
+     object.position.y = -2;
+     object.position.z = 0//position de l'objet
+   
+     object.traverse( function( node ) {
+        if( node.material ) {
+           node.material.side = THREE.DoubleSide;
+        }
+     });
+     scene.add( object );
+   
+  });
 
-  //setup the control object for the control gui
-  control = new function(){
-      this.rotationSpeed = 0.0005;
-      this.opacity = 1;
-      this.color = materialTerre.color.getHex();
-  }
+loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl' );
 
-  //add extras
-  //addControlGui(control);
+
   addStatsObject();
 
   // position and point the camera to the center of the scene
+
   camera.position.x = -600;
   camera.position.y = 300;
   camera.position.z = -500;
+
   camera.lookAt(scene.position);
 
   //addcontrols
@@ -299,7 +370,7 @@ function init() {
 
   //setup the composer steps
   //first render the background
-  var bgPass = new THREE.RenderPass(sceneBG, cameraBG);
+  //var bgPass = new THREE.RenderPass(sceneBG, cameraBG);                                       // commmter pour test sans BG
 
   //next render the scene (rotating earth), without clearing the current output
   var renderPass = new THREE.RenderPass(scene, camera);
@@ -311,7 +382,7 @@ function init() {
 
   //add these passes to the composer
   composer = new THREE.EffectComposer(renderer);
-  composer.addPass(bgPass);
+  //composer.addPass(bgPass);                                                                  // commmter pour test sans BG
   composer.addPass(renderPass);
   composer.addPass(effectCopy);
 
@@ -325,12 +396,6 @@ function init() {
   render();
 }
 
-function addControlGui (controlObject){
-  var gui = new dat.GUI();
-  gui.add(controlObject, 'rotationSpeed', -0.01, 0.01);
-  gui.add(controlObject,'opacity', 0.1, 1);
-  gui.addColor(controlObject, 'color');
-}
 
 function addStatsObject(){
   stats = new Stats();
@@ -357,6 +422,7 @@ function render() {
   var rotLuneTerre = 0.0005;
   var rotSpeedMars = 0.00026584;
   var rotSpeedJupiter = 0.00004215;
+  var rotSpeedNuageJupiter = 0.000042;
   var rotSpeedSaturn = 0.000016974;
   var rotSpeedMercure = 0.00207605;
   var rotSpeedVenus = 0.00081276;
@@ -418,6 +484,10 @@ function render() {
   jupiter.position.x = jupiter.position.x * Math.cos(rotSpeedJupiter) +jupiter.position.z * Math.sin(rotSpeedJupiter);
   jupiter.position.z = jupiter.position.z * Math.cos(rotSpeedJupiter) - jupiter.position.x  * Math.sin(rotSpeedJupiter);
 
+  //nuagejupiter.position.x = nuagejupiter.position.x * Math.cos(rotSpeedNuageJupiter) +nuagejupiter.position.z * Math.sin(rotSpeedNuageJupiter);
+  //nuagejupiter.position.z = nuagejupiter.position.z * Math.cos(rotSpeedNuageJupiter) - nuagejupiter.position.x  * Math.sin(rotSpeedNuageJupiter);
+
+
   saturn.position.x = saturn.position.x * Math.cos(rotSpeedSaturn) +saturn.position.z * Math.sin(rotSpeedSaturn);
   saturn.position.z = saturn.position.z * Math.cos(rotSpeedSaturn) - saturn.position.x  * Math.sin(rotSpeedSaturn);
 
@@ -435,12 +505,6 @@ function render() {
   camera.lookAt(scene.position);
 
 
-  //charge opacity
-  //scene.getObjectByName('sphere').material.opacity = control.opacity;
-
-  //change color
-  //scene.getObjectByName('sphere').material.color = new THREE.Color(control.color);
-
   //update stats
   stats.update();
 
@@ -451,8 +515,8 @@ function render() {
   // render using requestAnimationFrame
   requestAnimationFrame(render);
 
-  // renderer.render(scene, camera);
-  renderer.autoClear = false;
+  renderer.render(scene, camera);
+  //renderer.autoClear = false;                                      // commmter pour test sans BG
   composer.render();
 }
 
