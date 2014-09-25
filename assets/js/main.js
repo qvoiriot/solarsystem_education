@@ -258,7 +258,7 @@ function init() {
 
 
   // add ambient light
-  ambientLight = new THREE.AmbientLight(0x666666);
+  ambientLight = new THREE.AmbientLight(0x242424);
   ambientLight.position = new THREE.Vector3(11,11,11);
   ambientLight.name='ambient';
   scene.add(ambientLight);
@@ -458,6 +458,8 @@ function handleResize() {
 }
 
 window.onmousehover= onPlanetMouseHover;
+
+window.onmousedown = onDocumentMouseDown;
 
 // calls the init function when the window is done loading.
 window.onload = init;
