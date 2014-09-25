@@ -20,6 +20,9 @@ var neptune;
 var uranus;
 var saturne;
 
+var projector = new THREE.Projector();
+var collidableMeshList = [];
+
 /**
  * Initializes the scene, camera and objects. Called when the window is
  * loaded by using window.onload (see below)
@@ -50,8 +53,8 @@ function init() {
 
   //texture du soleil
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
-  var materialSun = new THREE.MeshPhongMaterial({map: matextureSun, transparent: true});
-  materialSun.side = THREE.BackSide;
+  var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: true});
+  //materialSun.side = THREE.BackSide;
 
   //texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
@@ -76,8 +79,8 @@ function init() {
 
 
   //texture des nuages jupiter
-  var matextureNuageJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/Jupiter_Clouds.jpg");
-  var materialNuageJupiter = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
+  //var matextureNuageJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/Jupiter_Clouds.jpg");
+  //var materialNuageJupiter = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true, opacity:0.5});
   
 
   //texture saturn
@@ -151,6 +154,7 @@ function init() {
   mercure.position.z = 0;
   mercure.name='mercure';
   scene.add(mercure);
+  collidableMeshList.push(mercure); 
 
   //create venus
   var venusGeometry = new THREE.SphereGeometry(9, 60, 60);
@@ -162,6 +166,7 @@ function init() {
   venus.position.z = 0;
   venus.name='venus';
   scene.add(venus);
+  collidableMeshList.push(venus); 
 
 
   // create the ground plane Terre
@@ -175,6 +180,7 @@ function init() {
   terre.position.z = 0;
   terre.name='sphere';
   scene.add(terre);
+  collidableMeshList.push(terre); 
 
 
   //create nuage
@@ -196,6 +202,7 @@ function init() {
   lune.position.z = 0;
   lune.name='lune';
   scene.add(lune);
+  collidableMeshList.push(lune); 
 
 
   //add soleil
@@ -207,6 +214,7 @@ function init() {
   soleil.position.z = 0;
   soleil.name='soleil';
   scene.add(soleil);
+  collidableMeshList.push(soleil); 
 
 
   //add mars
@@ -219,6 +227,7 @@ function init() {
   mars.position.z = 0;
   mars.name='mars';
   scene.add(mars);
+  collidableMeshList.push(mars); 
 
 
   //add jupiter
@@ -231,11 +240,12 @@ function init() {
   jupiter.position.z = 0;
   jupiter.name='jupiter';
   scene.add(jupiter);
+  collidableMeshList.push(jupiter); 
 
 
-/*
+  /*
   //add nuage jupiter
-  var jupiterNuageGeometry = new THREE.SphereGeometry(44.2, 60, 60);
+  var jupiterNuageGeometry = new THREE.SphereGeometry(44.1, 60, 60);
   nuagejupiter = new THREE.Mesh (jupiterNuageGeometry, materialNuageJupiter);
   nuagejupiter.receiveShadow = true;
 
@@ -257,6 +267,7 @@ function init() {
   saturn.position.z = 0;
   saturn.name='saturn';
   scene.add(saturn);
+  collidableMeshList.push(saturn); 
 
   //add anneau saturn
   var anneauGeometry = new THREE.CylinderGeometry( 53, 63, 1, 80 );
@@ -279,6 +290,7 @@ function init() {
   uranus.position.z = 0;
   uranus.name='uranus';
   scene.add(uranus);
+  collidableMeshList.push(uranus); 
 
   //add neptune
   var neptuneGeometry = new THREE.SphereGeometry(15, 60, 60);
@@ -290,6 +302,7 @@ function init() {
   neptune.position.z = 0;
   neptune.name='neptune';
   scene.add(neptune);
+  collidableMeshList.push(neptune); 
 
 
 
@@ -318,6 +331,10 @@ function init() {
           scene.add( object );
         } );
 
+
+
+
+
   // position and point the camera to the center of the scene
   camera.position.x = -600;
   camera.position.y = 300;
@@ -342,12 +359,49 @@ function init() {
   composer.addPass(renderPass);
   composer.addPass(effectCopy);
 
+
+    // when the mouse moves, call the given function
+  document.addEventListener( 'mousemove', onPlanetMouseHover, false );
+  
+
   // add the output of the renderer to the html element
   document.body.appendChild(renderer.domElement);
 
   // call the render function, after the first render, interval is determined
   // by requestAnimationFrame
+
   render();
+}
+
+
+function onPlanetMouseHover( event ) {
+  // the following line would stop any other event handler from firing
+  // (such as the mouse's TrackballControls)
+  // event.preventDefault();
+  
+  // update the mouse variable
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
+
+function onDocumentMouseDown(event){
+    event.preventDefault();
+
+    var vector = new THREE.Vector3 ( (event.clientX / window.innerWidth)*2-1, - (event.clientY/window.innerHeight)*2+1, 0.5);
+    projector.unprojectVector(vector, camera);
+
+
+    var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+    var intersects = raycaster.intersectObjects(collidableMeshList);
+    
+
+    if (intersects.length >0){
+        selectedObject = intersects[0].object;
+        intersects[0].object.material.transparent=true;
+        intersects[0].object.material.color = new THREE.Color(0x0000ff);            
+    }
+
 }
 
 
@@ -357,20 +411,19 @@ function init() {
  */
 function render() {
 
-  // definition des vitesses de revolution autour soleil
-  //control.rotationSpeed;
+  // Vitesses de révolution autour soleil
   var rotSpeed = 0.0005;
   var rotLuneTerre = 0.0005;
   var rotSpeedMars = 0.00026584;
   var rotSpeedJupiter = 0.00004215;
-  var rotSpeedNuageJupiter = 0.000042;
+  //var rotSpeedNuageJupiter = 0.000042;
   var rotSpeedSaturn = 0.000016974;
   var rotSpeedMercure = 0.00207605;
   var rotSpeedVenus = 0.00081276;
   var rotSpeedUranus = 0.000005951;
   var rotSpeedNeptune = 0.0000030346;
 
-  // définition des vitesses de rotation axiale
+  //Vitesses de rotation axiale
   var rotSun = 0.000036935;
   var rotTerre= 0.001;
   var rotNuage = 0.0012;
@@ -388,7 +441,7 @@ function render() {
   terre.rotation.y = terre.rotation.y+ rotTerre;
   nuage.rotation.y = nuage.rotation.y + rotNuage;
   lune.rotation.y = lune.rotation.y + rotLune;
-  //soleil.rotation.y = soleil.rotation.y+ rotSun;
+  soleil.rotation.y = soleil.rotation.y+ rotSun;
   mars.rotation.y = mars.rotation.y+rotMars;
   jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
   saturn.rotation.y= saturn.rotation.y+rotSaturn;
@@ -467,6 +520,8 @@ function handleResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+window.onmousedown= onDocumentMouseDown;
 
 // calls the init function when the window is done loading.
 window.onload = init;
