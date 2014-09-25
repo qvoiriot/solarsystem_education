@@ -1,27 +1,18 @@
 // global variables
-var renderer;
-var scene;
-var camera;
-var spotlight;
-var stats;
-var cameraControl;
-var directionalLight;
-var sphere;
-var nuage;
-var lune;
-var composer;
-var mars;
-var jupiter;
-var anneau;
-var espace;
-var mercure;
-var venus;
-var neptune;
-var uranus;
-var saturne;
+var renderer, scene, camera, spotlight, stats, cameraControl, directionalLight, composer;
 
+// planets variables
+var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
+
+//custom varialbes
 var projector = new THREE.Projector();
+var mouse = { x: 0, y: 0 }, INTERSECTED;
 var collidableMeshList = [];
+var keyboard = new THREEx.KeyboardState();
+var clock = new THREE.Clock();
+var sprite1;
+var canvas1, context1, texture1;
+
 
 /**
  * Initializes the scene, camera and objects. Called when the window is
@@ -134,6 +125,27 @@ function init() {
   soleil.name='soleil';
   scene.add(soleil);
   collidableMeshList.push(soleil); 
+
+
+/*************************************************************/
+/**************           CUSTOM SUN             *************/
+/*************************************************************/
+
+  // SUPER SIMPLE GLOW EFFECT
+  // use sprite because it appears the same from all angles
+  var spriteMaterial = new THREE.SpriteMaterial( 
+  { 
+    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ), 
+    
+    color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
+  });
+  var sprite = new THREE.Sprite( spriteMaterial );
+  sprite.scale.set(200, 200, 1.0);
+  soleil.add(sprite); // this centers the glow at the mesh
+
+
+/*************************************************************/
+  
 
   //create mercure
   var mercureGeometry = new THREE.SphereGeometry(4, 60, 60);
@@ -266,7 +278,7 @@ function init() {
   var light = new THREE.PointLight( 0xfffffff, 1, 6000 );
   light.position.set( 0, 0, 0 );
   scene.add( light );
-
+/*
 // ajout de navette
        // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
@@ -278,7 +290,7 @@ function init() {
           object.position.z = 0//position de l'objet   
           scene.add( object );
         } );
-
+*/
 
   // position and point the camera to the center of the scene
   camera.position.x = -600;
@@ -303,36 +315,67 @@ function init() {
   composer.addPass(effectCopy);
 
 
+  /*******************************************************************/
+  /************************* MOUSE HOVER *****************************/
+  /*******************************************************************/
+  /*
   // when the mouse moves, call the given function
-  document.addEventListener( 'mousemove', onPlanetMouseHover, false );
+  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    
+  /////// draw text on canvas /////////
+
+  // create a canvas element
+  canvas1 = document.createElement('canvas');
+  context1 = canvas1.getContext('2d');
+  context1.font = "Bold 20px Arial";
+  context1.fillStyle = "rgba(0,0,0,0.95)";
+    context1.fillText('Hello, world!', 0, 20);
+    
+  // canvas contents will be used for a texture
+  texture1 = new THREE.Texture(canvas1) 
+  texture1.needsUpdate = true;
+  
+  ////////////////////////////////////////
+
+  var spriteMaterial = new THREE.SpriteMaterial( { map: texture1, useScreenCoordinates: true, alignment: THREE.SpriteAlignment.topLeft } );
+  
+  sprite1 = new THREE.Sprite( spriteMaterial );
+  sprite1.scale.set(200,100,1.0);
+  sprite1.position.set( 50, 50, 0 );
+  scene.add( sprite1 ); 
+
+
+/*****************************************************************************/
 
   // add the output of the renderer to the html element
   document.body.appendChild(renderer.domElement);
 
-  render();
+  animate();
+  //render();
 }
 
-function addModelToScene( geometry, materials ) 
+function animate() 
 {
-  var material = new THREE.MeshFaceMaterial( materials );
-  shuttle = new THREE.Mesh( geometry, material );
-  shuttle.scale.set(10,10,10);
-    shuttle.position.x = 150;
-  shuttle.position.y = -2;
-  shuttle.position.z=0;
-  scene.add( shuttle );
+  //  requestAnimationFrame( animate );
+  render();   
+ // update();
 }
 
+/*
+function onDocumentMouseMove( event ) 
+{
+  // the following line would stop any other event handler from firing
+  // (such as the mouse's TrackballControls)
+  // event.preventDefault();
 
-function onPlanetMouseHover( event ) {
-   event.preventDefault();
+  // update sprite position
+  sprite1.position.set( event.clientX, event.clientY - 20, 0 );
   
   // update the mouse variable
   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  //console.log(mouse.x);
 }
-
+*/
 
 function onDocumentMouseDown(event){
     event.preventDefault();
@@ -350,6 +393,79 @@ function onDocumentMouseDown(event){
     }
 }
 
+/*
+
+function update()
+{
+  
+  // create a Ray with origin at the mouse position
+  //   and direction into the scene (camera direction)
+  var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+  projector.unprojectVector( vector, camera );
+  var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+  // create an array containing all objects in the scene with which the ray intersects
+  var intersects = ray.intersectObjects( scene.children );
+
+  // INTERSECTED = the object in the scene currently closest to the camera 
+  //    and intersected by the Ray projected from the mouse position  
+  
+  // if there is one (or more) intersections
+  if ( intersects.length > 0 )
+  {
+    // if the closest object intersected is not the currently stored intersection object
+    if ( intersects[ 0 ].object != INTERSECTED ) 
+    {
+        // restore previous intersection object (if it exists) to its original color
+      if ( INTERSECTED ) 
+        INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+      // store reference to closest object as current intersection object
+      INTERSECTED = intersects[ 0 ].object;
+      // store color of closest object (for later restoration)
+      INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+      // set a new color for closest object
+      INTERSECTED.material.color.setHex( 0xffff00 );
+      
+      // update text, if it has a "name" field.
+      if ( intersects[ 0 ].object.name )
+      {
+          context1.clearRect(0,0,640,480);
+        var message = intersects[ 0 ].object.name;
+        var metrics = context1.measureText(message);
+        var width = metrics.width;
+        context1.fillStyle = "rgba(0,0,0,0.95)"; // black border
+        context1.fillRect( 0,0, width+8,20+8);
+        context1.fillStyle = "rgba(255,255,255,0.95)"; // white filler
+        context1.fillRect( 2,2, width+4,20+4 );
+        context1.fillStyle = "rgba(0,0,0,1)"; // text color
+        context1.fillText( message, 4,20 );
+        texture1.needsUpdate = true;
+      }
+      else
+      {
+        context1.clearRect(0,0,300,300);
+        texture1.needsUpdate = true;
+      }
+    }
+  } 
+  else // there are no intersections
+  {
+    // restore previous intersection object (if it exists) to its original color
+    if ( INTERSECTED ) 
+      INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+    // remove previous intersection object reference
+    //     by setting current intersection object to "nothing"
+    INTERSECTED = null;
+    context1.clearRect(0,0,300,300);
+    texture1.needsUpdate = true;
+  }
+
+  
+  //controls.update();
+ 
+}
+
+*/
 
 function render() {
 
@@ -457,7 +573,7 @@ function handleResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-window.onmousehover= onPlanetMouseHover;
+//window.onmousemove = onDocumentMouseMove;
 
 window.onmousedown = onDocumentMouseDown;
 
