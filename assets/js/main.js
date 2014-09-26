@@ -278,19 +278,18 @@ function init() {
   var light = new THREE.PointLight( 0xfffffff, 1, 6000 );
   light.position.set( 0, 0, 0 );
   scene.add( light );
-/*
-// ajout de navette
-       // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
+// ajout de spaceCar
         var loader = new THREE.OBJMTLLoader();
-        loader.load( 'assets/textures/spaceship/shuttle.obj', 'assets/textures/spaceship/shuttle.mtl', function ( object ) {
-
-          object.position.x = 190;
-          object.position.y = -2;
-          object.position.z = 0//position de l'objet   
-          scene.add( object );
+        loader.load( 'assets/textures/spaceship/car/HN_48_Flying_Car.obj', 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl', function ( spaceCar ) {
+          spaceCar.scale.set(0.1,0.1,0.1)
+          spaceCar.rotation.y = -10;
+          spaceCar.position.x = 190;
+          spaceCar.position.y = -2;
+          spaceCar.position.z = 0//position de l'objet   
+          scene.add( spaceCar );
         } );
-*/
+
 
   // position and point the camera to the center of the scene
   camera.position.x = -600;
@@ -389,7 +388,7 @@ function onDocumentMouseDown(event){
     if (intersects.length >0){
         selectedObject = intersects[0].object;
         intersects[0].object.material.transparent=true;      
-        intersects[0].object.material.color = new THREE.Color(0x0000ff);            
+        intersects[0].object.material.color = new THREE.Color(0xffffff);            
     }
 }
 
@@ -424,7 +423,7 @@ function update()
       // store color of closest object (for later restoration)
       INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
       // set a new color for closest object
-      INTERSECTED.material.color.setHex( 0xffff00 );
+      INTERSECTED.material.color.setHex( 0xfffffff);
       
       // update text, if it has a "name" field.
       if ( intersects[ 0 ].object.name )
