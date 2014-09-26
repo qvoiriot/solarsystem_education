@@ -10,8 +10,7 @@ var mouse = { x: 0, y: 0 }, INTERSECTED;
 var collidableMeshList = [];
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
-var sprite1;
-var canvas1, context1, texture1;
+var sprite1, canvas1, context1, texture1;
 
 
 /**
@@ -113,6 +112,7 @@ function init() {
   espace.position.x= 0;
   espace.position.y=0;
   espace.position.z=0;
+  //espace.name='Espace';
   scene.add(espace);
 
 
@@ -140,7 +140,7 @@ function init() {
     color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
   });
   var sprite = new THREE.Sprite( spriteMaterial );
-  sprite.scale.set(200, 200, 1.0);
+  sprite.scale.set(190, 190, 1.0);
   soleil.add(sprite); // this centers the glow at the mesh
 
 
@@ -177,7 +177,7 @@ function init() {
   terre.position.x = 200;
   terre.position.y = -2;
   terre.position.z = 0;
-  terre.name='sphere';
+  terre.name='Terre';
   scene.add(terre);
   collidableMeshList.push(terre); 
 
@@ -188,7 +188,7 @@ function init() {
   nuage.position.x = 200.2;
   nuage.position.y = -2;
   nuage.position.z = 0;
-  nuage.name='nuage';
+  //nuage.name='nuage';
   scene.add(nuage);
 
   var luneGeometry = new THREE.SphereGeometry(5, 60, 60);
@@ -243,7 +243,7 @@ function init() {
   anneau.position.x = 761;
   anneau.position.y = -2;
   anneau.position.z = 0;
-  anneau.name='anneau';
+  //anneau.name='anneau';
   scene.add(anneau);
 
   //add uranus
@@ -318,7 +318,7 @@ function init() {
   /*******************************************************************/
   /************************* MOUSE HOVER *****************************/
   /*******************************************************************/
-  /*
+  
   // when the mouse moves, call the given function
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     
@@ -329,7 +329,7 @@ function init() {
   context1 = canvas1.getContext('2d');
   context1.font = "Bold 20px Arial";
   context1.fillStyle = "rgba(0,0,0,0.95)";
-    context1.fillText('Hello, world!', 0, 20);
+  context1.fillText('Hello, world!', 0, 20);
     
   // canvas contents will be used for a texture
   texture1 = new THREE.Texture(canvas1) 
@@ -337,11 +337,11 @@ function init() {
   
   ////////////////////////////////////////
 
-  var spriteMaterial = new THREE.SpriteMaterial( { map: texture1, useScreenCoordinates: true, alignment: THREE.SpriteAlignment.topLeft } );
+  var spriteMaterial1 = new THREE.SpriteMaterial( { map: texture1, useScreenCoordinates: true } );
   
-  sprite1 = new THREE.Sprite( spriteMaterial );
-  sprite1.scale.set(200,100,1.0);
-  sprite1.position.set( 50, 50, 0 );
+  sprite1 = new THREE.Sprite( spriteMaterial1 );
+  sprite1.scale.set(300,200,1.0);
+  sprite1.position.set( 100, 150, 0 );
   scene.add( sprite1 ); 
 
 
@@ -351,31 +351,31 @@ function init() {
   document.body.appendChild(renderer.domElement);
 
   animate();
-  //render();
+  render();
 }
 
 function animate() 
 {
-  //  requestAnimationFrame( animate );
-  render();   
- // update();
+  requestAnimationFrame( animate );
+  //render();   
+  update();
 }
 
-/*
+
 function onDocumentMouseMove( event ) 
 {
   // the following line would stop any other event handler from firing
   // (such as the mouse's TrackballControls)
-  // event.preventDefault();
+  event.preventDefault();
 
   // update sprite position
-  sprite1.position.set( event.clientX, event.clientY - 20, 0 );
+  //sprite1.position.set( event.clientX, event.clientY - 20, 0 );
   
   // update the mouse variable
   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
-*/
+
 
 function onDocumentMouseDown(event){
     event.preventDefault();
@@ -393,7 +393,7 @@ function onDocumentMouseDown(event){
     }
 }
 
-/*
+
 
 function update()
 {
@@ -440,6 +440,8 @@ function update()
         context1.fillStyle = "rgba(0,0,0,1)"; // text color
         context1.fillText( message, 4,20 );
         texture1.needsUpdate = true;
+
+        
       }
       else
       {
@@ -461,11 +463,11 @@ function update()
   }
 
   
-  //controls.update();
+ // controls.update();
  
 }
 
-*/
+
 
 function render() {
 
