@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!DOCTYPE html>
+
+    <meta charset="utf-8" />
+
     <title>01.31 Moon</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -24,6 +28,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+        #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 300px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 400px;
+          height: 300px;
         }
     </style>
 </head>
@@ -181,6 +198,10 @@
 </script>
 <body>
 <div id="moon">Moon</div>
+
+<div id="details"><p>La Lune est l'unique satellite naturel de la Terre. Suivant la désignation systématique des satellites, la Lune est appelée Terre I4 ; cependant en pratique cette forme n'est pas utilisée. Elle est le cinquième plus grand satellite du système solaire, avec un diamètre de 3 474 km. La distance moyenne séparant la Terre de la Lune est de 384 400 km.
+
+À ce jour, la Lune est le seul objet non terrestre visité par l'homme. Le premier à y avoir marché est l'astronaute Neil Armstrong le 21 juillet 1969. Après lui, onze autres hommes ont foulé le sol de la Lune, tous membres du programme Apollo.</p></div>
 
 </body>
 </html>
