@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>01.04 Mars</title>
+    <title>01.31 Moon</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
     <script src="libs/stats.min.js"></script>
@@ -17,7 +17,8 @@
             margin: 0;
             overflow: hidden;
         }
-         #mars{
+
+        #moon{
           font-size: 2em;
           padding: 0;
           text-align: center;
@@ -36,10 +37,13 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var mars;
+    var sphere;
+    var nuage;
+    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
+    var soleil;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -48,36 +52,35 @@
     function init() {
 
 
-    //texture mars
-    var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap_1.jpg");
-    var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbumpMap.jpg");
-    var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
-    materialMars.bumpMap = bumpMapMars;
 
 
-    // create a scene, that will hold all our elements such as objects, cameras and lights.
-    scene = new THREE.Scene();
+  //texture de la lune
+  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
+  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
+  materialLune.bumpMap = bumpMapLune;
 
-    // create a camera, which defines where we're looking at.
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        scene = new THREE.Scene();
 
-    // create a render, sets the background color and the size
-    renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(0x000000, 1.0);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMapEnabled = true;
+        // create a camera, which defines where we're looking at.
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render, sets the background color and the size
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
 
 
-  //add mars
-  var marsGeometry = new THREE.SphereGeometry(15, 60, 60);
-  mars = new THREE.Mesh (marsGeometry, materialMars);
-  mars.receiveShadow = true;
-  mars.position.x = 0;
-  mars.position.y = -2;
-  mars.position.z = 0;
-  mars.name='mars';
-  scene.add(mars);
-
+  var luneGeometry = new THREE.SphereGeometry(15, 60, 60);
+  lune = new THREE.Mesh (luneGeometry, materialLune);
+  lune.receiveShadow = true;
+  lune.position.x = 0;
+  lune.position.y = -2;
+  lune.position.z = 0;
+  lune.name='lune';
+  scene.add(lune);
 
         // add ambient light
         ambientLight = new THREE.AmbientLight(0x111111,1);
@@ -137,10 +140,9 @@
     function render() {
 
         //update camera
-  var rotMars = 0.000971742;
+  var rotLune = 0.002;
 
-    mars.rotation.y = mars.rotation.y+rotMars;
-
+  lune.rotation.y = lune.rotation.y + rotLune;
 
         camera.lookAt(scene.position);
 
@@ -178,7 +180,7 @@
 
 </script>
 <body>
-<div id="mars">Mars</div>
+<div id="moon">Moon</div>
 
 </body>
 </html>
