@@ -2,7 +2,7 @@
 var renderer, scene, camera, spotlight, stats, cameraControl, directionalLight, composer;
 
 // planets variables
-var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
+var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne, pluton;
 
 //custom varialbes
 var projector = new THREE.Projector();
@@ -92,13 +92,18 @@ function init() {
   var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
   var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
   
+    //texture pluton
+  var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonMap.jpg");
+  var bumpMapPluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonBumpMap.jpg");
+  var materialPluton = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
+  materialPluton.bumpMap = bumpMapPluton;
 
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   scene = new THREE.Scene();
 
   // create a camera, which defines where we're looking at.
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 8000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
 
   // create a render, sets the background color and the size
   renderer = new THREE.WebGLRenderer();
@@ -107,7 +112,7 @@ function init() {
   renderer.shadowMapEnabled = true;
 
   //create espace
-  var espaceGeometry = new THREE.SphereGeometry(4000, 90,90);
+  var espaceGeometry = new THREE.SphereGeometry(9800, 90,90);
   espace = new THREE.Mesh (espaceGeometry, materialEspace);
   espace.position.x= 0;
   espace.position.y=0;
@@ -215,10 +220,10 @@ function init() {
 
 
   //add jupiter
-  var jupiterGeometry = new THREE.SphereGeometry(44, 60, 60);
+  var jupiterGeometry = new THREE.SphereGeometry(112, 60, 60);
   jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
   jupiter.receiveShadow = true;
-  jupiter.position.x = 416;
+  jupiter.position.x = 1040;
   jupiter.position.y = -2;
   jupiter.position.z = 0;
   jupiter.name='jupiter';
@@ -226,10 +231,10 @@ function init() {
   collidableMeshList.push(jupiter); 
 
   //add saturn
-  var saturnGeometry = new THREE.SphereGeometry(37, 60, 60);
+  var saturnGeometry = new THREE.SphereGeometry(94, 60, 60);
   saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
   saturn.receiveShadow = true;
-  saturn.position.x = 761;
+  saturn.position.x = 1903;
   saturn.position.y = -2;
   saturn.position.z = 0;
   saturn.name='saturn';
@@ -237,20 +242,20 @@ function init() {
   collidableMeshList.push(saturn); 
 
   //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 53, 63, 1, 80 );
+  var anneauGeometry = new THREE.CylinderGeometry( 110, 63, 1, 80 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   anneau.receiveShadow = false;
-  anneau.position.x = 761;
+  anneau.position.x = 1903;
   anneau.position.y = -2;
   anneau.position.z = 0;
   //anneau.name='anneau';
   scene.add(anneau);
 
   //add uranus
-  var uranusGeometry = new THREE.SphereGeometry(16, 60, 60);
+  var uranusGeometry = new THREE.SphereGeometry(40, 60, 60);
   uranus = new THREE.Mesh (uranusGeometry, materialUranus);
   uranus.receiveShadow = true;
-  uranus.position.x = 1533;
+  uranus.position.x = 3833;
   uranus.position.y = -2;
   uranus.position.z = 0;
   uranus.name='uranus';
@@ -258,15 +263,27 @@ function init() {
   collidableMeshList.push(uranus); 
 
   //add neptune
-  var neptuneGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var neptuneGeometry = new THREE.SphereGeometry(38, 60, 60);
   neptune = new THREE.Mesh (neptuneGeometry, materialNeptune);
   neptune.receiveShadow = true;
-  neptune.position.x = 2400;
+  neptune.position.x = 6000;
   neptune.position.y = -2;
   neptune.position.z = 0;
   neptune.name='neptune';
   scene.add(neptune);
   collidableMeshList.push(neptune); 
+
+
+  //add pluton
+  var plutonGeometry = new THREE.SphereGeometry(4, 60, 60);
+  pluton = new THREE.Mesh (plutonGeometry, materialPluton);
+  pluton.receiveShadow = true;
+  pluton.position.x = 7800;
+  pluton.position.y = -2;
+  pluton.position.z = 0;
+  pluton.name='pluton';
+  scene.add(pluton);
+  collidableMeshList.push(pluton); 
 
 
   // add ambient light
@@ -275,7 +292,7 @@ function init() {
   ambientLight.name='ambient';
   scene.add(ambientLight);
 
-  var light = new THREE.PointLight( 0xfffffff, 1, 6000 );
+  var light = new THREE.PointLight( 0xfffffff, 1, 9000 );
   light.position.set( 0, 0, 0 );
   scene.add( light );
 
@@ -493,6 +510,8 @@ function render() {
   var rotSpeedVenus = 0.00081276;
   var rotSpeedUranus = 0.000005951;
   var rotSpeedNeptune = 0.0000030346;
+  var rotSpeedPluton = 0.0000020188;
+
   //var rotSpeedSpaceCar = 0.002;
 
   //Vitesses de rotation axiale
@@ -508,6 +527,7 @@ function render() {
   var rotVenus = -0.000098498;
   var rotUranus = 0.001337095;
   var rotNeptune = 0.001246563;
+  var rotPluton = 0.000156431;
 
   // vitesse de rotation
   terre.rotation.y = terre.rotation.y+ rotTerre;
@@ -523,6 +543,7 @@ function render() {
   neptune.rotation.y = neptune.rotation.y+ rotTerre;
   uranus.rotation.x = uranus.rotation.x+ rotUranus;
   neptune.rotation.y = neptune.rotation.y+ rotNeptune;
+  pluton.rotation.y = pluton.rotation.y+ rotPluton;
 
 
 
@@ -567,7 +588,8 @@ function render() {
   neptune.position.x = neptune.position.x * Math.cos(rotSpeedNeptune) +neptune.position.z * Math.sin(rotSpeedNeptune);
   neptune.position.z = neptune.position.z * Math.cos(rotSpeedNeptune) - neptune.position.x  * Math.sin(rotSpeedNeptune);
 
-
+  pluton.position.x = pluton.position.x * Math.cos(rotSpeedPluton) +pluton.position.z * Math.sin(rotSpeedPluton);
+  pluton.position.z = pluton.position.z * Math.cos(rotSpeedPluton) - pluton.position.x  * Math.sin(rotSpeedPluton);
 
 
   camera.lookAt(scene.position);
