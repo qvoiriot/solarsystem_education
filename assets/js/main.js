@@ -27,7 +27,7 @@ function init() {
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k.jpg");
   var bumpMapTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthbumpMap.jpg");
   var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k.jpg");
-  var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: true});
+  var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: false});
 
   materialTerre.bumpMap = bumpMapTerre;
   materialTerre.specularMap = specularMapEarth;
@@ -39,30 +39,30 @@ function init() {
 
   //texture du soleil
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
-  var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: true});
+  var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
   //texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
   var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
-  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: true});
+  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
   materialLune.bumpMap = bumpMapLune;
 
   //texture mars
   var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap_1.jpg");
   var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbumpMap.jpg");
-  var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
+  var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: false});
   materialMars.bumpMap = bumpMapMars;
 
   //texture jupiter
   var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupitermap.jpg");
   var bumpMapJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupiterbumpMap.jpg");
-  var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: true});
+  var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: false});
   materialJupiter.bumpMap =bumpMapJupiter;
 
   //texture saturn
   var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
   var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
-  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: true});
+  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
   materialSaturn.bumpMap =bumpMapSaturn;
 
   //texture Anneausaturn
@@ -72,30 +72,31 @@ function init() {
   //texture mercure
   var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap.jpg");
   var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybumpMap.jpg");
-  var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
+  var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: false});
   materialMercure.bumpMap = bumpMapMercure;
 
   //texture venus
   var matextureVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusmap.jpg");
   var bumpMapVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusbump.jpg");
-  var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: true});
+  var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: false});
   materialVenus.bumpMap = bumpMapVenus;
 
   //texture uranus
   var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusmap.jpg");
   var bumpMapUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusbumpMap.jpg");
-  var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: true});
+  var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: false});
   materialUranus.bumpMap = bumpMapUranus;
 
   //texture neptune
   var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
   var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
-  var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
+  var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: false});
+    materialNeptune.bumpMap = bumpMapNeptune;
   
     //texture pluton
   var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonMap.jpg");
   var bumpMapPluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonBumpMap.jpg");
-  var materialPluton = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
+  var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
   materialPluton.bumpMap = bumpMapPluton;
 
 
@@ -242,7 +243,7 @@ function init() {
   collidableMeshList.push(saturn); 
 
   //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 110, 63, 1, 80 );
+  var anneauGeometry = new THREE.CylinderGeometry( 250, 63, 1, 80 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   anneau.receiveShadow = false;
   anneau.position.x = 1903;
@@ -538,7 +539,7 @@ function render() {
   jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
   saturn.rotation.y= saturn.rotation.y+rotSaturn;
   anneau.rotation.y= anneau.rotation.y+rotAnneau;
-  mercure.rotation.y = mercure.rotation.y+ rotTerre;
+  mercure.rotation.y = mercure.rotation.y+ rotMercure;
   venus.rotation.y = venus.rotation.y+ rotVenus;
   neptune.rotation.y = neptune.rotation.y+ rotTerre;
   uranus.rotation.x = uranus.rotation.x+ rotUranus;

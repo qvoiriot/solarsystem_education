@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>01.05 Jupiter</title>
+    <script src="libs/three.js"></script>
+    <script src="libs/dat.gui.min.js"></script>
+    <script src="libs/stats.min.js"></script>
+    <script src="libs/OrbitControls_Zoom.js"></script>
+    <script src="libs/EffectComposer.js"></script>
+    <script src="libs/RenderPass.js"></script>
+    <script src="libs/CopyShader.js"></script>
+    <script src="libs/ShaderPass.js"></script>
+    <script src="libs/MaskPass.js"></script>
+    <style>
+        body {
+            /* set margin to 0 and overflow to hidden, to go fullscreen */
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<script>
+
+    // global variables
+    var renderer;
+    var scene;
+    var camera;
+    var spotlight;
+    var stats;
+    var cameraControl;
+    var directionalLight;
+    var sphere;
+    var nuage;
+    var lune;
+    var cameraBG;
+    var composer;
+    var sceneBG;
+    var jupiter;
+
+    /**
+     * Initializes the scene, camera and objects. Called when the window is
+     * loaded by using window.onload (see below)
+     */
+    function init() {
+
+
+
+
+  //texture jupiter
+  var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupitermap.jpg");
+  var bumpMapJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupiterbumpMap.jpg");
+  var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: true});
+  materialJupiter.bumpMap =bumpMapJupiter;
+
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render, sets the background color and the size
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
+
+
+  //add jupiter
+  var jupiterGeometry = new THREE.SphereGeometry(15, 60, 60);
+  jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
+  jupiter.receiveShadow = true;
+  jupiter.position.x = 0;
+  jupiter.position.y = -2;
+  jupiter.position.z = 0;
+  jupiter.name='jupiter';
+  scene.add(jupiter);
+
+
+        // add ambient light
+        ambientLight = new THREE.AmbientLight(0x111111,1);
+        ambientLight.position = new THREE.Vector3(11,11,11);
+        ambientLight.name='ambient';
+
+        scene.add(ambientLight);
+
+
+        //add directional light
+        directionalLight = new THREE.DirectionalLight(0xffffff,1);
+        directionalLight.position = new THREE.Vector3(100,100,-50);
+        directionalLight.name='directional';
+
+        scene.add(directionalLight);
+
+
+        //add extras
+        //addControlGui(control);
+        addStatsObject();
+
+
+        // position and point the camera to the center of the scene
+        camera.position.x = 15;
+        camera.position.y = 16;
+        camera.position.z = 13;
+        camera.lookAt(scene.position);
+
+        //addcontrols
+        cameraControl = new THREE.OrbitControls(camera);
+
+
+        // add the output of the renderer to the html element
+        document.body.appendChild(renderer.domElement);
+
+
+        // call the render function, after the first render, interval is determined
+        // by requestAnimationFrame
+        render();
+    }
+
+    function addStatsObject(){
+        stats = new Stats();
+        stats.setMode(0);
+
+        stats.domElement.style.position ='absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+
+        document.body.appendChild(stats.domElement);
+    }
+
+    /**
+     * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
+     * for future renders
+     */
+    function render() {
+
+        //update camera
+  var rotJupiter= 0.00243207;
+
+  jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
+
+
+        camera.lookAt(scene.position);
+
+        //update stats
+        stats.update();
+
+        //update the camera
+        cameraControl.update();
+        renderer.render(scene, camera);
+
+
+
+
+        // render using requestAnimationFrame
+        requestAnimationFrame(render);
+
+        
+    }
+
+
+    /**
+     * Function handles the resize event. This make sure the camera and the renderer
+     * are updated at the correct moment.
+     */
+    function handleResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // calls the init function when the window is done loading.
+    window.onload = init;
+    // calls the handleResize function when the window is resized
+    window.addEventListener('resize', handleResize, false);
+
+</script>
+<body>
+
+
+</body>
+</html>
