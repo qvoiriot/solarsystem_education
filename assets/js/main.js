@@ -12,7 +12,6 @@ var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 var sprite1, canvas1, context1, texture1;
 
-
 /**
  * Initializes the scene, camera and objects. Called when the window is
  * loaded by using window.onload (see below)
@@ -92,7 +91,8 @@ function init() {
   var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
   var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
   var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: true});
-  materialNeptune.bumpMap = bumpMapNeptune;
+  
+
 
   // create a scene, that will hold all our elements such as objects, cameras and lights.
   scene = new THREE.Scene();
@@ -279,17 +279,29 @@ function init() {
   light.position.set( 0, 0, 0 );
   scene.add( light );
 
+
+/************************************************************/
+/******************        SPACE CAR    *********************/
+/************************************************************/
 // ajout de spaceCar
+
+var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
+var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
+
         var loader = new THREE.OBJMTLLoader();
-        loader.load( 'assets/textures/spaceship/car/HN_48_Flying_Car.obj', 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl', function ( spaceCar ) {
-          spaceCar.scale.set(0.1,0.1,0.1)
+        loader.load( spaceCarObj, spaceCarMtl, function ( spaceCar ) {
+          spaceCar.scale.set(0.05,0.05,0.05)
           spaceCar.rotation.y = -10;
           spaceCar.position.x = 190;
           spaceCar.position.y = -2;
-          spaceCar.position.z = 0//position de l'objet   
+          spaceCar.position.z = 0  
+          spaceCar.name='SpaceCar';
           scene.add( spaceCar );
         } );
 
+        // ici : ajout du code pour le mouvement de la space car 
+        
+/************************************************************/
 
   // position and point the camera to the center of the scene
   camera.position.x = -600;
@@ -437,8 +449,10 @@ function update()
         context1.fillStyle = "rgba(255,255,255,0.95)"; // white filler
         context1.fillRect( 2,2, width+4,20+4 );
         context1.fillStyle = "rgba(0,0,0,1)"; // text color
-        context1.fillText( message, 4,20 );
+        context1.fillText( message, 4,20 );    context1.clearRect(0,0,300,300);
+
         texture1.needsUpdate = true;
+        console.log(message);
 
         
       }
@@ -457,7 +471,6 @@ function update()
     // remove previous intersection object reference
     //     by setting current intersection object to "nothing"
     INTERSECTED = null;
-    context1.clearRect(0,0,300,300);
     texture1.needsUpdate = true;
   }
 
@@ -480,6 +493,7 @@ function render() {
   var rotSpeedVenus = 0.00081276;
   var rotSpeedUranus = 0.000005951;
   var rotSpeedNeptune = 0.0000030346;
+  //var rotSpeedSpaceCar = 0.002;
 
   //Vitesses de rotation axiale
   var rotSun = 0.000036935;
@@ -513,6 +527,11 @@ function render() {
 
 
   // vitesse de révolution
+  //spaceCar.position.x = spaceCar.position.x * Math.cos(rotSpeedSpaceCar) + spaceCar.position.z * Math.sin(rotSpeedSpaceCar);
+  //spaceCar.position.z = spaceCar.position.z * Math.cos(rotSpeedSpaceCar) - spaceCar.position.x * Math.sin(rotSpeedSpaceCar);
+
+
+
   mercure.position.x = mercure.position.x * Math.cos(rotSpeedMercure) + mercure.position.z * Math.sin(rotSpeedMercure);
   mercure.position.z = mercure.position.z * Math.cos(rotSpeedMercure) - mercure.position.x * Math.sin(rotSpeedMercure);
 
@@ -547,6 +566,7 @@ function render() {
 
   neptune.position.x = neptune.position.x * Math.cos(rotSpeedNeptune) +neptune.position.z * Math.sin(rotSpeedNeptune);
   neptune.position.z = neptune.position.z * Math.cos(rotSpeedNeptune) - neptune.position.x  * Math.sin(rotSpeedNeptune);
+
 
 
 
