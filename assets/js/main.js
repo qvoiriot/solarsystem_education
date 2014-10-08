@@ -1,5 +1,6 @@
 // global variables
 var renderer, scene, camera, spotlight, stats, cameraControl, directionalLight, composer;
+var cameraBG, sceneBG;
 
 // planets variables
 var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne, pluton;
@@ -18,10 +19,19 @@ var sprite1, canvas1, context1, texture1;
  */
 function init() {
 
-  //texture espace
-  var matextureEspace = THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background_1.jpg");
-  var materialEspace = new THREE.MeshPhongMaterial({map: matextureEspace, transparent: true});
-  materialEspace.side = THREE.DoubleSide;
+  //add background using a camera
+        cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
+        cameraBG.position.z = 50;
+        sceneBG = new THREE.Scene();
+
+  var materialColor = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background.jpg"), depthTest: false});
+
+  var bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), materialColor);
+        bgPlane.position.z = -100;
+        bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
+
+  sceneBG.add(bgPlane);
+
 
   //texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k.jpg");
@@ -111,15 +121,6 @@ function init() {
   renderer.setClearColor(0x000000, 1.0);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMapEnabled = true;
-
-  //create espace
-  var espaceGeometry = new THREE.SphereGeometry(9800, 90,90);
-  espace = new THREE.Mesh (espaceGeometry, materialEspace);
-  espace.position.x= 0;
-  espace.position.y=0;
-  espace.position.z=0;
-  //espace.name='Espace';
-  scene.add(espace);
 
 
   //add soleil
@@ -330,6 +331,9 @@ var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
   //addcontrols
   cameraControl = new THREE.OrbitControls(camera);
 
+  //first render the background
+  var bgPass = new THREE.RenderPass(sceneBG, cameraBG);
+
   //next render the scene (rotating earth), without clearing the current output
   var renderPass = new THREE.RenderPass(scene, camera);
   renderPass.clear = false;
@@ -340,163 +344,18 @@ var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
 
   //add these passes to the composer
   composer = new THREE.EffectComposer(renderer);
+  composer.addPass(bgPass);
   composer.addPass(renderPass);
   composer.addPass(effectCopy);
 
 
-  /*******************************************************************/
-  /************************* MOUSE HOVER *****************************/
-  /*******************************************************************/
   
-  // when the mouse moves, call the given function
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    
-  /////// draw text on canvas /////////
-
-  // create a canvas element
-  canvas1 = document.createElement('canvas');
-  context1 = canvas1.getContext('2d');
-  context1.font = "Bold 20px Arial";
-  context1.fillStyle = "rgba(0,0,0,0.95)";
-  context1.fillText('Hello, world!', 0, 20);
-    
-  // canvas contents will be used for a texture
-  texture1 = new THREE.Texture(canvas1) 
-  texture1.needsUpdate = true;
-  
-  ////////////////////////////////////////
-
-  var spriteMaterial1 = new THREE.SpriteMaterial( { map: texture1, useScreenCoordinates: true } );
-  
-  sprite1 = new THREE.Sprite( spriteMaterial1 );
-  sprite1.scale.set(300,200,1.0);
-  sprite1.position.set( 100, 150, 0 );
-  scene.add( sprite1 ); 
-
-
-/*****************************************************************************/
-
   // add the output of the renderer to the html element
   document.body.appendChild(renderer.domElement);
 
-  animate();
+
   render();
 }
-
-function animate() 
-{
-  requestAnimationFrame( animate );
-  //render();   
-  update();
-}
-
-
-function onDocumentMouseMove( event ) 
-{
-  // the following line would stop any other event handler from firing
-  // (such as the mouse's TrackballControls)
-  event.preventDefault();
-
-  // update sprite position
-  //sprite1.position.set( event.clientX, event.clientY - 20, 0 );
-  
-  // update the mouse variable
-  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}
-
-
-function onDocumentMouseDown(event){
-    event.preventDefault();
-
-    var vector = new THREE.Vector3 ( (event.clientX / window.innerWidth)*2-1, - (event.clientY/window.innerHeight)*2+1, 0.5);
-    projector.unprojectVector(vector, camera);
-
-    var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
-    var intersects = raycaster.intersectObjects(collidableMeshList);
-    
-    if (intersects.length >0){
-        selectedObject = intersects[0].object;
-        intersects[0].object.material.transparent=true;      
-        intersects[0].object.material.color = new THREE.Color(0xffffff);            
-    }
-}
-
-
-
-function update()
-{
-  
-  // create a Ray with origin at the mouse position
-  //   and direction into the scene (camera direction)
-  var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-  projector.unprojectVector( vector, camera );
-  var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
-  // create an array containing all objects in the scene with which the ray intersects
-  var intersects = ray.intersectObjects( scene.children );
-
-  // INTERSECTED = the object in the scene currently closest to the camera 
-  //    and intersected by the Ray projected from the mouse position  
-  
-  // if there is one (or more) intersections
-  if ( intersects.length > 0 )
-  {
-    // if the closest object intersected is not the currently stored intersection object
-    if ( intersects[ 0 ].object != INTERSECTED ) 
-    {
-        // restore previous intersection object (if it exists) to its original color
-      if ( INTERSECTED ) 
-        INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-      // store reference to closest object as current intersection object
-      INTERSECTED = intersects[ 0 ].object;
-      // store color of closest object (for later restoration)
-      INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-      // set a new color for closest object
-      INTERSECTED.material.color.setHex( 0xfffffff);
-      
-      // update text, if it has a "name" field.
-      if ( intersects[ 0 ].object.name )
-      {
-          context1.clearRect(0,0,640,480);
-        var message = intersects[ 0 ].object.name;
-        var metrics = context1.measureText(message);
-        var width = metrics.width;
-        context1.fillStyle = "rgba(0,0,0,0.95)"; // black border
-        context1.fillRect( 0,0, width+8,20+8);
-        context1.fillStyle = "rgba(255,255,255,0.95)"; // white filler
-        context1.fillRect( 2,2, width+4,20+4 );
-        context1.fillStyle = "rgba(0,0,0,1)"; // text color
-        context1.fillText( message, 4,20 );    context1.clearRect(0,0,300,300);
-
-        texture1.needsUpdate = true;
-        console.log(message);
-
-        
-      }
-      else
-      {
-        context1.clearRect(0,0,300,300);
-        texture1.needsUpdate = true;
-      }
-    }
-  } 
-  else // there are no intersections
-  {
-    // restore previous intersection object (if it exists) to its original color
-    if ( INTERSECTED ) 
-      INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-    // remove previous intersection object reference
-    //     by setting current intersection object to "nothing"
-    INTERSECTED = null;
-    texture1.needsUpdate = true;
-  }
-
-  
- // controls.update();
- 
-}
-
 
 
 function render() {
@@ -601,8 +460,9 @@ function render() {
   // render using requestAnimationFrame
   requestAnimationFrame(render);
 
-  renderer.render(scene, camera);
+  //renderer.render(scene, camera);
 
+  renderer.autoClear = false;
   composer.render();
 }
 
@@ -616,10 +476,6 @@ function handleResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-//window.onmousemove = onDocumentMouseMove;
-
-window.onmousedown = onDocumentMouseDown;
 
 // calls the init function when the window is done loading.
 window.onload = init;
