@@ -116,7 +116,6 @@ function init() {
   soleil.name='soleil';
   scene.add(soleil);
 
-
   /*************************************************************/
   /**************           CUSTOM SUN             *************/
   /*************************************************************/
@@ -132,7 +131,6 @@ function init() {
   var sprite = new THREE.Sprite( spriteMaterial );
   sprite.scale.set(190, 190, 1.0);
   soleil.add(sprite); // this centers the glow at the mesh
-
 
   /*************************************************************/
 
@@ -254,7 +252,6 @@ function init() {
   var light = new THREE.PointLight( 0xfffffff, 1, 9000 );
   light.position.set( 0, 0, 0 );
   scene.add( light );
-
 
   /************************************************************/
   /******************        SPACE CAR    *********************/
@@ -413,6 +410,11 @@ function handleResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+//calls the loader before the init
+$(window).load(function() {
+    $(".loader").delay(5000).fadeOut("slow");
+  })
 
 // calls the init function when the window is done loading.
 window.onload = init;
