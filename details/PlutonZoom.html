@@ -3,41 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <title>01.09 Pluton</title>
-    <script src="../assests/libs/three.js"></script>
-    <script src="../assests/libs/dat.gui.min.js"></script>
-    <script src="../assests/libs/stats.min.js"></script>
-    <script src="../assests/libs/OrbitControls_Zoom.js"></script>
-    <script src="../assests/libs/EffectComposer.js"></script>
-    <script src="../assests/libs/RenderPass.js"></script>
-    <script src="../assests/libs/CopyShader.js"></script>
-    <script src="../assests/libs/ShaderPass.js"></script>
-    <script src="../assests/libs/MaskPass.js"></script>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/zoom.css">
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #pluton{
-          font-size: 2em;
-          padding: 0;
-          text-align: center;
-          background-color: black;
-          color: white;
-        }
-        #details{
-          background-color: black;
-          border: groove;
-          position: fixed;
-          margin-top: 50px;
-          margin-left: 50px;
-          display: block;
-          color: white;
-          text-align: justify;
-          padding: 10px;
-          width: 450px;
-          height: 750px;
-        }
+             
     </style>
 </head>
 <script>
@@ -194,7 +176,7 @@
 </script>
 <body>
 
-<div id="pluton">Pluton</div>
+<div id="name">Pluton</div>
 <div id="details"><p>Pluton est la plus petite et en général la plus lointaine planète du système solaire, mais elle ne ressemble à aucune autre. En effet, elle ne s’apparente ni aux planètes telluriques ni aux planètes géantes. L’orbite de Pluton est un autre sujet d’étonnement : comparée à celle des autres planètes, quasi-circulaire et très proche du plan de l’écliptique, elle est la plus elliptique et la plus inclinée.</p>
 <p>Plus petite que la Lune, Pluton est un corps solide, composé de roches et de glaces, dont la surface serait au moins partiellement recouverte de méthane ou d’azote gelés. Pluton serait entourée d’une très fine atmosphère, riche en azote, qui s’épaissit à mesure que la planète se rapproche du Soleil sous l’effet de l’évaporation. La pression au sol serait alors 100 000 fois plus faible que celle existant sur Terre.</p>
 <p>Pluton est souvent comparée à un astéroïde ou à une comète, voire à un système planétaire double : le diamètre et la masse de Charon, son principal satellite, valent en effet la moitié de ceux de Pluton. Par ailleurs, d’autres corps lui ressemblant ont été découverts récemment dans la même région. Varuna, Ixion et Quaoar sont les plus gros objets de la ceinture de Kuiper, vestiges de la formation du système solaire. Pluton se rapproche ainsi beaucoup plus d’un de ces objets que d’une planète.</p>
