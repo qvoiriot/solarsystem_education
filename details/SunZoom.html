@@ -4,15 +4,15 @@
 
     <meta charset="utf-8" />
     <title>01.00 Sun</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -101,10 +101,10 @@
 
   // SUPER SIMPLE GLOW EFFECT
   // use sprite because it appears the same from all angles
-  var spriteMaterial = new THREE.SpriteMaterial( 
-  { 
-    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ), 
-    
+  var spriteMaterial = new THREE.SpriteMaterial(
+  {
+    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ),
+
     color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
   });
   var sprite = new THREE.Sprite( spriteMaterial );
@@ -191,7 +191,7 @@
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
+
     }
 
 

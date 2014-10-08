@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!DOCTYPE html>
+
     <meta charset="utf-8" />
-    <title>01.09 Pluton</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+
+    <title>01.31 Moon</title>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #pluton{
+
+        #moon{
           font-size: 2em;
           padding: 0;
           text-align: center;
@@ -29,14 +33,14 @@
           background-color: black;
           border: groove;
           position: fixed;
-          margin-top: 50px;
+          margin-top: 300px;
           margin-left: 50px;
           display: block;
           color: white;
           text-align: justify;
           padding: 10px;
-          width: 450px;
-          height: 750px;
+          width: 400px;
+          height: 300px;
         }
     </style>
 </head>
@@ -56,7 +60,7 @@
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
+    var soleil;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -65,11 +69,13 @@
     function init() {
 
 
-    //texture pluton
-  var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonMap.jpg");
-  var bumpMapPluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonBumpMap.jpg");
-  var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
-  materialPluton.bumpMap = bumpMapPluton;
+
+
+  //texture de la lune
+  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
+  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
+  materialLune.bumpMap = bumpMapLune;
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -83,16 +89,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add pluton
-  var plutonGeometry = new THREE.SphereGeometry(8, 60, 60);
-  pluton = new THREE.Mesh (plutonGeometry, materialPluton);
-  pluton.receiveShadow = true;
-  pluton.position.x = 0;
-  pluton.position.y = -2;
-  pluton.position.z = 0;
-  pluton.name='pluton';
-  scene.add(pluton);
 
+  var luneGeometry = new THREE.SphereGeometry(15, 60, 60);
+  lune = new THREE.Mesh (luneGeometry, materialLune);
+  lune.receiveShadow = true;
+  lune.position.x = 0;
+  lune.position.y = -2;
+  lune.position.z = 0;
+  lune.name='lune';
+  scene.add(lune);
 
         // add ambient light
         ambientLight = new THREE.AmbientLight(0x111111,1);
@@ -152,10 +157,9 @@
     function render() {
 
         //update camera
-  var rotPluton = 0.000156431;
+  var rotLune = 0.002;
 
-  pluton.rotation.y = pluton.rotation.y+ rotPluton;
-
+  lune.rotation.y = lune.rotation.y + rotLune;
 
         camera.lookAt(scene.position);
 
@@ -172,7 +176,7 @@
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
+
     }
 
 
@@ -193,18 +197,11 @@
 
 </script>
 <body>
+<div id="moon">Moon</div>
 
-<div id="pluton">Pluton</div>
-<div id="details"><p>Pluton est la plus petite et en général la plus lointaine planète du système solaire, mais elle ne ressemble à aucune autre. En effet, elle ne s’apparente ni aux planètes telluriques ni aux planètes géantes. L’orbite de Pluton est un autre sujet d’étonnement : comparée à celle des autres planètes, quasi-circulaire et très proche du plan de l’écliptique, elle est la plus elliptique et la plus inclinée.</p>
-<p>Plus petite que la Lune, Pluton est un corps solide, composé de roches et de glaces, dont la surface serait au moins partiellement recouverte de méthane ou d’azote gelés. Pluton serait entourée d’une très fine atmosphère, riche en azote, qui s’épaissit à mesure que la planète se rapproche du Soleil sous l’effet de l’évaporation. La pression au sol serait alors 100 000 fois plus faible que celle existant sur Terre.</p>
-<p>Pluton est souvent comparée à un astéroïde ou à une comète, voire à un système planétaire double : le diamètre et la masse de Charon, son principal satellite, valent en effet la moitié de ceux de Pluton. Par ailleurs, d’autres corps lui ressemblant ont été découverts récemment dans la même région. Varuna, Ixion et Quaoar sont les plus gros objets de la ceinture de Kuiper, vestiges de la formation du système solaire. Pluton se rapproche ainsi beaucoup plus d’un de ces objets que d’une planète.</p>
-<p>En 2006, L’union Astronomique Internationale a décidé que Pluton ne serait plus considérée comme une planète mais une « planète naine », à l’instar des milliers d’objets de Kuiper qui orbitent au-delà de Neptune.</p>
+<div id="details"><p>La Lune est l'unique satellite naturel de la Terre. Suivant la désignation systématique des satellites, la Lune est appelée Terre I4 ; cependant en pratique cette forme n'est pas utilisée. Elle est le cinquième plus grand satellite du système solaire, avec un diamètre de 3 474 km. La distance moyenne séparant la Terre de la Lune est de 384 400 km.
 
-<ul>
-    <li>Etymologie :: fils de Saturne, frère de Jupiter et de Neptune, Pluton est le roi des Enfers et le dieu des morts dans la mythologie romaine</li>
-<li>Découverte :18 février 1930, par l’astronome américain Clyde Tombaugh.</li>
-<li>Signe particulier :  : Pluton est la 1 ère représentante des planètes naines. Elle se distingue des 8 planètes par sa composition et son orbite, très elliptique et inclinée. De ce fait, elle croise périodiquement l’orbite de Neptune.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles :environ 10 ans</li>
-</ul></div>
+À ce jour, la Lune est le seul objet non terrestre visité par l'homme. Le premier à y avoir marché est l'astronaute Neil Armstrong le 21 juillet 1969. Après lui, onze autres hommes ont foulé le sol de la Lune, tous membres du programme Apollo.</p></div>
+
 </body>
 </html>

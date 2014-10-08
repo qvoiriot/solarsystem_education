@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8" />
-    <title>01.01 Mercure</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+    <title>01.06 Saturn</title>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #mercure{
+                #saturne{
           font-size: 2em;
           padding: 0;
           text-align: center;
           background-color: black;
           color: white;
         }
-                #details{
+                 #details{
           background-color: black;
           border: groove;
           position: fixed;
@@ -57,6 +56,7 @@
     var cameraBG;
     var composer;
     var sceneBG;
+    var jupiter;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -65,13 +65,15 @@
     function init() {
 
 
+  //texture saturn
+  var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
+  var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
+  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
+  materialSaturn.bumpMap =bumpMapSaturn;
 
 
-  //texture mercure
-  var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap.jpg");
-  var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybumpMap.jpg");
-  var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
-  materialMercure.bumpMap = bumpMapMercure;
+  var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
+  var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -86,16 +88,25 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
+  //add saturn
+  var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
+  saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
+  saturn.receiveShadow = true;
+  saturn.position.x = 0;
+  saturn.position.y = -2;
+  saturn.position.z = 0;
+  saturn.name='saturn';
+  scene.add(saturn);
 
-          //create mercure
-          var mercureGeometry = new THREE.SphereGeometry(8, 60, 60);
-          mercure = new THREE.Mesh (mercureGeometry, materialMercure);
-          mercure.receiveShadow = true;
-          mercure.position.x = 0;
-          mercure.position.y = -2;
-          mercure.position.z = 0;
-          mercure.name='mercure';
-          scene.add(mercure);
+  //add anneau saturn
+  var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
+  anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
+  anneau.receiveShadow = false;
+  anneau.position.x = 0;
+  anneau.position.y = -2;
+  anneau.position.z = 0;
+  //anneau.name='anneau';
+  scene.add(anneau);
 
 
         // add ambient light
@@ -156,9 +167,11 @@
     function render() {
 
         //update camera
-        var rotMercure= 0.000408082;
+  var rotSaturn= 0.002338904;
+  var rotAnneau= 0.01;
 
-        mercure.rotation.y = mercure.rotation.y+ rotMercure;
+  saturn.rotation.y= saturn.rotation.y+rotSaturn;
+  anneau.rotation.y= anneau.rotation.y+rotAnneau;
 
 
         camera.lookAt(scene.position);
@@ -171,14 +184,10 @@
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
     }
-
 
     /**
      * Function handles the resize event. This make sure the camera and the renderer
@@ -197,20 +206,24 @@
 
 </script>
 <body>
-<div id="mercure">Mercure</div>
-<div id="details"><p>Mercure est la plus petite des planètes telluriques et la plus proche du Soleil. Sa surface truffée de cratères rappelle en de nombreux aspects la surface lunaire.</p><p>
-Désert de poussières et de roches tantôt brûlantes, tantôt glacées, Mercure est un astre mort, c’est-à-dire sans activité interne, depuis au moins 3,6 milliards d’années.</p>
-<p>L’une des particularités géologiques de Mercure est la présence d’escarpements, hauts de 1 à 3 km et longs de plusieurs centaines de km. Ils se seraient formés lors du refroidissement de la planète.</p>
-<p>Légèrement plus volumineuse que la Lune, Mercure est une boule solide constituée, au centre, d’un gros noyau riche en fer : il occuperait 42 % du volume de la planète et représenterait près de 80 % de sa masse. </p>
-<p>Ceci pourrait expliquer sa densité particulièrement élevée, en contradiction avec une règle constatant généralement que plus une planète tellurique est grande, plus elle est dense.</p>
-<p>Dépourvue d'atmosphère, Mercure subit toutes les rigueurs du milieu spatial : d'importants écarts de température entre le jour et la nuit : de –210 °C à 430 °C, ce qui représente un
-écart thermique sans équivalent dans le système solaire ; le bombardement météoritique : sa surface est criblée de cratères de toutes tailles, le plus grand atteignant 1 550 km de diamètre. Caloris Basin aurait été creusé par la rencontre entre Mercure et un astéroïde d'une centaine de km.</p>
+<div id="saturne">Saturne</div>
+<div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
 <ul>
-    <li>Etymologie : Mercure est le Dieu romain du commerce et des voyageurs.</li>
-<li>Découverte : pendant l’Antiquité, grâce à son éclat qui peut être confondu avec une étoile.</li>
-<li>Signe particulier : le jour solaire sur Mercure dure 2 ans mercuriens ! La raison de cette particularité ?
-Mercure pivote très lentement sur elle-même, d’où une valeur du jour solaire d’environ 6 mois terrestres.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles : 5 ans</li>
+    <li>une énorme sphère fluide, mi-gazeuse, mi-liquide, comprimée sous son propre poids et tournant très vite sur elle-même ;</li>
+    <li>une composition dominée par l’hydrogène et l’hélium ;</li>
+    <li>une épaisse atmosphère opaque présentant une structure en bandes légèrement colorées ;</li>
+    <li>la présence, en son centre, d’un petit noyau solide ;</li>
+    <li>l’existence d’une source interne d’énergie qui lui permet de rayonner 3 fois plus d’énergie qu’elle n’en reçoit du Soleil.</li>
+</ul></p>
+<p>Saturne est en revanche moins volumineuse et moins massive que Jupiter. Par ailleurs, avec une densité comparable à celle du bois, elle est assurément la planète la moins dense du système solaire.</p>
+<p>Son système d’anneaux, mesurant 300 000 km de diamètre pour moins d’1 km d’épaisseur, consiste en plusieurs milliers d’anneaux très minces et plus ou moins riches en matière. Une infinité de débris solides, poussières, grains et gros blocs de roches et de glaces est en mouvement au-dessus de l’équateur, de dimension pouvant varier d’une fraction de millimètre à quelques centaines de mètres.</p>
+<p>On lui connaît plus de plusieurs dizaines de satellites naturels, la plupart glacés et criblés de cratères. Parmi eux, Titan est le seul satellite du système solaire à posséder une atmosphère dense et des composés organiques. Les scientifiques y voient une sorte de Terre primitive congelée, permettant peut-être de comprendre comment la vie est apparue sur notre planète.</p>
+
+<ul>
+    <li>Etymologie :  Dieu des Paysans dans la religion romaine, Saturne correspond cependant au dieu grec Cronos représentant le temps</li>
+<li>Découverte : préhistoire</li>
+<li>Signe particulier :  très peu dense, Saturne est si légère qu’elle pourrait flotter sur un océan, s’il en existait un à sa taille.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 4 à 7 ans</li>
 </ul></div>
 </body>
 </html>

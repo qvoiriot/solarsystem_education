@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>01.06 Saturn</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+      <meta charset="utf-8" />
+    <title>01.05 Jupiter</title>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #saturne{
+                #jupiter{
           font-size: 2em;
           padding: 0;
           text-align: center;
           background-color: black;
           color: white;
         }
-                 #details{
+         #details{
           background-color: black;
           border: groove;
           position: fixed;
@@ -65,15 +65,13 @@
     function init() {
 
 
-  //texture saturn
-  var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
-  var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
-  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
-  materialSaturn.bumpMap =bumpMapSaturn;
 
 
-  var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
-  var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
+  //texture jupiter
+  var matextureJupiter = THREE.ImageUtils.loadTexture("../assets/textures/planets/jupitermap.jpg");
+  var bumpMapJupiter = THREE.ImageUtils.loadTexture("../assets/textures/planets/jupiterbumpMap.jpg");
+  var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: true});
+  materialJupiter.bumpMap =bumpMapJupiter;
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -88,25 +86,16 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add saturn
-  var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
-  saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
-  saturn.receiveShadow = true;
-  saturn.position.x = 0;
-  saturn.position.y = -2;
-  saturn.position.z = 0;
-  saturn.name='saturn';
-  scene.add(saturn);
 
-  //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
-  anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
-  anneau.receiveShadow = false;
-  anneau.position.x = 0;
-  anneau.position.y = -2;
-  anneau.position.z = 0;
-  //anneau.name='anneau';
-  scene.add(anneau);
+  //add jupiter
+  var jupiterGeometry = new THREE.SphereGeometry(8, 60, 60);
+  jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
+  jupiter.receiveShadow = true;
+  jupiter.position.x = 0;
+  jupiter.position.y = -2;
+  jupiter.position.z = 0;
+  jupiter.name='jupiter';
+  scene.add(jupiter);
 
 
         // add ambient light
@@ -167,11 +156,9 @@
     function render() {
 
         //update camera
-  var rotSaturn= 0.002338904;
-  var rotAnneau= 0.01;
+  var rotJupiter= 0.00243207;
 
-  saturn.rotation.y= saturn.rotation.y+rotSaturn;
-  anneau.rotation.y= anneau.rotation.y+rotAnneau;
+  jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
 
 
         camera.lookAt(scene.position);
@@ -184,10 +171,14 @@
         renderer.render(scene, camera);
 
 
+
+
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
+
     }
+
 
     /**
      * Function handles the resize event. This make sure the camera and the renderer
@@ -206,24 +197,25 @@
 
 </script>
 <body>
-<div id="saturne">Saturne</div>
-<div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
-<ul>
-    <li>une énorme sphère fluide, mi-gazeuse, mi-liquide, comprimée sous son propre poids et tournant très vite sur elle-même ;</li>
-    <li>une composition dominée par l’hydrogène et l’hélium ;</li>
-    <li>une épaisse atmosphère opaque présentant une structure en bandes légèrement colorées ;</li>
-    <li>la présence, en son centre, d’un petit noyau solide ;</li>
-    <li>l’existence d’une source interne d’énergie qui lui permet de rayonner 3 fois plus d’énergie qu’elle n’en reçoit du Soleil.</li>
-</ul></p>
-<p>Saturne est en revanche moins volumineuse et moins massive que Jupiter. Par ailleurs, avec une densité comparable à celle du bois, elle est assurément la planète la moins dense du système solaire.</p>
-<p>Son système d’anneaux, mesurant 300 000 km de diamètre pour moins d’1 km d’épaisseur, consiste en plusieurs milliers d’anneaux très minces et plus ou moins riches en matière. Une infinité de débris solides, poussières, grains et gros blocs de roches et de glaces est en mouvement au-dessus de l’équateur, de dimension pouvant varier d’une fraction de millimètre à quelques centaines de mètres.</p>
-<p>On lui connaît plus de plusieurs dizaines de satellites naturels, la plupart glacés et criblés de cratères. Parmi eux, Titan est le seul satellite du système solaire à posséder une atmosphère dense et des composés organiques. Les scientifiques y voient une sorte de Terre primitive congelée, permettant peut-être de comprendre comment la vie est apparue sur notre planète.</p>
+
+<div id="jupiter">Jupiter</div>
+<div id="details"><p>Jupiter est la plus grosse planète du système solaire : elle pourrait contenir 1 300 fois la Terre, et sa masse représente 2 fois ½ celle des 8 autres planètes réunies.
+</p>
+<p>Composée d’hydrogène et d’hélium, Jupiter est une planète essentiellement gazeuse. Son centre pourrait toutefois comporter un petit noyau solide.</p>
+<p>Contrairement aux petites planètes du système solaire, elle a conservé son atmosphère primitive. Tourbillons, orages, éclairs, aurores polaires… Sa célèbre tâche rouge témoigne de nombreux phénomènes météorologiques. Contrairement à la Terre, cette activité ne provient pas du Soleil mais probablement de la température interne de Jupiter, atteignant en son centre 30 000 °C.</p>
+<p>Les vents forts en surface (jusqu'à 400 km/h), résultat de sa forte vitesse de rotation, donnent à la planète sa structure en bandes colorées, la couleur étant attribuée à la présence de cristaux composés notamment de phosphore, de soufre ou d'azote.</p>
+<p>Au centre d'un système planétaire miniature, Jupiter entraîne dans son mouvement un cortège de satellites naturels et de fins anneaux. Invisible depuis la Terre, son système d'anneaux est diffus et transparent. Avec 63 satellites, Jupiter détient un record.</p>
+<p>Ils sont cependant très différents, comme en témoignent les 4 plus gros et plus connus : Io dispose d'une activité volcanique, Europe, d'une surface glacée, Ganymède, d'une activité géologique passée, et Callisto, d'un sol criblé de cratères.</p>
+<p>Jupiter est également entourée d’une puissante ceinture de radiations, chargée de particules solaires piégées par le champ magnétique de la planète.
+</p>
 
 <ul>
-    <li>Etymologie :  Dieu des Paysans dans la religion romaine, Saturne correspond cependant au dieu grec Cronos représentant le temps</li>
+    <li>Etymologie :  père et maître des Dieux, Jupiter était le Dieu du Ciel, de la Lumière, de la Foudre et du Tonnerre.
+</li>
 <li>Découverte : préhistoire</li>
-<li>Signe particulier :  très peu dense, Saturne est si légère qu’elle pourrait flotter sur un océan, s’il en existait un à sa taille.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles : 4 à 7 ans</li>
+<li>Signe particulier : Jupiter arbore une tache rouge ovale identifiée depuis plus de 3 siècles : elle correspond à un violent cyclone, représentant 2 fois la taille de la Terre.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 2 à 6 ans
+</li>
 </ul></div>
 </body>
 </html>

@@ -15,7 +15,7 @@ function init() {
   cameraBG.position.z = 50;
 
   sceneBG = new THREE.Scene();
-  var materialColor = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background_light.jpg"), depthTest: false});
+  var materialColor = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background_1.jpg"), depthTest: false});
   var bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), materialColor);
   bgPlane.position.z = -100;
   bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
