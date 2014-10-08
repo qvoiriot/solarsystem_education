@@ -11,7 +11,7 @@ var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune,
 function init() {
 
   //add background using a camera
-  cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
+  cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -9000, 9000);
   cameraBG.position.z = 50;
 
   sceneBG = new THREE.Scene();
