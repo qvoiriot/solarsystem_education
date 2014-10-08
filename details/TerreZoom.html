@@ -12,7 +12,9 @@
     <script src="../assets/libs/CopyShader.js"></script>
     <script src="../assets/libs/ShaderPass.js"></script>
     <script src="../assets/libs/MaskPass.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../assets/css/zoom.css">
+
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -57,7 +59,7 @@
   //texture des nuages
   var matextureNuage = THREE.ImageUtils.loadTexture("../assets/textures/planets/fair_clouds_4k.png");
   var materialNuage = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
-     
+
 
     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
@@ -171,7 +173,7 @@
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
+
     }
 
 

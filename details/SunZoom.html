@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8" />
     <title>01.00 Sun</title>
     <script src="../assets/libs/three.js"></script>
@@ -13,7 +12,9 @@
     <script src="../assets/libs/CopyShader.js"></script>
     <script src="../assets/libs/ShaderPass.js"></script>
     <script src="../assets/libs/MaskPass.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../assets/css/zoom.css">
+
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -83,10 +84,10 @@
 
   // SUPER SIMPLE GLOW EFFECT
   // use sprite because it appears the same from all angles
-  var spriteMaterial = new THREE.SpriteMaterial( 
-  { 
-    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ), 
-    
+  var spriteMaterial = new THREE.SpriteMaterial(
+  {
+    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ),
+
     color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
   });
   var sprite = new THREE.Sprite( spriteMaterial );
@@ -173,7 +174,7 @@
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
+
     }
 
 
