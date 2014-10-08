@@ -1,9 +1,11 @@
 #name{
-    font-size: 2em;
+    font-size: 50px;
     padding: 0;
     text-align: center;
     background-color: black;
     color: white;
+    margin-left: 50%;
+    position: fixed;
 }
 #details{
     background-color: black;
