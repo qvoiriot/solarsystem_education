@@ -63,8 +63,8 @@
 
 
   //texture de la terre
-  var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k.jpg");
-  var bumpMapTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthbumpMap.jpg");
+  var matextureTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthmap4k.jpg");
+  var bumpMapTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthbumpMap.jpg");
   //var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k.jpg");
   var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: false});
 
@@ -73,7 +73,7 @@
   materialTerre.specular = new THREE.Color(0x262626);
 
   //texture des nuages
-  var matextureNuage = THREE.ImageUtils.loadTexture("assets/textures/planets/fair_clouds_4k.png");
+  var matextureNuage = THREE.ImageUtils.loadTexture("../assets/textures/planets/fair_clouds_4k.png");
   var materialNuage = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
 
 
@@ -102,7 +102,7 @@
 
 
   //create nuage
-  var nuageGeometry = new THREE.SphereGeometry(8.2, 60, 60);
+  var nuageGeometry = new THREE.SphereGeometry(8.1, 60, 60);
   nuage = new THREE.Mesh (nuageGeometry, materialNuage);
   nuage.position.x = 0;
   nuage.position.y = -2;

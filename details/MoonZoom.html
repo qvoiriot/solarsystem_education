@@ -29,18 +29,18 @@
           background-color: black;
           color: white;
         }
-        #details{
+                 #details{
           background-color: black;
           border: groove;
           position: fixed;
-          margin-top: 300px;
+          margin-top: 50px;
           margin-left: 50px;
           display: block;
           color: white;
           text-align: justify;
           padding: 10px;
-          width: 400px;
-          height: 300px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -72,8 +72,8 @@
 
 
   //texture de la lune
-  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
-  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
+  var matextureLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonmap.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonbumpmap.jpg");
   var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
   materialLune.bumpMap = bumpMapLune;
 

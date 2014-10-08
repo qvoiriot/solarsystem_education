@@ -66,13 +66,13 @@
 
 
   //texture saturn
-  var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap.jpg");
-  var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
+  var matextureSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnmap.jpg");
+  var bumpMapSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnbumpMap.jpg");
   var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
   materialSaturn.bumpMap =bumpMapSaturn;
 
 
-  var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
+  var matextureAnneau = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnring.jpg");
   var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
 
 
