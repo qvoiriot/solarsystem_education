@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>01.08 Neptune</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+        #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -70,7 +84,7 @@
         renderer.shadowMapEnabled = true;
 
   //add neptune
-  var neptuneGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var neptuneGeometry = new THREE.SphereGeometry(8, 60, 60);
   neptune = new THREE.Mesh (neptuneGeometry, materialNeptune);
   neptune.receiveShadow = true;
   neptune.position.x = 0;
@@ -180,6 +194,18 @@
 </script>
 <body>
 <div id="neptune">Neptune</div>
+<div id="details"><p>Neptune est la première planète dont l’existence n’a pas été découverte par l’observation : elle a été prédite par calcul, à partir de la théorie de la gravitation universelle.</p>
+<p>Elle ressemble à sa sœur jumelle, Uranus, tant par sa couleur bleue verdâtre que par ses dimensions, sa densité et sa structure. Elle dispose d'un noyau rocheux, d'un manteau glacé et d'une enveloppe gazeuse constituée d'hydrogène, d'hélium et de méthane dans les couches supérieures.</p>
+<p>L'activité de son atmosphère est particulièrement surprenante, comme en témoignent les tâches à sa surface : vents violents (jusqu'à 1 000 km/h), présence de nombreux nuages, déplacements rapides de turbulences etc.</p>
+<p>Neptune est entourée de 13 satellites très irréguliers et d'un système d'anneaux particuliers, appelés "arcs de Neptune", et curieusement incomplets.</p>
+<p>L'année de la géante gazeuse la plus lointaine de la Terre est 164 fois plus longue que la nôtre. Depuis sa découverte en 1846, Neptune n'a donc pas encore effectué une révolution complète autour du Soleil, ce sera le cas en 2010.
+</p>
 
+<ul>
+    <li>Etymologie : fils de Saturne et frère de Jupiter, Neptune est le Dieu de la Mer dans la mythologie romaine.</li>
+<li>Découverte : en 1846, par l’astronome allemand Johann G. Galle d’après les calculs de U. Leverrier.</li>
+<li>Signe particulier :  en raison de l’orbite très irrégulière de Pluton, Neptune a été la planète la plus éloignée du Soleil entre 1979 et 1999.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 11 ans</li>
+</ul></div>
 </body>
 </html>

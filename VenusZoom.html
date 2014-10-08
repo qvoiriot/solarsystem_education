@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+      <meta charset="utf-8" />
     <title>01.02 Venus</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+                #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -74,7 +88,7 @@
 
 
   //create venus
-  var venusGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var venusGeometry = new THREE.SphereGeometry(8, 60, 60);
   venus = new THREE.Mesh (venusGeometry, materialVenus);
   venus.receiveShadow = true;
   venus.position.x = 0;
@@ -186,6 +200,23 @@
 </script>
 <body>
 <div id="venus">Venus</div>
-
+<div id="details"><p>Par sa taille et sa masse, Vénus ressemble à la Terre, ce qui leur vaut parfois d’être considérées comme 2 soeurs. La comparaison s’arrête néanmoins là, car l’évolution encore mal comprise de Vénus en fait un astre fort singulier.
+</p><p>
+Vénus est la seconde planète la plus proche du Soleil et la plus chaude du système solaire. Grâce à un important effet de serre, sa surface est maintenue à une température moyenne de 480 °C.
+</p>
+<p>Conséquence d’une atmosphère épaisse essentiellement constituée de dioxyde de carbone, la pression atmosphérique est 90 fois plus élevée que sur Terre. Entre 30 et 70 km d’altitude, des couches de brumes et de nuages formés de gouttelettes d’eau et d’acide sulfurique masquent la surface de la planète.
+</p>
+<p>Le cratère Golubkina, de 34 km de diamètre. En étudiant le nombre et la taille de tels cratères, on peut en déduire l’âge de la surface, soit seulement 500 millions d’années.</p>
+<p>Les plaines constituent 80% du paysage vénusien. Sa surface porte cependant le signe d’un passé turbulent : canyons longs et profonds, montagnes plus hautes que sur Terre, dômes volcaniques, coulées de lave et cratères d’impacts météoritiques.
+</p>
+<p>Les plaines constituent 80% du paysage vénusien. Sa surface porte cependant le signe d’un passé turbulent : canyons longs et profonds, montagnes plus hautes que sur Terre, dômes volcaniques, coulées de lave et cratères d’impacts météoritiques.
+</p>
+<ul>
+    <li>Etymologie : dans la mythologie romaine, Vénus était la déesse des Jardins, puis de l’Amour et de la Beauté.
+</li>
+<li>Découverte :préhistoire</li>
+<li>Signe particulier : : Vénus tourne sur elle-même dans le sens inverse de toutes ses congénères. Elle effectue un tour en 243 jours</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 5 mois</li>
+</ul></div>
 </body>
 </html>

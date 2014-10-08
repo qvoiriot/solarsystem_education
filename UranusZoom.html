@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
     <title>01.07 Uranus</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -22,6 +23,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+         #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -72,7 +86,7 @@
         renderer.shadowMapEnabled = true;
 
   //add uranus
-  var uranusGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var uranusGeometry = new THREE.SphereGeometry(8, 60, 60);
   uranus = new THREE.Mesh (uranusGeometry, materialUranus);
   uranus.receiveShadow = true;
   uranus.position.x = 0;
@@ -183,5 +197,17 @@
 <body>
 
 <div id="uranus">Uranus</div>
+
+<div id="details"><p>Pour les Anciens, le système solaire s’arrêtait à Saturne, les autres astres étant considérés comme des étoiles. Pourtant, quelques années avant la Révolution française, l’astronome William Herschel repère un objet, qu’il croit au premier abord être une comète. Le calcul montre qu’il s’agit d’une planète gravitant à près de 3 milliards de km du Soleil.</p>
+<p>Uranus est une planète insolite : elle doit probablement sa couleur verdâtre assez inhabituelle à la présence de méthane dans son atmosphère : ce gaz ne réfléchit que la composante verte de la lumière solaire. Autre curiosité : son axe de rotation se trouve à peu près dans le plan de l’écliptique. Alors que toutes les planètes tournent comme des toupies, Uranus tourne ainsi sur elle-même comme un cerceau.</p>
+<p>Troisième plus grande planète du système solaire, Uranus appartient au groupe des 4 planètes géantes dont font partie Jupiter, Saturne et Neptune. Elle est vraisemblablement composée d’un noyau rocheux, entouré d’un manteau de glace à base d’eau, d’ammoniac et de méthane. Comme Saturne et Jupiter, elle dispose d’une épaisse enveloppe gazeuse d’hydrogène et d’hélium, masquant ce qui se trouve en profondeur. Au sommet de cette atmosphère, la température vaut environ – 220 °C.</p>
+<p>Uranus est entourée de très fins anneaux et de 22 satellites</p>
+
+<ul>
+    <li>Etymologie :  : Uranus est le Dieu du Ciel et Père de Saturne dans la mythologie romaine.</li>
+<li>Découverte : 13 mars 1781, par l’astronome William Herschel.</li>
+<li>Signe particulier :  : alors que les 8 autres planètes du système solaire tournent comme des toupies, Uranus tourne sur elle-même comme un cerceau. Ceci est probablement dû à un choc violent qui, jadis, l’aurait fait basculer : son axe de rotation se situe ainsi dans le plan de l’écliptique.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 9 ans</li>
+</ul></div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>01.06 Saturn</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+                 #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -75,7 +89,7 @@
         renderer.shadowMapEnabled = true;
 
   //add saturn
-  var saturnGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
   saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
   saturn.receiveShadow = true;
   saturn.position.x = 0;
@@ -85,7 +99,7 @@
   scene.add(saturn);
 
   //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 15, 40, 1, 50 );
+  var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   anneau.receiveShadow = false;
   anneau.position.x = 0;
@@ -154,7 +168,7 @@
 
         //update camera
   var rotSaturn= 0.002338904;
-  var rotAnneau= -0.02;
+  var rotAnneau= 0.01;
 
   saturn.rotation.y= saturn.rotation.y+rotSaturn;
   anneau.rotation.y= anneau.rotation.y+rotAnneau;
@@ -170,14 +184,10 @@
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
     }
-
 
     /**
      * Function handles the resize event. This make sure the camera and the renderer
@@ -197,6 +207,23 @@
 </script>
 <body>
 <div id="saturne">Saturne</div>
+<div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
+<ul>
+    <li>une énorme sphère fluide, mi-gazeuse, mi-liquide, comprimée sous son propre poids et tournant très vite sur elle-même ;</li>
+    <li>une composition dominée par l’hydrogène et l’hélium ;</li>
+    <li>une épaisse atmosphère opaque présentant une structure en bandes légèrement colorées ;</li>
+    <li>la présence, en son centre, d’un petit noyau solide ;</li>
+    <li>l’existence d’une source interne d’énergie qui lui permet de rayonner 3 fois plus d’énergie qu’elle n’en reçoit du Soleil.</li>
+</ul></p>
+<p>Saturne est en revanche moins volumineuse et moins massive que Jupiter. Par ailleurs, avec une densité comparable à celle du bois, elle est assurément la planète la moins dense du système solaire.</p>
+<p>Son système d’anneaux, mesurant 300 000 km de diamètre pour moins d’1 km d’épaisseur, consiste en plusieurs milliers d’anneaux très minces et plus ou moins riches en matière. Une infinité de débris solides, poussières, grains et gros blocs de roches et de glaces est en mouvement au-dessus de l’équateur, de dimension pouvant varier d’une fraction de millimètre à quelques centaines de mètres.</p>
+<p>On lui connaît plus de plusieurs dizaines de satellites naturels, la plupart glacés et criblés de cratères. Parmi eux, Titan est le seul satellite du système solaire à posséder une atmosphère dense et des composés organiques. Les scientifiques y voient une sorte de Terre primitive congelée, permettant peut-être de comprendre comment la vie est apparue sur notre planète.</p>
 
+<ul>
+    <li>Etymologie :  Dieu des Paysans dans la religion romaine, Saturne correspond cependant au dieu grec Cronos représentant le temps</li>
+<li>Découverte : préhistoire</li>
+<li>Signe particulier :  très peu dense, Saturne est si légère qu’elle pourrait flotter sur un océan, s’il en existait un à sa taille.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 4 à 7 ans</li>
+</ul></div>
 </body>
 </html>

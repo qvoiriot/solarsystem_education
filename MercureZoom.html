@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <meta charset="utf-8" />
     <title>01.01 Mercure</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +25,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+                #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -73,7 +88,7 @@
 
 
           //create mercure
-          var mercureGeometry = new THREE.SphereGeometry(15, 60, 60);
+          var mercureGeometry = new THREE.SphereGeometry(8, 60, 60);
           mercure = new THREE.Mesh (mercureGeometry, materialMercure);
           mercure.receiveShadow = true;
           mercure.position.x = 0;
@@ -183,6 +198,19 @@
 </script>
 <body>
 <div id="mercure">Mercure</div>
-
+<div id="details"><p>Mercure est la plus petite des planètes telluriques et la plus proche du Soleil. Sa surface truffée de cratères rappelle en de nombreux aspects la surface lunaire.</p><p>
+Désert de poussières et de roches tantôt brûlantes, tantôt glacées, Mercure est un astre mort, c’est-à-dire sans activité interne, depuis au moins 3,6 milliards d’années.</p>
+<p>L’une des particularités géologiques de Mercure est la présence d’escarpements, hauts de 1 à 3 km et longs de plusieurs centaines de km. Ils se seraient formés lors du refroidissement de la planète.</p>
+<p>Légèrement plus volumineuse que la Lune, Mercure est une boule solide constituée, au centre, d’un gros noyau riche en fer : il occuperait 42 % du volume de la planète et représenterait près de 80 % de sa masse. </p>
+<p>Ceci pourrait expliquer sa densité particulièrement élevée, en contradiction avec une règle constatant généralement que plus une planète tellurique est grande, plus elle est dense.</p>
+<p>Dépourvue d'atmosphère, Mercure subit toutes les rigueurs du milieu spatial : d'importants écarts de température entre le jour et la nuit : de –210 °C à 430 °C, ce qui représente un
+écart thermique sans équivalent dans le système solaire ; le bombardement météoritique : sa surface est criblée de cratères de toutes tailles, le plus grand atteignant 1 550 km de diamètre. Caloris Basin aurait été creusé par la rencontre entre Mercure et un astéroïde d'une centaine de km.</p>
+<ul>
+    <li>Etymologie : Mercure est le Dieu romain du commerce et des voyageurs.</li>
+<li>Découverte : pendant l’Antiquité, grâce à son éclat qui peut être confondu avec une étoile.</li>
+<li>Signe particulier : le jour solaire sur Mercure dure 2 ans mercuriens ! La raison de cette particularité ?
+Mercure pivote très lentement sur elle-même, d’où une valeur du jour solaire d’environ 6 mois terrestres.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 5 ans</li>
+</ul></div>
 </body>
 </html>
