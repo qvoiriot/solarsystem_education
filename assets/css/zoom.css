@@ -11,14 +11,15 @@
     background-color: black;
     border: groove;
     position: fixed;
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: 10px;
+    margin-left: 15px;
     color: white;
     text-align: justify;
     padding: 10px;
     width: 450px;
     height: 750px;
 }
+
 
 #retour{
     text-align: center;
@@ -38,4 +39,20 @@
 
 #retour a:hover{
     color: red;
+}
+
+details{
+    position: fixed;
+    margin-top: 70px;
+    margin-left: 50px;
+    color: #0CD4B9;
+    background-color: black;
+}
+
+details:hover{
+    position: fixed;
+    margin-top: 70px;
+    margin-left: 50px;
+    color: red;
+    background-color: black;
 }

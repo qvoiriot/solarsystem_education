@@ -258,7 +258,7 @@ function init() {
   /************************************************************/
   // ajout de spaceCar
 
-  var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
+/*  var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
   var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
 
         var loader = new THREE.OBJMTLLoader();
