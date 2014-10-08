@@ -112,12 +112,6 @@
 
         scene.add(directionalLight);
 
-
-        //add extras
-        //addControlGui(control);
-        addStatsObject();
-
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -137,16 +131,6 @@
         render();
     }
 
-    function addStatsObject(){
-        stats = new Stats();
-        stats.setMode(0);
-
-        stats.domElement.style.position ='absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-
-        document.body.appendChild(stats.domElement);
-    }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
@@ -161,19 +145,13 @@
 
         camera.lookAt(scene.position);
 
-        //update stats
-        stats.update();
-
         //update the camera
         cameraControl.update();
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
-
 
     }
 
@@ -195,6 +173,7 @@
 
 </script>
 <body>
+    <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Soleil</div>
 
 <div id="details"><p>Le Soleil est une étoile naine jaune qui se compose de 74 % d’hydrogène, de 24 % d’hélium et d’une fraction d’éléments plus lourds. Le Soleil est de type spectral G2–V. « G2 » signifie qu’il est plus chaud (5 770 kelvins en surface environ) et plus brillant que la moyenne, avec une couleur jaune tirant sur le blanc. Son spectre renferme des bandes de métaux ionisés et neutres, ainsi que de faibles bandes d’hydrogène. Le suffixe « V » (ou « classe de luminosité ») indique qu’il évolue actuellement, comme la majorité des étoiles, sur la séquence principale du diagramme de Hertzsprung-Russell : il tire son énergie de réactions de fusion nucléaire qui transforment, dans son noyau, l’hydrogène en hélium, et se trouve dans un état d’équilibre hydrostatique, ne subissant ni contraction, ni dilatation continuelles.</p>

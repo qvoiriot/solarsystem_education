@@ -110,10 +110,6 @@
 
         scene.add(directionalLight);
 
-        //add extras
-        //addControlGui(control);
-        addStatsObject();
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -132,18 +128,6 @@
         render();
     }
 
-
-    function addStatsObject(){
-        stats = new Stats();
-        stats.setMode(0);
-
-        stats.domElement.style.position ='absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-
-        document.body.appendChild(stats.domElement);
-    }
-
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
      * for future renders
@@ -159,9 +143,6 @@
 
 
         camera.lookAt(scene.position);
-
-        //update stats
-        stats.update();
 
         //update the camera
         cameraControl.update();
@@ -194,6 +175,7 @@
 
 </script>
 <body>
+    <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Terre</div>
 <div id="details"><p>De taille moyenne, la Terre est la 3ème planète en partant du Soleil. Elle se distingue des autres planètes telluriques par la présence d’un gros satellite naturel, d’un important champ magnétique, et surtout de la vie, dont les conditions d’apparition restent encore mystérieuses</p>
 <p>La Terre est composées de plusieurs couches : l’enveloppe gazeuse, composée essentiellement d’azote et d’oxygène, constitue l’atmosphère ; l’enveloppe liquide, appelée hydrosphère, comprend les mers, les océans, les fleuves et les glaciers ; enfin, la partie solide est la plus importante et se divise elle-même en 3 couches :

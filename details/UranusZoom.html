@@ -95,12 +95,6 @@
 
         scene.add(directionalLight);
 
-
-        //add extras
-        //addControlGui(control);
-        addStatsObject();
-
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -120,16 +114,6 @@
         render();
     }
 
-    function addStatsObject(){
-        stats = new Stats();
-        stats.setMode(0);
-
-        stats.domElement.style.position ='absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-
-        document.body.appendChild(stats.domElement);
-    }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
@@ -145,20 +129,12 @@
 
         camera.lookAt(scene.position);
 
-        //update stats
-        stats.update();
-
         //update the camera
         cameraControl.update();
         renderer.render(scene, camera);
 
-
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
-
-
     }
 
 
@@ -179,7 +155,7 @@
 
 </script>
 <body>
-
+  <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Uranus</div>
 
 <div id="details"><p>Pour les Anciens, le système solaire s’arrêtait à Saturne, les autres astres étant considérés comme des étoiles. Pourtant, quelques années avant la Révolution française, l’astronome William Herschel repère un objet, qu’il croit au premier abord être une comète. Le calcul montre qu’il s’agit d’une planète gravitant à près de 3 milliards de km du Soleil.</p>
