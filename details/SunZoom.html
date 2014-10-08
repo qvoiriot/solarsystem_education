@@ -52,7 +52,7 @@
 
 
   //texture du soleil
-  var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
+  var matextureSun = THREE.ImageUtils.loadTexture("../assets/textures/planets/sun.jpg");
   var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
 
@@ -86,7 +86,7 @@
   // use sprite because it appears the same from all angles
   var spriteMaterial = new THREE.SpriteMaterial(
   {
-    map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ),
+    map: new THREE.ImageUtils.loadTexture( '../assets/textures/planets/sun_halo.png' ),
 
     color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
   });
