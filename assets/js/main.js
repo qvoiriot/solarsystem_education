@@ -21,6 +21,7 @@ function init() {
   bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
   sceneBG.add(bgPlane);
 
+
   //texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k_light.jpg");
   var bumpMapTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthbumpMap_light.jpg");
@@ -116,9 +117,9 @@ function init() {
   scene.add(soleil);
 
 
-/*************************************************************/
-/**************           CUSTOM SUN             *************/
-/*************************************************************/
+  /*************************************************************/
+  /**************           CUSTOM SUN             *************/
+  /*************************************************************/
 
   // SUPER SIMPLE GLOW EFFECT
   // use sprite because it appears the same from all angles
@@ -133,7 +134,7 @@ function init() {
   soleil.add(sprite); // this centers the glow at the mesh
 
 
-/*************************************************************/
+  /*************************************************************/
 
   //create mercure
   var mercureGeometry = new THREE.SphereGeometry(4, 60, 60);
@@ -155,7 +156,6 @@ function init() {
   venus.name='venus';
   scene.add(venus);
 
-
   // create the ground plane Terre
   var sphereGeometry = new THREE.SphereGeometry(10, 60, 60);
   terre = new THREE.Mesh (sphereGeometry, materialTerre);
@@ -175,7 +175,6 @@ function init() {
   lune.name='lune';
   scene.add(lune);
 
-
   //add mars
   var marsGeometry = new THREE.SphereGeometry(5, 60, 60);
   mars = new THREE.Mesh (marsGeometry, materialMars);
@@ -185,7 +184,6 @@ function init() {
   mars.position.z = 0;
   mars.name='mars';
   scene.add(mars);
-
 
   //add jupiter
   var jupiterGeometry = new THREE.SphereGeometry(112, 60, 60);
@@ -237,7 +235,6 @@ function init() {
   neptune.name='neptune';
   scene.add(neptune);
 
-
   //add pluton
   var plutonGeometry = new THREE.SphereGeometry(4, 60, 60);
   pluton = new THREE.Mesh (plutonGeometry, materialPluton);
@@ -247,7 +244,6 @@ function init() {
   pluton.position.z = 0;
   pluton.name='pluton';
   scene.add(pluton);
-
 
   // add ambient light
   ambientLight = new THREE.AmbientLight(0x242424);
@@ -260,13 +256,13 @@ function init() {
   scene.add( light );
 
 
-/************************************************************/
-/******************        SPACE CAR    *********************/
-/************************************************************/
-// ajout de spaceCar
+  /************************************************************/
+  /******************        SPACE CAR    *********************/
+  /************************************************************/
+  // ajout de spaceCar
 
-var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
-var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
+  var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
+  var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
 
         var loader = new THREE.OBJMTLLoader();
         loader.load( spaceCarObj, spaceCarMtl, function ( spaceCar ) {
@@ -281,7 +277,7 @@ var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
 
         // ici : ajout du code pour le mouvement de la space car
 
-/************************************************************/
+  /************************************************************/
 
   // position and point the camera to the center of the scene
   camera.position.x = -600;
@@ -405,10 +401,8 @@ function render() {
 
   // renderer.render(scene, camera);
   renderer.autoClear = false;
-
   composer.render();
 }
-
 
 /**
  * Function handles the resize event. This make sure the camera and the renderer

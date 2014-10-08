@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+      <meta charset="utf-8" />
     <title>01.05 Jupiter</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+         #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -74,7 +88,7 @@
 
 
   //add jupiter
-  var jupiterGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var jupiterGeometry = new THREE.SphereGeometry(8, 60, 60);
   jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
   jupiter.receiveShadow = true;
   jupiter.position.x = 0;
@@ -185,5 +199,23 @@
 <body>
 
 <div id="jupiter">Jupiter</div>
+<div id="details"><p>Jupiter est la plus grosse planète du système solaire : elle pourrait contenir 1 300 fois la Terre, et sa masse représente 2 fois ½ celle des 8 autres planètes réunies.
+</p>
+<p>Composée d’hydrogène et d’hélium, Jupiter est une planète essentiellement gazeuse. Son centre pourrait toutefois comporter un petit noyau solide.</p>
+<p>Contrairement aux petites planètes du système solaire, elle a conservé son atmosphère primitive. Tourbillons, orages, éclairs, aurores polaires… Sa célèbre tâche rouge témoigne de nombreux phénomènes météorologiques. Contrairement à la Terre, cette activité ne provient pas du Soleil mais probablement de la température interne de Jupiter, atteignant en son centre 30 000 °C.</p>
+<p>Les vents forts en surface (jusqu'à 400 km/h), résultat de sa forte vitesse de rotation, donnent à la planète sa structure en bandes colorées, la couleur étant attribuée à la présence de cristaux composés notamment de phosphore, de soufre ou d'azote.</p>
+<p>Au centre d'un système planétaire miniature, Jupiter entraîne dans son mouvement un cortège de satellites naturels et de fins anneaux. Invisible depuis la Terre, son système d'anneaux est diffus et transparent. Avec 63 satellites, Jupiter détient un record.</p>
+<p>Ils sont cependant très différents, comme en témoignent les 4 plus gros et plus connus : Io dispose d'une activité volcanique, Europe, d'une surface glacée, Ganymède, d'une activité géologique passée, et Callisto, d'un sol criblé de cratères.</p>
+<p>Jupiter est également entourée d’une puissante ceinture de radiations, chargée de particules solaires piégées par le champ magnétique de la planète.
+</p>
+
+<ul>
+    <li>Etymologie :  père et maître des Dieux, Jupiter était le Dieu du Ciel, de la Lumière, de la Foudre et du Tonnerre.
+</li>
+<li>Découverte : préhistoire</li>
+<li>Signe particulier : Jupiter arbore une tache rouge ovale identifiée depuis plus de 3 siècles : elle correspond à un violent cyclone, représentant 2 fois la taille de la Terre.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 2 à 6 ans
+</li>
+</ul></div>
 </body>
 </html>

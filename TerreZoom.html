@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>01.03 - Terre</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+                 #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -61,19 +75,7 @@
   //texture des nuages
   var matextureNuage = THREE.ImageUtils.loadTexture("assets/textures/planets/fair_clouds_4k.png");
   var materialNuage = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
-
-
-  //texture de la lune
-  var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap.jpg");
-  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap.jpg");
-  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
-  materialLune.bumpMap = bumpMapLune;
-
-        
-
-
-
-
+     
 
     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
@@ -89,7 +91,7 @@
 
 
   // create the ground plane Terre
-  var sphereGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var sphereGeometry = new THREE.SphereGeometry(8, 60, 60);
   terre = new THREE.Mesh (sphereGeometry, materialTerre);
   terre.receiveShadow = true;
   terre.position.x = 0;
@@ -100,7 +102,7 @@
 
 
   //create nuage
-  var nuageGeometry = new THREE.SphereGeometry(15.2, 60, 60);
+  var nuageGeometry = new THREE.SphereGeometry(8.2, 60, 60);
   nuage = new THREE.Mesh (nuageGeometry, materialNuage);
   nuage.position.x = 0;
   nuage.position.y = -2;
@@ -108,14 +110,6 @@
   //nuage.name='nuage';
   scene.add(nuage);
 
-  var luneGeometry = new THREE.SphereGeometry(5, 60, 60);
-  lune = new THREE.Mesh (luneGeometry, materialLune);
-  lune.receiveShadow = true;
-  lune.position.x = 30;
-  lune.position.y = -2;
-  lune.position.z = 0;
-  lune.name='lune';
-  scene.add(lune);
 
         // add ambient light
         ambientLight = new THREE.AmbientLight(0x111111,1);
@@ -175,15 +169,9 @@
         //update camera
         var rotTerre = 0.0005; //control.rotationSpeed;
         var rotNuage = 0.0006;
-        var rotLune = 0.0009;
-        var rotLuneTerre = 0.0009;
 
         terre.rotation.y = terre.rotation.y+ rotTerre;
         nuage.rotation.y = nuage.rotation.y + rotNuage;
-        lune.rotation.y = lune.rotation.y + rotLune;
-
-        lune.position.x = lune.position.x * Math.cos(rotLuneTerre) + lune.position.z * Math.sin(rotLuneTerre);
-        lune.position.z = lune.position.z * Math.cos(rotLuneTerre) - lune.position.x * Math.sin(rotLuneTerre);
 
 
         camera.lookAt(scene.position);
@@ -223,6 +211,24 @@
 </script>
 <body>
 <div id="terre">Terre</div>
+<div id="details"><p>De taille moyenne, la Terre est la 3ème planète en partant du Soleil. Elle se distingue des autres planètes telluriques par la présence d’un gros satellite naturel, d’un important champ magnétique, et surtout de la vie, dont les conditions d’apparition restent encore mystérieuses</p>
+<p>La Terre est composées de plusieurs couches : l’enveloppe gazeuse, composée essentiellement d’azote et d’oxygène, constitue l’atmosphère ; l’enveloppe liquide, appelée hydrosphère, comprend les mers, les océans, les fleuves et les glaciers ; enfin, la partie solide est la plus importante et se divise elle-même en 3 couches :
+  <ul>
+    <li>la croûte, composée de roches, pouvant aller jusqu’à quelques dizaines de km d’épaisseur ;</li>
+    <li>le manteau, composé de roches plus denses, épais d’environ 2 900 km ;</li>
+    <li>le noyau externe liquide et le noyau interne solide, composé essentiellement de fer et de nickel, de 3 500 km d’épaisseur.
+</li>
+  </ul>
 
+</p>
+<p>Tout en se refroidissant, elle se solidifie et éjecte divers gaz : vapeur d’eau, dioxyde de carbone, ammoniac, etc. Retenus captifs par la pesanteur, ils constituent ensuite une atmosphère. La surface terrestre se recouvre d’étendues liquides, les océans, qui lui valent le nom de planète bleue.</p>
+<p>La Terre est le plus grand corps du système solaire à disposer d’une surface solide et la seule probablement à être animée d’un mouvement tectonique, ces 2 caractéristiques étant liées. L’activité volcanique et sismique sont la preuve directe du mouvement perpétuel de la croûte terrestre.
+</p>
+
+<ul>
+    <li>Un système de référence : Le plan de l’orbite terrestre autour du Soleil est appelé plan de l’écliptique. La révolution de la Terre autour du Soleil détermine la durée de l’année, et sa rotation autour de l’axe des pôles celle du jour
+</li>
+<li>Signe particulier : la Terre est la seule planète porteuse de vie connue à ce jour.</li>
+</ul></div>
 </body>
 </html>

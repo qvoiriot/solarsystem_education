@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>01.04 Mars</title>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
@@ -23,6 +24,19 @@
           text-align: center;
           background-color: black;
           color: white;
+        }
+                         #details{
+          background-color: black;
+          border: groove;
+          position: fixed;
+          margin-top: 50px;
+          margin-left: 50px;
+          display: block;
+          color: white;
+          text-align: justify;
+          padding: 10px;
+          width: 450px;
+          height: 750px;
         }
     </style>
 </head>
@@ -69,7 +83,7 @@
 
 
   //add mars
-  var marsGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var marsGeometry = new THREE.SphereGeometry(8, 60, 60);
   mars = new THREE.Mesh (marsGeometry, materialMars);
   mars.receiveShadow = true;
   mars.position.x = 0;
@@ -179,6 +193,21 @@
 </script>
 <body>
 <div id="mars">Mars</div>
+<div id="details"><p>Comparée à la Terre, Mars est une petite planète : 7 fois moins volumineuse et 10 fois moins massive. C'est une boule solide désertique, qui doit sa couleur rougeâtre en surface à la présence d'oxyde de fer. Elle est entourée de 2 petits satellites, Phobos et Deimos.
+</p>
+<p>Sa faible gravité, 3 fois plus faible que la gravité terrestre, et la perte très tôt dans son histoire de son champ magnétique, ne lui a permis de retenir qu’une enveloppe gazeuse insignifiante. Extrêmement ténue, elle renferme 95 % de dioxyde de carbone. La pression atmosphérique est très variable et 100 à 150 fois plus faible que sur Terre.</p>
+<p>Faiblement chauffée par le Soleil et sans effet de serre notable, Mars arbore des températures oscillant entre – 100°C et 0°C à l'équateur</p>
+<p>Balayant un sol sec, les vents soulèvent des poussières ferrugineuses qui donnent à l'atmosphère une couleur rose ocre. Périodiquement, de violentes tempêtes soulèvent des nuages de poussières jusqu'à 50 km d'altitude, rendant le ciel complètement opaque. Les vents sont le principal agent d'altération de la surface martienne.</p>
+<p>Ses pôles sont en permanence recouverts de calottes très variables en dimension de glace d’eau et de neige carbonique. Sa surface, couverte de poussières et de blocs rocheux, présente d’innombrables cratères d’impacts météoritiques dans l’hémisphère sud, des plaines volcaniques plus jeunes dans l’hémisphère nord et une profonde vallée, Valles Marineris, s’étendant d’Ouest en Est. Sa structure interne, composé d’une croûte, d’un manteau et d’un noyau, rappelle celle des autres planètes telluriques.
+</p>
 
+<ul>
+    <li>Etymologie : la couleur rougeâtre de Mars rappelant celle du sang, les Grecs puis les Romains lui donnèrent le nom de leur Dieu de la Guerre.
+</li>
+<li>Découverte : préhistoire</li>
+<li>Signe particulier : l'histoire de Mars et ses caractéristiques actuelles laissent supposer l'existence passée ou présente d'une forme de vie.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 7 ou 11 mois
+</li>
+</ul></div>
 </body>
 </html>
