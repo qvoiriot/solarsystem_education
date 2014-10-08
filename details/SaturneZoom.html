@@ -2,30 +2,30 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>01.08 Neptune</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+    <title>01.06 Saturn</title>
+    <script src="../assests/libs/three.js"></script>
+    <script src="../assests/libs/dat.gui.min.js"></script>
+    <script src="../assests/libs/stats.min.js"></script>
+    <script src="../assests/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assests/libs/EffectComposer.js"></script>
+    <script src="../assests/libs/RenderPass.js"></script>
+    <script src="../assests/libs/CopyShader.js"></script>
+    <script src="../assests/libs/ShaderPass.js"></script>
+    <script src="../assests/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #neptune{
+                #saturne{
           font-size: 2em;
           padding: 0;
           text-align: center;
           background-color: black;
           color: white;
         }
-        #details{
+                 #details{
           background-color: black;
           border: groove;
           position: fixed;
@@ -65,11 +65,16 @@
     function init() {
 
 
-  //texture neptune
-  var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
-  var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
-  var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: false});
-    materialNeptune.bumpMap = bumpMapNeptune;
+  //texture saturn
+  var matextureSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnmap.jpg");
+  var bumpMapSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnbumpMap.jpg");
+  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
+  materialSaturn.bumpMap =bumpMapSaturn;
+
+
+  var matextureAnneau = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnring.jpg");
+  var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
+
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -83,15 +88,25 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add neptune
-  var neptuneGeometry = new THREE.SphereGeometry(8, 60, 60);
-  neptune = new THREE.Mesh (neptuneGeometry, materialNeptune);
-  neptune.receiveShadow = true;
-  neptune.position.x = 0;
-  neptune.position.y = -2;
-  neptune.position.z = 0;
-  neptune.name='neptune';
-  scene.add(neptune);
+  //add saturn
+  var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
+  saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
+  saturn.receiveShadow = true;
+  saturn.position.x = 0;
+  saturn.position.y = -2;
+  saturn.position.z = 0;
+  saturn.name='saturn';
+  scene.add(saturn);
+
+  //add anneau saturn
+  var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
+  anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
+  anneau.receiveShadow = false;
+  anneau.position.x = 0;
+  anneau.position.y = -2;
+  anneau.position.z = 0;
+  //anneau.name='anneau';
+  scene.add(anneau);
 
 
         // add ambient light
@@ -152,9 +167,11 @@
     function render() {
 
         //update camera
-  var rotNeptune = 0.001246563;
+  var rotSaturn= 0.002338904;
+  var rotAnneau= 0.01;
 
-  neptune.rotation.y = neptune.rotation.y+ rotNeptune;
+  saturn.rotation.y= saturn.rotation.y+rotSaturn;
+  anneau.rotation.y= anneau.rotation.y+rotAnneau;
 
 
         camera.lookAt(scene.position);
@@ -167,14 +184,10 @@
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
 
-        
     }
-
 
     /**
      * Function handles the resize event. This make sure the camera and the renderer
@@ -193,19 +206,24 @@
 
 </script>
 <body>
-<div id="neptune">Neptune</div>
-<div id="details"><p>Neptune est la première planète dont l’existence n’a pas été découverte par l’observation : elle a été prédite par calcul, à partir de la théorie de la gravitation universelle.</p>
-<p>Elle ressemble à sa sœur jumelle, Uranus, tant par sa couleur bleue verdâtre que par ses dimensions, sa densité et sa structure. Elle dispose d'un noyau rocheux, d'un manteau glacé et d'une enveloppe gazeuse constituée d'hydrogène, d'hélium et de méthane dans les couches supérieures.</p>
-<p>L'activité de son atmosphère est particulièrement surprenante, comme en témoignent les tâches à sa surface : vents violents (jusqu'à 1 000 km/h), présence de nombreux nuages, déplacements rapides de turbulences etc.</p>
-<p>Neptune est entourée de 13 satellites très irréguliers et d'un système d'anneaux particuliers, appelés "arcs de Neptune", et curieusement incomplets.</p>
-<p>L'année de la géante gazeuse la plus lointaine de la Terre est 164 fois plus longue que la nôtre. Depuis sa découverte en 1846, Neptune n'a donc pas encore effectué une révolution complète autour du Soleil, ce sera le cas en 2010.
-</p>
+<div id="saturne">Saturne</div>
+<div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
+<ul>
+    <li>une énorme sphère fluide, mi-gazeuse, mi-liquide, comprimée sous son propre poids et tournant très vite sur elle-même ;</li>
+    <li>une composition dominée par l’hydrogène et l’hélium ;</li>
+    <li>une épaisse atmosphère opaque présentant une structure en bandes légèrement colorées ;</li>
+    <li>la présence, en son centre, d’un petit noyau solide ;</li>
+    <li>l’existence d’une source interne d’énergie qui lui permet de rayonner 3 fois plus d’énergie qu’elle n’en reçoit du Soleil.</li>
+</ul></p>
+<p>Saturne est en revanche moins volumineuse et moins massive que Jupiter. Par ailleurs, avec une densité comparable à celle du bois, elle est assurément la planète la moins dense du système solaire.</p>
+<p>Son système d’anneaux, mesurant 300 000 km de diamètre pour moins d’1 km d’épaisseur, consiste en plusieurs milliers d’anneaux très minces et plus ou moins riches en matière. Une infinité de débris solides, poussières, grains et gros blocs de roches et de glaces est en mouvement au-dessus de l’équateur, de dimension pouvant varier d’une fraction de millimètre à quelques centaines de mètres.</p>
+<p>On lui connaît plus de plusieurs dizaines de satellites naturels, la plupart glacés et criblés de cratères. Parmi eux, Titan est le seul satellite du système solaire à posséder une atmosphère dense et des composés organiques. Les scientifiques y voient une sorte de Terre primitive congelée, permettant peut-être de comprendre comment la vie est apparue sur notre planète.</p>
 
 <ul>
-    <li>Etymologie : fils de Saturne et frère de Jupiter, Neptune est le Dieu de la Mer dans la mythologie romaine.</li>
-<li>Découverte : en 1846, par l’astronome allemand Johann G. Galle d’après les calculs de U. Leverrier.</li>
-<li>Signe particulier :  en raison de l’orbite très irrégulière de Pluton, Neptune a été la planète la plus éloignée du Soleil entre 1979 et 1999.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles : 11 ans</li>
+    <li>Etymologie :  Dieu des Paysans dans la religion romaine, Saturne correspond cependant au dieu grec Cronos représentant le temps</li>
+<li>Découverte : préhistoire</li>
+<li>Signe particulier :  très peu dense, Saturne est si légère qu’elle pourrait flotter sur un océan, s’il en existait un à sa taille.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 4 à 7 ans</li>
 </ul></div>
 </body>
 </html>

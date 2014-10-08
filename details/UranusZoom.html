@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="utf-8" />
-    <title>01.01 Mercure</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+  <meta charset="utf-8" />
+    <title>01.07 Uranus</title>
+    <script src="../assests/libs/three.js"></script>
+    <script src="../assests/libs/dat.gui.min.js"></script>
+    <script src="../assests/libs/stats.min.js"></script>
+    <script src="../assests/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assests/libs/EffectComposer.js"></script>
+    <script src="../assests/libs/RenderPass.js"></script>
+    <script src="../assests/libs/CopyShader.js"></script>
+    <script src="../assests/libs/ShaderPass.js"></script>
+    <script src="../assests/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
-        }
-                #mercure{
+        }        #uranus{
           font-size: 2em;
           padding: 0;
           text-align: center;
           background-color: black;
           color: white;
         }
-                #details{
+         #details{
           background-color: black;
           border: groove;
           position: fixed;
@@ -57,6 +55,7 @@
     var cameraBG;
     var composer;
     var sceneBG;
+    var jupiter;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -67,11 +66,11 @@
 
 
 
-  //texture mercure
-  var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap.jpg");
-  var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybumpMap.jpg");
-  var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
-  materialMercure.bumpMap = bumpMapMercure;
+  //texture uranus
+  var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusmap.jpg");
+  var bumpMapUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusbumpMap.jpg");
+  var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: false});
+  materialUranus.bumpMap = bumpMapUranus;
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -86,16 +85,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-
-          //create mercure
-          var mercureGeometry = new THREE.SphereGeometry(8, 60, 60);
-          mercure = new THREE.Mesh (mercureGeometry, materialMercure);
-          mercure.receiveShadow = true;
-          mercure.position.x = 0;
-          mercure.position.y = -2;
-          mercure.position.z = 0;
-          mercure.name='mercure';
-          scene.add(mercure);
+  //add uranus
+  var uranusGeometry = new THREE.SphereGeometry(8, 60, 60);
+  uranus = new THREE.Mesh (uranusGeometry, materialUranus);
+  uranus.receiveShadow = true;
+  uranus.position.x = 0;
+  uranus.position.y = -2;
+  uranus.position.z = 0;
+  uranus.name='uranus';
+  scene.add(uranus);
 
 
         // add ambient light
@@ -156,9 +154,9 @@
     function render() {
 
         //update camera
-        var rotMercure= 0.000408082;
+  var rotUranus = 0.001337095;
 
-        mercure.rotation.y = mercure.rotation.y+ rotMercure;
+  uranus.rotation.x = uranus.rotation.x+ rotUranus;
 
 
         camera.lookAt(scene.position);
@@ -197,20 +195,19 @@
 
 </script>
 <body>
-<div id="mercure">Mercure</div>
-<div id="details"><p>Mercure est la plus petite des planètes telluriques et la plus proche du Soleil. Sa surface truffée de cratères rappelle en de nombreux aspects la surface lunaire.</p><p>
-Désert de poussières et de roches tantôt brûlantes, tantôt glacées, Mercure est un astre mort, c’est-à-dire sans activité interne, depuis au moins 3,6 milliards d’années.</p>
-<p>L’une des particularités géologiques de Mercure est la présence d’escarpements, hauts de 1 à 3 km et longs de plusieurs centaines de km. Ils se seraient formés lors du refroidissement de la planète.</p>
-<p>Légèrement plus volumineuse que la Lune, Mercure est une boule solide constituée, au centre, d’un gros noyau riche en fer : il occuperait 42 % du volume de la planète et représenterait près de 80 % de sa masse. </p>
-<p>Ceci pourrait expliquer sa densité particulièrement élevée, en contradiction avec une règle constatant généralement que plus une planète tellurique est grande, plus elle est dense.</p>
-<p>Dépourvue d'atmosphère, Mercure subit toutes les rigueurs du milieu spatial : d'importants écarts de température entre le jour et la nuit : de –210 °C à 430 °C, ce qui représente un
-écart thermique sans équivalent dans le système solaire ; le bombardement météoritique : sa surface est criblée de cratères de toutes tailles, le plus grand atteignant 1 550 km de diamètre. Caloris Basin aurait été creusé par la rencontre entre Mercure et un astéroïde d'une centaine de km.</p>
+
+<div id="uranus">Uranus</div>
+
+<div id="details"><p>Pour les Anciens, le système solaire s’arrêtait à Saturne, les autres astres étant considérés comme des étoiles. Pourtant, quelques années avant la Révolution française, l’astronome William Herschel repère un objet, qu’il croit au premier abord être une comète. Le calcul montre qu’il s’agit d’une planète gravitant à près de 3 milliards de km du Soleil.</p>
+<p>Uranus est une planète insolite : elle doit probablement sa couleur verdâtre assez inhabituelle à la présence de méthane dans son atmosphère : ce gaz ne réfléchit que la composante verte de la lumière solaire. Autre curiosité : son axe de rotation se trouve à peu près dans le plan de l’écliptique. Alors que toutes les planètes tournent comme des toupies, Uranus tourne ainsi sur elle-même comme un cerceau.</p>
+<p>Troisième plus grande planète du système solaire, Uranus appartient au groupe des 4 planètes géantes dont font partie Jupiter, Saturne et Neptune. Elle est vraisemblablement composée d’un noyau rocheux, entouré d’un manteau de glace à base d’eau, d’ammoniac et de méthane. Comme Saturne et Jupiter, elle dispose d’une épaisse enveloppe gazeuse d’hydrogène et d’hélium, masquant ce qui se trouve en profondeur. Au sommet de cette atmosphère, la température vaut environ – 220 °C.</p>
+<p>Uranus est entourée de très fins anneaux et de 22 satellites</p>
+
 <ul>
-    <li>Etymologie : Mercure est le Dieu romain du commerce et des voyageurs.</li>
-<li>Découverte : pendant l’Antiquité, grâce à son éclat qui peut être confondu avec une étoile.</li>
-<li>Signe particulier : le jour solaire sur Mercure dure 2 ans mercuriens ! La raison de cette particularité ?
-Mercure pivote très lentement sur elle-même, d’où une valeur du jour solaire d’environ 6 mois terrestres.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles : 5 ans</li>
+    <li>Etymologie :  : Uranus est le Dieu du Ciel et Père de Saturne dans la mythologie romaine.</li>
+<li>Découverte : 13 mars 1781, par l’astronome William Herschel.</li>
+<li>Signe particulier :  : alors que les 8 autres planètes du système solaire tournent comme des toupies, Uranus tourne sur elle-même comme un cerceau. Ceci est probablement dû à un choc violent qui, jadis, l’aurait fait basculer : son axe de rotation se situe ainsi dans le plan de l’écliptique.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 9 ans</li>
 </ul></div>
 </body>
 </html>

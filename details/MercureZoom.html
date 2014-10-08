@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
-    <title>01.09 Pluton</title>
-    <script src="libs/three.js"></script>
-    <script src="libs/dat.gui.min.js"></script>
-    <script src="libs/stats.min.js"></script>
-    <script src="libs/OrbitControls_Zoom.js"></script>
-    <script src="libs/EffectComposer.js"></script>
-    <script src="libs/RenderPass.js"></script>
-    <script src="libs/CopyShader.js"></script>
-    <script src="libs/ShaderPass.js"></script>
-    <script src="libs/MaskPass.js"></script>
+    <title>01.01 Mercure</title>
+    <script src="../assests/libs/three.js"></script>
+    <script src="../assests/libs/dat.gui.min.js"></script>
+    <script src="../assests/libs/stats.min.js"></script>
+    <script src="../assests/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assests/libs/EffectComposer.js"></script>
+    <script src="../assests/libs/RenderPass.js"></script>
+    <script src="../assests/libs/CopyShader.js"></script>
+    <script src="../assests/libs/ShaderPass.js"></script>
+    <script src="../assests/libs/MaskPass.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
         }
-                #pluton{
+                #mercure{
           font-size: 2em;
           padding: 0;
           text-align: center;
           background-color: black;
           color: white;
         }
-        #details{
+                #details{
           background-color: black;
           border: groove;
           position: fixed;
@@ -56,7 +57,6 @@
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -65,11 +65,14 @@
     function init() {
 
 
-    //texture pluton
-  var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonMap.jpg");
-  var bumpMapPluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonBumpMap.jpg");
-  var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
-  materialPluton.bumpMap = bumpMapPluton;
+
+
+  //texture mercure
+  var matextureMercure = THREE.ImageUtils.loadTexture("../assets/textures/planets/mercurymap.jpg");
+  var bumpMapMercure = THREE.ImageUtils.loadTexture("../assets/textures/planets/mercurybumpMap.jpg");
+  var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: true});
+  materialMercure.bumpMap = bumpMapMercure;
+
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -83,15 +86,16 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add pluton
-  var plutonGeometry = new THREE.SphereGeometry(8, 60, 60);
-  pluton = new THREE.Mesh (plutonGeometry, materialPluton);
-  pluton.receiveShadow = true;
-  pluton.position.x = 0;
-  pluton.position.y = -2;
-  pluton.position.z = 0;
-  pluton.name='pluton';
-  scene.add(pluton);
+
+          //create mercure
+          var mercureGeometry = new THREE.SphereGeometry(8, 60, 60);
+          mercure = new THREE.Mesh (mercureGeometry, materialMercure);
+          mercure.receiveShadow = true;
+          mercure.position.x = 0;
+          mercure.position.y = -2;
+          mercure.position.z = 0;
+          mercure.name='mercure';
+          scene.add(mercure);
 
 
         // add ambient light
@@ -152,9 +156,9 @@
     function render() {
 
         //update camera
-  var rotPluton = 0.000156431;
+        var rotMercure= 0.000408082;
 
-  pluton.rotation.y = pluton.rotation.y+ rotPluton;
+        mercure.rotation.y = mercure.rotation.y+ rotMercure;
 
 
         camera.lookAt(scene.position);
@@ -193,18 +197,20 @@
 
 </script>
 <body>
-
-<div id="pluton">Pluton</div>
-<div id="details"><p>Pluton est la plus petite et en général la plus lointaine planète du système solaire, mais elle ne ressemble à aucune autre. En effet, elle ne s’apparente ni aux planètes telluriques ni aux planètes géantes. L’orbite de Pluton est un autre sujet d’étonnement : comparée à celle des autres planètes, quasi-circulaire et très proche du plan de l’écliptique, elle est la plus elliptique et la plus inclinée.</p>
-<p>Plus petite que la Lune, Pluton est un corps solide, composé de roches et de glaces, dont la surface serait au moins partiellement recouverte de méthane ou d’azote gelés. Pluton serait entourée d’une très fine atmosphère, riche en azote, qui s’épaissit à mesure que la planète se rapproche du Soleil sous l’effet de l’évaporation. La pression au sol serait alors 100 000 fois plus faible que celle existant sur Terre.</p>
-<p>Pluton est souvent comparée à un astéroïde ou à une comète, voire à un système planétaire double : le diamètre et la masse de Charon, son principal satellite, valent en effet la moitié de ceux de Pluton. Par ailleurs, d’autres corps lui ressemblant ont été découverts récemment dans la même région. Varuna, Ixion et Quaoar sont les plus gros objets de la ceinture de Kuiper, vestiges de la formation du système solaire. Pluton se rapproche ainsi beaucoup plus d’un de ces objets que d’une planète.</p>
-<p>En 2006, L’union Astronomique Internationale a décidé que Pluton ne serait plus considérée comme une planète mais une « planète naine », à l’instar des milliers d’objets de Kuiper qui orbitent au-delà de Neptune.</p>
-
+<div id="mercure">Mercure</div>
+<div id="details"><p>Mercure est la plus petite des planètes telluriques et la plus proche du Soleil. Sa surface truffée de cratères rappelle en de nombreux aspects la surface lunaire.</p><p>
+Désert de poussières et de roches tantôt brûlantes, tantôt glacées, Mercure est un astre mort, c’est-à-dire sans activité interne, depuis au moins 3,6 milliards d’années.</p>
+<p>L’une des particularités géologiques de Mercure est la présence d’escarpements, hauts de 1 à 3 km et longs de plusieurs centaines de km. Ils se seraient formés lors du refroidissement de la planète.</p>
+<p>Légèrement plus volumineuse que la Lune, Mercure est une boule solide constituée, au centre, d’un gros noyau riche en fer : il occuperait 42 % du volume de la planète et représenterait près de 80 % de sa masse. </p>
+<p>Ceci pourrait expliquer sa densité particulièrement élevée, en contradiction avec une règle constatant généralement que plus une planète tellurique est grande, plus elle est dense.</p>
+<p>Dépourvue d'atmosphère, Mercure subit toutes les rigueurs du milieu spatial : d'importants écarts de température entre le jour et la nuit : de –210 °C à 430 °C, ce qui représente un
+écart thermique sans équivalent dans le système solaire ; le bombardement météoritique : sa surface est criblée de cratères de toutes tailles, le plus grand atteignant 1 550 km de diamètre. Caloris Basin aurait été creusé par la rencontre entre Mercure et un astéroïde d'une centaine de km.</p>
 <ul>
-    <li>Etymologie :: fils de Saturne, frère de Jupiter et de Neptune, Pluton est le roi des Enfers et le dieu des morts dans la mythologie romaine</li>
-<li>Découverte :18 février 1930, par l’astronome américain Clyde Tombaugh.</li>
-<li>Signe particulier :  : Pluton est la 1 ère représentante des planètes naines. Elle se distingue des 8 planètes par sa composition et son orbite, très elliptique et inclinée. De ce fait, elle croise périodiquement l’orbite de Neptune.</li>
-<li>Durée typique du voyage aller avec les techniques actuelles :environ 10 ans</li>
+    <li>Etymologie : Mercure est le Dieu romain du commerce et des voyageurs.</li>
+<li>Découverte : pendant l’Antiquité, grâce à son éclat qui peut être confondu avec une étoile.</li>
+<li>Signe particulier : le jour solaire sur Mercure dure 2 ans mercuriens ! La raison de cette particularité ?
+Mercure pivote très lentement sur elle-même, d’où une valeur du jour solaire d’environ 6 mois terrestres.</li>
+<li>Durée typique du voyage aller avec les techniques actuelles : 5 ans</li>
 </ul></div>
 </body>
 </html>
