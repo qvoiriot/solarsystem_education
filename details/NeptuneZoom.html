@@ -94,11 +94,6 @@
         scene.add(directionalLight);
 
 
-        //add extras
-        //addControlGui(control);
-        addStatsObject();
-
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -118,17 +113,6 @@
         render();
     }
 
-    function addStatsObject(){
-        stats = new Stats();
-        stats.setMode(0);
-
-        stats.domElement.style.position ='absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-
-        document.body.appendChild(stats.domElement);
-    }
-
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
      * for future renders
@@ -143,19 +127,13 @@
 
         camera.lookAt(scene.position);
 
-        //update stats
-        stats.update();
-
-        //update the camera
+    //update the camera
         cameraControl.update();
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
-
 
     }
 
@@ -177,6 +155,7 @@
 
 </script>
 <body>
+    <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Neptune</div>
 <div id="details"><p>Neptune est la première planète dont l’existence n’a pas été découverte par l’observation : elle a été prédite par calcul, à partir de la théorie de la gravitation universelle.</p>
 <p>Elle ressemble à sa sœur jumelle, Uranus, tant par sa couleur bleue verdâtre que par ses dimensions, sa densité et sa structure. Elle dispose d'un noyau rocheux, d'un manteau glacé et d'une enveloppe gazeuse constituée d'hydrogène, d'hélium et de méthane dans les couches supérieures.</p>

@@ -4,15 +4,15 @@
     <meta charset="utf-8" />
     <title>01.06 Saturn</title>
 
-    <script src="../assests/libs/three.js"></script>
-    <script src="../assests/libs/dat.gui.min.js"></script>
-    <script src="../assests/libs/stats.min.js"></script>
-    <script src="../assests/libs/OrbitControls_Zoom.js"></script>
-    <script src="../assests/libs/EffectComposer.js"></script>
-    <script src="../assests/libs/RenderPass.js"></script>
-    <script src="../assests/libs/CopyShader.js"></script>
-    <script src="../assests/libs/ShaderPass.js"></script>
-    <script src="../assests/libs/MaskPass.js"></script>
+    <script src="../assets/libs/three.js"></script>
+    <script src="../assets/libs/dat.gui.min.js"></script>
+    <script src="../assets/libs/stats.min.js"></script>
+    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
+    <script src="../assets/libs/EffectComposer.js"></script>
+    <script src="../assets/libs/RenderPass.js"></script>
+    <script src="../assets/libs/CopyShader.js"></script>
+    <script src="../assets/libs/ShaderPass.js"></script>
+    <script src="../assets/libs/MaskPass.js"></script>
     <link rel="stylesheet" type="text/css" href="../assets/css/zoom.css">
 
     <style>
@@ -108,12 +108,6 @@
 
         scene.add(directionalLight);
 
-
-        //add extras
-        //addControlGui(control);
-        addStatsObject();
-
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -133,16 +127,6 @@
         render();
     }
 
-    function addStatsObject(){
-        stats = new Stats();
-        stats.setMode(0);
-
-        stats.domElement.style.position ='absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-
-        document.body.appendChild(stats.domElement);
-    }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
@@ -159,9 +143,6 @@
 
 
         camera.lookAt(scene.position);
-
-        //update stats
-        stats.update();
 
         //update the camera
         cameraControl.update();
@@ -190,6 +171,7 @@
 
 </script>
 <body>
+  <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Saturne</div>
 <div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
 <ul>

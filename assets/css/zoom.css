@@ -11,10 +11,29 @@
     position: fixed;
     margin-top: 50px;
     margin-left: 50px;
-    display: block;
     color: white;
     text-align: justify;
     padding: 10px;
     width: 450px;
     height: 750px;
+}
+
+#retour{
+    text-align: center;
+    width: 50px;
+    padding: 2px;
+    background-color: black;
+    position: fixed;
+    margin-top: 5px;
+    margin-left: 5px;
+    border: ridge;
+    border-color: #0CD4B9;
+}
+
+#retour a{
+        color: #0CD4B9;
+}
+
+#retour a:hover{
+    color: red;
 }
