@@ -11,7 +11,7 @@ var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune,
 function init() {
 
   //add background using a camera
-  cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -10000, 10000);
+  cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -9000, 9000);
   cameraBG.position.z = 50;
 
   sceneBG = new THREE.Scene();
@@ -258,7 +258,7 @@ function init() {
   /************************************************************/
   // ajout de spaceCar
 
-  var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
+/*  var spaceCarObj = 'assets/textures/spaceship/car/HN_48_Flying_Car.obj';
   var spaceCarMtl = 'assets/textures/spaceship/car/HN_48_Flying_Car.mtl';
 
         var loader = new THREE.OBJMTLLoader();

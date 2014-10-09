@@ -73,11 +73,11 @@
         renderer.shadowMapEnabled = true;
 
 
-  var luneGeometry = new THREE.SphereGeometry(15, 60, 60);
+  var luneGeometry = new THREE.SphereGeometry(8, 60, 60);
   lune = new THREE.Mesh (luneGeometry, materialLune);
   lune.receiveShadow = true;
   lune.position.x = 0;
-  lune.position.y = -2;
+  lune.position.y = 0;
   lune.position.z = 0;
   lune.name='lune';
   scene.add(lune);
@@ -156,12 +156,14 @@
 
 </script>
 <body>
-    <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
+    <div id="retour"><a href="http://localhost/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Moon</div>
 
-<div id="details"><p>La Lune est l'unique satellite naturel de la Terre. Suivant la désignation systématique des satellites, la Lune est appelée Terre I4 ; cependant en pratique cette forme n'est pas utilisée. Elle est le cinquième plus grand satellite du système solaire, avec un diamètre de 3 474 km. La distance moyenne séparant la Terre de la Lune est de 384 400 km.
+<details close>
+  <summary>Informations Pratiques</summary>
+<div id="details"><p>La Lune est l'unique satellite naturel de la Terre. </p><p>Suivant la désignation systématique des satellites, la Lune est appelée Terre I4 ; cependant en pratique cette forme n'est pas utilisée.</p><p> Elle est le cinquième plus grand satellite du système solaire, avec un diamètre de 3 474 km. </p><p>La distance moyenne séparant la Terre de la Lune est de 384 400 km.</p><p>
 
-À ce jour, la Lune est le seul objet non terrestre visité par l'homme. Le premier à y avoir marché est l'astronaute Neil Armstrong le 21 juillet 1969. Après lui, onze autres hommes ont foulé le sol de la Lune, tous membres du programme Apollo.</p></div>
-
+À ce jour, la Lune est le seul objet non terrestre visité par l'homme. Le premier à y avoir marché est l'astronaute Neil Armstrong le 21 juillet 1969. </p><p>Après lui, onze autres hommes ont foulé le sol de la Lune, tous membres du programme Apollo.</p></div>
+</details
 </body>
 </html>

@@ -76,7 +76,7 @@
   jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
   jupiter.receiveShadow = true;
   jupiter.position.x = 0;
-  jupiter.position.y = -2;
+  jupiter.position.y = 0;
   jupiter.position.z = 0;
   jupiter.name='jupiter';
   scene.add(jupiter);
@@ -160,8 +160,10 @@
 
 </script>
 <body>
-  <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
+  <div id="retour"><a href="http://localhost/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Jupiter</div>
+<details close>
+  <summary>Informations Pratiques</summary>
 <div id="details"><p>Jupiter est la plus grosse planète du système solaire : elle pourrait contenir 1 300 fois la Terre, et sa masse représente 2 fois ½ celle des 8 autres planètes réunies.
 </p>
 <p>Composée d’hydrogène et d’hélium, Jupiter est une planète essentiellement gazeuse. Son centre pourrait toutefois comporter un petit noyau solide.</p>
@@ -180,5 +182,6 @@
 <li>Durée typique du voyage aller avec les techniques actuelles : 2 à 6 ans
 </li>
 </ul></div>
+</details>
 </body>
 </html>

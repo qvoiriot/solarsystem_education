@@ -77,7 +77,7 @@
   saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
   saturn.receiveShadow = true;
   saturn.position.x = 0;
-  saturn.position.y = -2;
+  saturn.position.y = 0;
   saturn.position.z = 0;
   saturn.name='saturn';
   scene.add(saturn);
@@ -171,8 +171,10 @@
 
 </script>
 <body>
-  <div id="retour"><a href="http://localhost/EPSI/solarsystem_education/systeme_solaire.html">Retour</a></div>
+  <div id="retour"><a href="http://localhost/solarsystem_education/systeme_solaire.html">Retour</a></div>
 <div id="name">Saturne</div>
+<details close>
+  <summary>Informations Pratiques</summary>
 <div id="details"><p>Longtemps connue comme la seule planète possédant un système d’anneaux, Saturne est une planète géante assez semblable à Jupiter :
 <ul>
     <li>une énorme sphère fluide, mi-gazeuse, mi-liquide, comprimée sous son propre poids et tournant très vite sur elle-même ;</li>
@@ -191,5 +193,6 @@
 <li>Signe particulier :  très peu dense, Saturne est si légère qu’elle pourrait flotter sur un océan, s’il en existait un à sa taille.</li>
 <li>Durée typique du voyage aller avec les techniques actuelles : 4 à 7 ans</li>
 </ul></div>
+</details>
 </body>
 </html>
