@@ -168,15 +168,14 @@ function init() {
   lune_node.position.z = 0;
   scene.add(lune_node);
 
-  var luneGeometry = new THREE.SphereGeometry(5, 60, 60);
+  var luneGeometry = new THREE.SphereGeometry(3, 60, 60);
   lune = new THREE.Mesh (luneGeometry, materialLune);
   lune.receiveShadow = true;
-  //lune.position.x = 230;
+
   lune.position.x = 30;
   lune.position.y = -2;
   lune.position.z = 0;
   lune.name='lune';
-  //scene.add(lune);
   lune_node.add(lune);
 
   //add mars
@@ -318,7 +317,7 @@ function render() {
 
   // Vitesses de révolution autour soleil
   var rotSpeed = 0.0005;
-  var rotLuneTerre = 0.0005;
+  var rotLuneTerre = 0.000668477;
   var rotSpeedMars = 0.00026584;
   var rotSpeedJupiter = 0.00004215;
   var rotSpeedSaturn = 0.000016974;
@@ -331,7 +330,7 @@ function render() {
   //Vitesses de rotation axiale
   var rotSun = 0.000036935;
   var rotTerre= 0.001;
-  var rotLune = 0.002;
+  var rotLune = 0.008;
   var rotMars = 0.000971742;
   var rotJupiter= 0.00243207;
   var rotSaturn= 0.002338904;
@@ -369,8 +368,8 @@ function render() {
   lune_node.position.x = lune_node.position.x * Math.cos(rotSpeed) + lune_node.position.z * Math.sin(rotSpeed);
   lune_node.position.z = lune_node.position.z * Math.cos(rotSpeed) - lune_node.position.x * Math.sin(rotSpeed);
 
-  nuage.position.x = nuage.position.x * Math.cos(rotSpeed) + nuage.position.z * Math.sin(rotSpeed);
-  nuage.position.z = nuage.position.z * Math.cos(rotSpeed) - nuage.position.x * Math.sin(rotSpeed);
+  //nuage.position.x = nuage.position.x * Math.cos(rotSpeed) + nuage.position.z * Math.sin(rotSpeed);
+  //nuage.position.z = nuage.position.z * Math.cos(rotSpeed) - nuage.position.x * Math.sin(rotSpeed);
 
   lune_node.rotation.y = lune_node.rotation.y + rotLune;
 
