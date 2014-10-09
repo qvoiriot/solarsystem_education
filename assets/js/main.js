@@ -2,7 +2,7 @@
 var renderer, scene, camera, spotlight, stats, cameraControl, directionalLight, composer;
 
 // planets variables
-var sphere, nuage, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
+var sphere, nuage, lune_node, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
 
 //custom varialbes
 var projector = new THREE.Projector();
@@ -191,14 +191,22 @@ function init() {
   //nuage.name='nuage';
   scene.add(nuage);
 
+  lune_node = new THREE.Object3D();
+  lune_node.position.x = 200;
+  lune_node.position.y = -2;
+  lune_node.position.z = 0;
+  scene.add(lune_node);
+
   var luneGeometry = new THREE.SphereGeometry(5, 60, 60);
   lune = new THREE.Mesh (luneGeometry, materialLune);
   lune.receiveShadow = true;
-  lune.position.x = 230;
+  //lune.position.x = 230;
+  lune.position.x = 30;
   lune.position.y = -2;
   lune.position.z = 0;
   lune.name='lune';
-  scene.add(lune);
+  //scene.add(lune);
+  lune_node.add(lune);
   collidableMeshList.push(lune); 
 
 
@@ -440,7 +448,7 @@ function update()
       // update text, if it has a "name" field.
       if ( intersects[ 0 ].object.name )
       {
-          context1.clearRect(0,0,640,480);
+        /*context1.clearRect(0,0,640,480);
         var message = intersects[ 0 ].object.name;
         var metrics = context1.measureText(message);
         var width = metrics.width;
@@ -452,7 +460,9 @@ function update()
         context1.fillText( message, 4,20 );    context1.clearRect(0,0,300,300);
 
         texture1.needsUpdate = true;
-        console.log(message);
+        console.log(message);*/
+
+        document.getElementById('hover_planet').style.display = 'block';
 
         
       }
@@ -542,11 +552,15 @@ function render() {
   terre.position.x = terre.position.x * Math.cos(rotSpeed) + terre.position.z * Math.sin(rotSpeed);
   terre.position.z = terre.position.z * Math.cos(rotSpeed) - terre.position.x * Math.sin(rotSpeed);
 
+  lune_node.position.x = lune_node.position.x * Math.cos(rotSpeed) + lune_node.position.z * Math.sin(rotSpeed);
+  lune_node.position.z = lune_node.position.z * Math.cos(rotSpeed) - lune_node.position.x * Math.sin(rotSpeed);
+
   nuage.position.x = nuage.position.x * Math.cos(rotSpeed) + nuage.position.z * Math.sin(rotSpeed);
   nuage.position.z = nuage.position.z * Math.cos(rotSpeed) - nuage.position.x * Math.sin(rotSpeed);
 
-  lune.position.x = lune.position.x * Math.cos(rotLuneTerre) +lune.position.z * Math.sin(rotLuneTerre);
-  lune.position.z = lune.position.z * Math.cos(rotLuneTerre) - lune.position.x  * Math.sin(rotLuneTerre);
+  lune_node.rotation.y = lune_node.rotation.y + rotLune;
+  /*lune.position.x = lune.position.x * Math.cos(rotLuneTerre) +lune.position.z * Math.sin(rotLuneTerre);
+  lune.position.z = lune.position.z * Math.cos(rotLuneTerre) - lune.position.x  * Math.sin(rotLuneTerre);*/
 
 
   mars.position.x = mars.position.x * Math.cos(rotSpeedMars) +mars.position.z * Math.sin(rotSpeedMars);
