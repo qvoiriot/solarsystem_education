@@ -2,7 +2,7 @@
 var renderer, scene, sceneBG, camera, cameraBG, spotlight, cameraControl, directionalLight, composer;
 
 // planets variables
-var sphere, nuage, lune_node, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
+var sphere, lune_node, lune, mars, jupiter, anneau, espace, mercure, venus, neptune, uranus, saturne;
 
 /**
  * Initializes the scene, camera and objects. Called when the window is
@@ -368,9 +368,6 @@ function render() {
 
   lune_node.position.x = lune_node.position.x * Math.cos(rotSpeed) + lune_node.position.z * Math.sin(rotSpeed);
   lune_node.position.z = lune_node.position.z * Math.cos(rotSpeed) - lune_node.position.x * Math.sin(rotSpeed);
-
-  nuage.position.x = nuage.position.x * Math.cos(rotSpeed) + nuage.position.z * Math.sin(rotSpeed);
-  nuage.position.z = nuage.position.z * Math.cos(rotSpeed) - nuage.position.x * Math.sin(rotSpeed);
 
   lune_node.rotation.y = lune_node.rotation.y + rotLune;
 
