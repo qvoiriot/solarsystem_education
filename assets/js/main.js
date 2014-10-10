@@ -124,8 +124,7 @@ function init() {
   var spriteMaterial = new THREE.SpriteMaterial(
   {
     map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ),
-
-    color: 0xF91900, transparent: false, blending: THREE.AdditiveBlending
+        color: 0xF91900, transparent: false, blending: THREE.AdditiveBlending
   });
   var sprite = new THREE.Sprite( spriteMaterial );
   sprite.scale.set(190, 190, 1.0);
