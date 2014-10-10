@@ -32,6 +32,7 @@ function init() {
   materialTerre.specular = new THREE.Color(0x262626);
 
   //texture du soleil
+  //var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun_light.jpg");
   var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
@@ -124,7 +125,7 @@ function init() {
   {
     map: new THREE.ImageUtils.loadTexture( 'assets/textures/planets/sun_halo.png' ),
 
-    color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
+    color: 0xF91900, transparent: false, blending: THREE.AdditiveBlending
   });
   var sprite = new THREE.Sprite( spriteMaterial );
   sprite.scale.set(190, 190, 1.0);

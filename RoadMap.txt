@@ -1,0 +1,26 @@
+/**************************************/
+/******* Modification à apporter  *****/
+/**************************************/
+
+
+
+/***** 1 *****/
+au clic sur un bouton du menu planète :
+	- caméra focus sur la planète à partir du point ou l'on se trouve
+	- scroll vers la planète avec effet de tunnel de particule pour simuler un déplacement rapide
+	- zoom sur la planète en même temps que le scroll afin de simuler l'approche
+	-- option => faire se poser la SpaceCar sur la planete avec un dézoom de la SpaceCar
+	- affichage des pages html que l'on a fait pour chaque planete mais pas dans une hmtl différentes mais dans un block specifique en "écran"
+
+/**** 2 *****/
+au clic sur bouton de retour vers le système solaire :
+	-- option => la SpaceCar décolle de la planète avec effet de zoom quand elle approche.
+	- déplacement dans un tunnel de particule vers la position initiale de la caméra
+	- rotation de la caméra pour reprendre sa position initiale.
+
+
+/**** 3 *****/
+libre cours à votre imagination et au temps que l'on veut consacrer pour le post traitement
+	- amélioration des effets
+	- réalisation des options
+	- etc ...
