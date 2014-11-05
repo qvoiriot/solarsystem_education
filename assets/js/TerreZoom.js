@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>01.03 - Terre</title>
-    <script src="../assets/libs/three.js"></script>
-    <script src="../assets/libs/dat.gui.min.js"></script>
-    <script src="../assets/libs/stats.min.js"></script>
-    <script src="../assets/libs/OrbitControls_Zoom.js"></script>
-    <script src="../assets/libs/EffectComposer.js"></script>
-    <script src="../assets/libs/RenderPass.js"></script>
-    <script src="../assets/libs/CopyShader.js"></script>
-    <script src="../assets/libs/ShaderPass.js"></script>
-    <script src="../assets/libs/MaskPass.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="../assets/css/zoom.css">
-
-    <style>
-        body {
-            /* set margin to 0 and overflow to hidden, to go fullscreen */
-            margin: 0;
-            overflow: hidden;
-        }
-         
-    </style>
-</head>
-<script>
-
     // global variables
     var renderer;
     var scene;
@@ -89,7 +61,7 @@
   var nuageGeometry = new THREE.SphereGeometry(8.1, 60, 60);
   nuage = new THREE.Mesh (nuageGeometry, materialNuage);
   nuage.position.x = 0;
-  nuage.position.y = 0;
+  nuage.position.y = -2;
   nuage.position.z = 0;
   //nuage.name='nuage';
   scene.add(nuage);
@@ -173,31 +145,3 @@
     // calls the handleResize function when the window is resized
     window.addEventListener('resize', handleResize, false);
 
-</script>
-<body>
-    <div id="retour"><a href="http://localhost/solarsystem_education/systeme_solaire.html">Retour</a></div>
-<div id="name">Terre</div>
-<details close>
-  <summary>Informations Pratiques</summary>
-<div id="details"><p>De taille moyenne, la Terre est la 3ème planète en partant du Soleil. Elle se distingue des autres planètes telluriques par la présence d’un gros satellite naturel, d’un important champ magnétique, et surtout de la vie, dont les conditions d’apparition restent encore mystérieuses</p>
-<p>La Terre est composées de plusieurs couches : l’enveloppe gazeuse, composée essentiellement d’azote et d’oxygène, constitue l’atmosphère ; l’enveloppe liquide, appelée hydrosphère, comprend les mers, les océans, les fleuves et les glaciers ; enfin, la partie solide est la plus importante et se divise elle-même en 3 couches :
-  <ul>
-    <li>la croûte, composée de roches, pouvant aller jusqu’à quelques dizaines de km d’épaisseur ;</li>
-    <li>le manteau, composé de roches plus denses, épais d’environ 2 900 km ;</li>
-    <li>le noyau externe liquide et le noyau interne solide, composé essentiellement de fer et de nickel, de 3 500 km d’épaisseur.
-</li>
-  </ul>
-
-</p>
-<p>Tout en se refroidissant, elle se solidifie et éjecte divers gaz : vapeur d’eau, dioxyde de carbone, ammoniac, etc. Retenus captifs par la pesanteur, ils constituent ensuite une atmosphère. La surface terrestre se recouvre d’étendues liquides, les océans, qui lui valent le nom de planète bleue.</p>
-<p>La Terre est le plus grand corps du système solaire à disposer d’une surface solide et la seule probablement à être animée d’un mouvement tectonique, ces 2 caractéristiques étant liées. L’activité volcanique et sismique sont la preuve directe du mouvement perpétuel de la croûte terrestre.
-</p>
-
-<ul>
-    <li>Un système de référence : Le plan de l’orbite terrestre autour du Soleil est appelé plan de l’écliptique. La révolution de la Terre autour du Soleil détermine la durée de l’année, et sa rotation autour de l’axe des pôles celle du jour
-</li>
-<li>Signe particulier : la Terre est la seule planète porteuse de vie connue à ce jour.</li>
-</ul></div>
-</details>
-</body>
-</html>

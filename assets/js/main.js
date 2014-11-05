@@ -10,7 +10,13 @@ var sphere, lune_node, lune, mars, jupiter, anneau, espace, mercure, venus, nept
  */
 function init() {
 
-  //add background using a camera
+  systeme();
+  
+}
+
+function systeme(){
+
+  // add background using a camera
   cameraBG = new THREE.OrthographicCamera(-window.innerWidth, window.innerWidth, window.innerHeight, -window.innerHeight, -9000, 9000);
   cameraBG.position.z = 50;
 
@@ -21,7 +27,7 @@ function init() {
   bgPlane.scale.set(window.innerWidth * 2, window.innerHeight * 2, 1);
   sceneBG.add(bgPlane);
 
-  //texture de la terre
+  // texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthmap4k_light.jpg");
   var bumpMapTerre = THREE.ImageUtils.loadTexture("assets/textures/planets/earthbumpMap_light.jpg");
   var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k_light.jpg");
@@ -31,65 +37,65 @@ function init() {
   materialTerre.specularMap = specularMapEarth;
   materialTerre.specular = new THREE.Color(0x262626);
 
-  //texture du soleil
-  //var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
+  // texture du soleil
+  // var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun_light.jpg");
   var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
-  //texture de la lune
+  // texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap_light.jpg");
   var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap_light.jpg");
   var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
   materialLune.bumpMap = bumpMapLune;
 
-  //texture mars
+  // texture mars
   var matextureMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marsmap_1_light.jpg");
   var bumpMapMars = THREE.ImageUtils.loadTexture("assets/textures/planets/marbumpMap_light.jpg");
   var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: false});
   materialMars.bumpMap = bumpMapMars;
 
-  //texture jupiter
+  // texture jupiter
   var matextureJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupitermap_light.jpg");
   var bumpMapJupiter = THREE.ImageUtils.loadTexture("assets/textures/planets/jupiterbumpMap_light.jpg");
   var materialJupiter = new THREE.MeshPhongMaterial({map: matextureJupiter, transparent: false});
   materialJupiter.bumpMap =bumpMapJupiter;
 
-  //texture saturn
+  // texture saturn
   var matextureSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnmap_light.jpg");
   var bumpMapSaturn = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnbumpMap.jpg");
   var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
   materialSaturn.bumpMap =bumpMapSaturn;
 
-  //texture Anneausaturn
+  // texture Anneausaturn
   var matextureAnneau = THREE.ImageUtils.loadTexture("assets/textures/planets/saturnring.jpg");
   var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.4});
 
-  //texture mercure
+  // texture mercure
   var matextureMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurymap_light.jpg");
   var bumpMapMercure = THREE.ImageUtils.loadTexture("assets/textures/planets/mercurybumpMap_light.jpg");
   var materialMercure = new THREE.MeshPhongMaterial({map: matextureMercure, transparent: false});
   materialMercure.bumpMap = bumpMapMercure;
 
-  //texture venus
+  // texture venus
   var matextureVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusmap_light.jpg");
   var bumpMapVenus = THREE.ImageUtils.loadTexture("assets/textures/planets/venusbump_light.jpg");
   var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: false});
   materialVenus.bumpMap = bumpMapVenus;
 
-  //texture uranus
+  // texture uranus
   var matextureUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusmap.jpg");
   var bumpMapUranus = THREE.ImageUtils.loadTexture("assets/textures/planets/uranusbumpMap.jpg");
   var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: false});
   materialUranus.bumpMap = bumpMapUranus;
 
-  //texture neptune
+  // texture neptune
   var matextureNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunemap.jpg");
   var bumpMapNeptune = THREE.ImageUtils.loadTexture("assets/textures/planets/neptunebumpMap.jpg");
   var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: false});
     materialNeptune.bumpMap = bumpMapNeptune;
 
-    //texture pluton
-  var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonMap.jpg");
+  // texture pluton
+  var matexturePluton = THREE.ImageUtils.loadTexture("assets/textures/planets/plutonmap.jpg");
   var bumpMapPluton = THREE.ImageUtils.loadTexture("assets/textures/planets/PlutonBumpMap.jpg");
   var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
   materialPluton.bumpMap = bumpMapPluton;
@@ -106,7 +112,7 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMapEnabled = true;
 
-  //add soleil
+  // add soleil
   var soleilGeometry = new THREE.SphereGeometry(60, 60, 60);
   soleil = new THREE.Mesh (soleilGeometry, materialSun);
   soleil.position.x = 0;
@@ -132,7 +138,14 @@ function init() {
 
   /*************************************************************/
 
-  //create mercure
+  // create node for system center
+  center_node = new THREE.Object3D();
+  center_node.position.x = 0;
+  center_node.position.y = 0;
+  center_node.position.z = 0;
+  scene.add(center_node);
+
+
   var mercureGeometry = new THREE.SphereGeometry(4, 60, 60);
   mercure = new THREE.Mesh (mercureGeometry, materialMercure);
   mercure.receiveShadow = true;
@@ -140,9 +153,10 @@ function init() {
   mercure.position.y = -2;
   mercure.position.z = 0;
   mercure.name='mercure';
-  scene.add(mercure);
+  center_node.add(mercure);
 
-  //create venus
+
+  // create venus
   var venusGeometry = new THREE.SphereGeometry(9, 60, 60);
   venus = new THREE.Mesh (venusGeometry, materialVenus);
   venus.receiveShadow = true;
@@ -150,7 +164,9 @@ function init() {
   venus.position.y = -2;
   venus.position.z = 0;
   venus.name='venus';
-  scene.add(venus);
+  center_node.add(venus);
+
+
 
   // create the ground plane Terre
   var sphereGeometry = new THREE.SphereGeometry(10, 60, 60);
@@ -160,7 +176,7 @@ function init() {
   terre.position.y = -2;
   terre.position.z = 0;
   terre.name='Terre';
-  scene.add(terre);
+  center_node.add(terre);
 
   lune_node = new THREE.Object3D();
   lune_node.position.x = 200;
@@ -178,7 +194,9 @@ function init() {
   lune.name='lune';
   lune_node.add(lune);
 
-  //add mars
+
+
+  // add mars
   var marsGeometry = new THREE.SphereGeometry(5, 60, 60);
   mars = new THREE.Mesh (marsGeometry, materialMars);
   mars.receiveShadow = true;
@@ -186,9 +204,10 @@ function init() {
   mars.position.y = -2;
   mars.position.z = 0;
   mars.name='mars';
-  scene.add(mars);
+  center_node.add(mars);
 
-  //add jupiter
+
+  // add jupiter
   var jupiterGeometry = new THREE.SphereGeometry(112, 60, 60);
   jupiter = new THREE.Mesh (jupiterGeometry, materialJupiter);
   jupiter.receiveShadow = true;
@@ -196,9 +215,10 @@ function init() {
   jupiter.position.y = -2;
   jupiter.position.z = 0;
   jupiter.name='jupiter';
-  scene.add(jupiter);
+  center_node.add(jupiter);
 
-  //add saturn
+
+  // add saturn
   var saturnGeometry = new THREE.SphereGeometry(94, 60, 60);
   saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
   saturn.receiveShadow = true;
@@ -206,9 +226,9 @@ function init() {
   saturn.position.y = -2;
   saturn.position.z = 0;
   saturn.name='saturn';
-  scene.add(saturn);
+  center_node.add(saturn);
 
-  //add anneau saturn
+  // add anneau saturn
   var anneauGeometry = new THREE.CylinderGeometry( 250, 63, 1, 80 );
   anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
   anneau.receiveShadow = false;
@@ -216,9 +236,10 @@ function init() {
   anneau.position.y = -2;
   anneau.position.z = 0;
   //anneau.name='anneau';
-  scene.add(anneau);
+  center_node.add(anneau);
 
-  //add uranus
+
+  // add uranus
   var uranusGeometry = new THREE.SphereGeometry(40, 60, 60);
   uranus = new THREE.Mesh (uranusGeometry, materialUranus);
   uranus.receiveShadow = true;
@@ -226,7 +247,7 @@ function init() {
   uranus.position.y = -2;
   uranus.position.z = 0;
   uranus.name='uranus';
-  scene.add(uranus);
+  center_node.add(uranus);
 
   //add neptune
   var neptuneGeometry = new THREE.SphereGeometry(38, 60, 60);
@@ -236,7 +257,8 @@ function init() {
   neptune.position.y = -2;
   neptune.position.z = 0;
   neptune.name='neptune';
-  scene.add(neptune);
+  center_node.add(neptune);
+
 
   //add pluton
   var plutonGeometry = new THREE.SphereGeometry(4, 60, 60);
@@ -246,7 +268,7 @@ function init() {
   pluton.position.y = -2;
   pluton.position.z = 0;
   pluton.name='pluton';
-  scene.add(pluton);
+  center_node.add(pluton);
 
   // add ambient light
   ambientLight = new THREE.AmbientLight(0x242424);
@@ -287,21 +309,21 @@ function init() {
   camera.position.z = -500;
   camera.lookAt(scene.position);
 
-  //addcontrols
+  // addcontrols
   cameraControl = new THREE.OrbitControls(camera);
 
-  //first render the background
+  // first render the background
   var bgPass = new THREE.RenderPass(sceneBG, cameraBG);
 
-  //next render the scene (rotating earth), without clearing the current output
+  // next render the scene (rotating earth), without clearing the current output
   var renderPass = new THREE.RenderPass(scene, camera);
   renderPass.clear = false;
 
-  //finally copy the result to the screen
+  // finally copy the result to the screen
   var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
   effectCopy.renderToScreen = true;
 
-  //add these passes to the composer
+  // add these passes to the composer
   composer = new THREE.EffectComposer(renderer);
   composer.addPass(bgPass);
   composer.addPass(renderPass);
@@ -327,9 +349,9 @@ function render() {
   var rotSpeedNeptune = 0.0000030346;
   var rotSpeedPluton = 0.0000020188;
 
-  //Vitesses de rotation axiale
+  // Vitesses de rotation axiale
   var rotSun = 0.000036935;
-  var rotTerre= 0.001;
+  var rotTerre= 0.004;
   var rotLune = 0.008;
   var rotMars = 0.000971742;
   var rotJupiter= 0.00243207;
@@ -341,9 +363,10 @@ function render() {
   var rotNeptune = 0.001246563;
   var rotPluton = 0.000156431;
 
-  // vitesse de rotation
-  terre.rotation.y = terre.rotation.y+ rotTerre;
-  lune.rotation.y = lune.rotation.y + rotLune;
+  // calcul vitesse de rotation
+  terre.rotation.y = terre.rotation.y+rotTerre;
+  //lune.rotation.y = lune.rotation.y + rotLune;
+  lune_node.rotation.y = lune_node.rotation.y + rotLune;
   soleil.rotation.y = soleil.rotation.y+ rotSun;
   mars.rotation.y = mars.rotation.y+rotMars;
   jupiter.rotation.y= jupiter.rotation.y+rotJupiter;
@@ -356,6 +379,9 @@ function render() {
   neptune.rotation.y = neptune.rotation.y+ rotNeptune;
   pluton.rotation.y = pluton.rotation.y+ rotPluton;
 
+
+
+  // calcul vitesse de révolution
   mercure.position.x = mercure.position.x * Math.cos(rotSpeedMercure) + mercure.position.z * Math.sin(rotSpeedMercure);
   mercure.position.z = mercure.position.z * Math.cos(rotSpeedMercure) - mercure.position.x * Math.sin(rotSpeedMercure);
 
@@ -367,8 +393,6 @@ function render() {
 
   lune_node.position.x = lune_node.position.x * Math.cos(rotSpeed) + lune_node.position.z * Math.sin(rotSpeed);
   lune_node.position.z = lune_node.position.z * Math.cos(rotSpeed) - lune_node.position.x * Math.sin(rotSpeed);
-
-  lune_node.rotation.y = lune_node.rotation.y + rotLune;
 
   mars.position.x = mars.position.x * Math.cos(rotSpeedMars) +mars.position.z * Math.sin(rotSpeedMars);
   mars.position.z = mars.position.z * Math.cos(rotSpeedMars) - mars.position.x  * Math.sin(rotSpeedMars);
@@ -393,7 +417,7 @@ function render() {
 
   camera.lookAt(scene.position);
 
-  //update the camera
+  // Update the camera
   cameraControl.update();
 
   // render using requestAnimationFrame
@@ -414,7 +438,7 @@ function handleResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-//calls the loader before the init
+// Calls the loader before the init
 $(window).load(function() {
     $(".loader").delay(5000).fadeOut("slow");
   })
