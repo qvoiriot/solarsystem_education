@@ -15,7 +15,7 @@
      * Initializes the scene, camera and objects. Called when the window is
      * loaded by using window.onload (see below)
      */
-    function init() {
+    function terre() {
 
 
   //texture de la terre
@@ -97,14 +97,14 @@
 
         // call the render function, after the first render, interval is determined
         // by requestAnimationFrame
-        render();
+        renderTerre();
     }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
      * for future renders
      */
-    function render() {
+    function renderTerre() {
 
         //update camera
         var rotTerre = 0.0005; //control.rotationSpeed;
@@ -134,14 +134,14 @@
      * Function handles the resize event. This make sure the camera and the renderer
      * are updated at the correct moment.
      */
-    function handleResize() {
+    function handleResizeTerre() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     // calls the init function when the window is done loading.
-    window.onload = init;
+    //window.onload = terre;
     // calls the handleResize function when the window is resized
-    window.addEventListener('resize', handleResize, false);
+    window.addEventListener('resize', handleResizeTerre, false);
 

@@ -23,3 +23,15 @@ body {
 .menu button {
   cursor: pointer;
 }
+
+.menu1 {
+  position: absolute;
+  left: 30%;
+  top: 30px;
+}
+
+.menu1 button {
+  cursor: pointer;
+}
+
+

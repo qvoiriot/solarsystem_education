@@ -440,7 +440,7 @@ function handleResize() {
 
 // Calls the loader before the init
 $(window).load(function() {
-    $(".loader").delay(5000).fadeOut("slow");
+    $(".loader").delay(6000).fadeOut("slow");
   })
 
 // calls the init function when the window is done loading.
