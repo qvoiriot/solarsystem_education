@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>01.01 Mercure</title>
+    <title>01.04 Mars</title>
     <script src="../assets/libs/three.js"></script>
     <script src="../assets/libs/dat.gui.min.js"></script>
     <script src="../assets/libs/stats.min.js"></script>
@@ -46,12 +46,14 @@
      */
     function init() {
 
+
+
+
         //texture mars
         var matextureMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marsmap_1.jpg");
         var bumpMapMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marbumpMap.jpg");
         var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
         materialMars.bumpMap = bumpMapMars;
-
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -119,9 +121,9 @@
     function render() {
 
         //update camera
-        var rotMercure= 0.000408082;
+        var rotMars = 0.000971742;
 
-        mercure.rotation.y = mercure.rotation.y+ rotMercure;
+        mars.rotation.y = mars.rotation.y+rotMars;
 
 
         camera.lookAt(scene.position);
@@ -152,7 +154,6 @@
     window.addEventListener('resize', handleResize, false);
 
 </script>
-
 <body>
     <div id="retour"><a href="http://www.epsiprojet.crochot-dutisseuil.fr/systeme_solaire.html">Retour</a></div>
 <div id="name">Mars</div>
