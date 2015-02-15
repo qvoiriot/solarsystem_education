@@ -38,7 +38,6 @@ function systeme(){
   materialTerre.specular = new THREE.Color(0x262626);
 
   // texture du soleil
-  // var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun.jpg");
   var matextureSun = THREE.ImageUtils.loadTexture("assets/textures/planets/sun_light.jpg");
   var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
@@ -235,7 +234,6 @@ function systeme(){
   anneau.position.x = 1903;
   anneau.position.y = -2;
   anneau.position.z = 0;
-  //anneau.name='anneau';
   center_node.add(anneau);
 
 
@@ -447,3 +445,5 @@ $(window).load(function() {
 window.onload = init;
 // calls the handleResize function when the window is resized
 window.addEventListener('resize', handleResize, false);
+
+

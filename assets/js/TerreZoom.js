@@ -15,9 +15,9 @@
      * Initializes the scene, camera and objects. Called when the window is
      * loaded by using window.onload (see below)
      */
-    function terre() {
+  function terreZoom() {
 
-
+    alert("dans la fonction");
   //texture de la terre
   var matextureTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthmap4k.jpg");
   var bumpMapTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthbumpMap.jpg");
@@ -97,14 +97,14 @@
 
         // call the render function, after the first render, interval is determined
         // by requestAnimationFrame
-        renderTerre();
+        renderTerreZoom();
     }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
      * for future renders
      */
-    function renderTerre() {
+    function renderTerreZoom() {
 
         //update camera
         var rotTerre = 0.0005; //control.rotationSpeed;
