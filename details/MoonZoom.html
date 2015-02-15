@@ -37,13 +37,11 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
     var lune;
     var cameraBG;
     var composer;
     var sceneBG;
-    var soleil;
+
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -54,11 +52,11 @@
 
 
 
-  //texture de la lune
-  var matextureLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonmap.jpg");
-  var bumpMapLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonbumpMap.jpg");
-  var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
-  materialLune.bumpMap = bumpMapLune;
+        //texture de la lune
+        var matextureLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonmap.jpg");
+        var bumpMapLune = THREE.ImageUtils.loadTexture("../assets/textures/planets/moonbumpMap.jpg");
+        var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
+        materialLune.bumpMap = bumpMapLune;
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -73,14 +71,14 @@
         renderer.shadowMapEnabled = true;
 
 
-  var luneGeometry = new THREE.SphereGeometry(8, 60, 60);
-  lune = new THREE.Mesh (luneGeometry, materialLune);
-  lune.receiveShadow = true;
-  lune.position.x = 0;
-  lune.position.y = 0;
-  lune.position.z = 0;
-  lune.name='lune';
-  scene.add(lune);
+        var luneGeometry = new THREE.SphereGeometry(8, 60, 60);
+        lune = new THREE.Mesh (luneGeometry, materialLune);
+        lune.receiveShadow = true;
+        lune.position.x = 0;
+        lune.position.y = 0;
+        lune.position.z = 0;
+        lune.name='lune';
+        scene.add(lune);
 
         // add ambient light
         ambientLight = new THREE.AmbientLight(0x111111,1);
@@ -122,19 +120,19 @@
      */
     function render() {
 
-        //update camera
-  var rotLune = 0.002;
+      //update camera
+      var rotLune = 0.002;
 
-  lune.rotation.y = lune.rotation.y + rotLune;
+      lune.rotation.y = lune.rotation.y + rotLune;
 
-        camera.lookAt(scene.position);
+      camera.lookAt(scene.position);
 
-        //update the camera
-        cameraControl.update();
-        renderer.render(scene, camera);
+      //update the camera
+      cameraControl.update();
+      renderer.render(scene, camera);
 
-        // render using requestAnimationFrame
-        requestAnimationFrame(render);
+      // render using requestAnimationFrame
+      requestAnimationFrame(render);
 
     }
 

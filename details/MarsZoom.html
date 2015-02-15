@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
-    <title>01.04 Mars</title>
+    <title>01.01 Mercure</title>
     <script src="../assets/libs/three.js"></script>
     <script src="../assets/libs/dat.gui.min.js"></script>
     <script src="../assets/libs/stats.min.js"></script>
@@ -21,7 +22,7 @@
             margin: 0;
             overflow: hidden;
         }
-       
+          
     </style>
 </head>
 <script>
@@ -34,47 +35,47 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var mars;
     var cameraBG;
     var composer;
     var sceneBG;
+    var mars;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
      * loaded by using window.onload (see below)
      */
-    function mars() {
+    function init() {
+
+        //texture mars
+        var matextureMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marsmap_1.jpg");
+        var bumpMapMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marbumpMap.jpg");
+        var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
+        materialMars.bumpMap = bumpMapMars;
 
 
-    //texture mars
-    var matextureMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marsmap_1.jpg");
-    var bumpMapMars = THREE.ImageUtils.loadTexture("../assets/textures/planets/marbumpMap.jpg");
-    var materialMars = new THREE.MeshPhongMaterial({map: matextureMars, transparent: true});
-    materialMars.bumpMap = bumpMapMars;
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render, sets the background color and the size
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
 
 
-    // create a scene, that will hold all our elements such as objects, cameras and lights.
-    scene = new THREE.Scene();
-
-    // create a camera, which defines where we're looking at.
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    // create a render, sets the background color and the size
-    renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(0x000000, 1.0);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMapEnabled = true;
-
-
-  //add mars
-  var marsGeometry = new THREE.SphereGeometry(8, 60, 60);
-  mars = new THREE.Mesh (marsGeometry, materialMars);
-  mars.receiveShadow = true;
-  mars.position.x = 0;
-  mars.position.y = 0;
-  mars.position.z = 0;
-  mars.name='mars';
-  scene.add(mars);
+        //add mars
+        var marsGeometry = new THREE.SphereGeometry(8, 60, 60);
+        mars = new THREE.Mesh (marsGeometry, materialMars);
+        mars.receiveShadow = true;
+        mars.position.x = 0;
+        mars.position.y = 0;
+        mars.position.z = 0;
+        mars.name='mars';
+        scene.add(mars);
 
 
         // add ambient light
@@ -92,7 +93,6 @@
 
         scene.add(directionalLight);
 
-
         // position and point the camera to the center of the scene
         camera.position.x = 15;
         camera.position.y = 16;
@@ -109,19 +109,19 @@
 
         // call the render function, after the first render, interval is determined
         // by requestAnimationFrame
-        renderMars();
+        render();
     }
 
     /**
      * Called when the scene needs to be rendered. Delegates to requestAnimationFrame
      * for future renders
      */
-    function renderMars() {
+    function render() {
 
         //update camera
-  var rotMars = 0.000971742;
+        var rotMercure= 0.000408082;
 
-    mars.rotation.y = mars.rotation.y+rotMars;
+        mercure.rotation.y = mercure.rotation.y+ rotMercure;
 
 
         camera.lookAt(scene.position);
@@ -140,18 +140,19 @@
      * Function handles the resize event. This make sure the camera and the renderer
      * are updated at the correct moment.
      */
-    function handleResizeMars() {
+    function handleResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     // calls the init function when the window is done loading.
-    window.onload = mars;
+    window.onload = init;
     // calls the handleResize function when the window is resized
-    window.addEventListener('resize', handleResizeMars, false);
+    window.addEventListener('resize', handleResize, false);
 
 </script>
+
 <body>
     <div id="retour"><a href="http://www.epsiprojet.crochot-dutisseuil.fr/systeme_solaire.html">Retour</a></div>
 <div id="name">Mars</div>

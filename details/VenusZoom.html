@@ -34,9 +34,7 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
+    var venus;
     var cameraBG;
     var composer;
     var sceneBG;
@@ -47,14 +45,11 @@
      */
     function init() {
 
-
-
-
-  //texture venus
-  var matextureVenus = THREE.ImageUtils.loadTexture("../assets/textures/planets/venusmap.jpg");
-  var bumpMapVenus = THREE.ImageUtils.loadTexture("../assets/textures/planets/venusbump.jpg");
-  var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: true});
-  materialVenus.bumpMap = bumpMapVenus;
+        //texture venus
+        var matextureVenus = THREE.ImageUtils.loadTexture("../assets/textures/planets/venusmap.jpg");
+        var bumpMapVenus = THREE.ImageUtils.loadTexture("../assets/textures/planets/venusbump.jpg");
+        var materialVenus = new THREE.MeshPhongMaterial({map: matextureVenus, transparent: true});
+        materialVenus.bumpMap = bumpMapVenus;
 
 
 
@@ -71,17 +66,15 @@
         renderer.shadowMapEnabled = true;
 
 
-
-  //create venus
-  var venusGeometry = new THREE.SphereGeometry(8, 60, 60);
-  venus = new THREE.Mesh (venusGeometry, materialVenus);
-  venus.receiveShadow = true;
-  venus.position.x = 0;
-  venus.position.y = 0;
-  venus.position.z = 0;
-  venus.name='venus';
-  scene.add(venus);
-
+        //create venus
+        var venusGeometry = new THREE.SphereGeometry(8, 60, 60);
+        venus = new THREE.Mesh (venusGeometry, materialVenus);
+        venus.receiveShadow = true;
+        venus.position.x = 0;
+        venus.position.y = 0;
+        venus.position.z = 0;
+        venus.name='venus';
+        scene.add(venus);
 
 
         // add ambient light
@@ -127,9 +120,9 @@
     function render() {
 
         //update camera
-  var rotVenus = -0.00098498;
+        var rotVenus = -0.00098498;
 
-  venus.rotation.y = venus.rotation.y+ rotVenus;
+        venus.rotation.y = venus.rotation.y+ rotVenus;
 
 
         camera.lookAt(scene.position);
@@ -140,7 +133,6 @@
 
         // render using requestAnimationFrame
         requestAnimationFrame(render);
-
     }
 
 

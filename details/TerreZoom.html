@@ -37,7 +37,7 @@
     var cameraBG;
     var composer;
     var sceneBG;
-    var terre, lune, nuage;
+    var terre, nuage;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -46,53 +46,53 @@
     function init() {
 
 
-  //texture de la terre
-  var matextureTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthmap4k.jpg");
-  var bumpMapTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthbumpMap.jpg");
-  //var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k.jpg");
-  var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: false});
+        //texture de la terre
+        var matextureTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthmap4k.jpg");
+        var bumpMapTerre = THREE.ImageUtils.loadTexture("../assets/textures/planets/earthbumpMap.jpg");
+        //var specularMapEarth = THREE.ImageUtils.loadTexture("assets/textures/planets/earthspec4k.jpg");
+        var materialTerre = new THREE.MeshPhongMaterial({map: matextureTerre, transparent: false});
 
-  materialTerre.bumpMap = bumpMapTerre;
-  //materialTerre.specularMap = specularMapEarth;
-  materialTerre.specular = new THREE.Color(0x262626);
+        materialTerre.bumpMap = bumpMapTerre;
+        //materialTerre.specularMap = specularMapEarth;
+        materialTerre.specular = new THREE.Color(0x262626);
 
-  //texture des nuages
-  var matextureNuage = THREE.ImageUtils.loadTexture("../assets/textures/planets/fair_clouds_4k.png");
-  var materialNuage = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
-
-
-    // create a scene, that will hold all our elements such as objects, cameras and lights.
-    scene = new THREE.Scene();
-
-    // create a camera, which defines where we're looking at.
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    // create a render, sets the background color and the size
-    renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(0x000000, 1.0);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMapEnabled = true;
+        //texture des nuages
+        var matextureNuage = THREE.ImageUtils.loadTexture("../assets/textures/planets/fair_clouds_4k.png");
+        var materialNuage = new THREE.MeshPhongMaterial({map: matextureNuage, transparent: true});
 
 
-  // create the ground plane Terre
-  var sphereGeometry = new THREE.SphereGeometry(8, 60, 60);
-  terre = new THREE.Mesh (sphereGeometry, materialTerre);
-  terre.receiveShadow = true;
-  terre.position.x = 0;
-  terre.position.y = 0;
-  terre.position.z = 0;
-  terre.name='Terre';
-  scene.add(terre);
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render, sets the background color and the size
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
 
 
-  //create nuage
-  var nuageGeometry = new THREE.SphereGeometry(8.1, 60, 60);
-  nuage = new THREE.Mesh (nuageGeometry, materialNuage);
-  nuage.position.x = 0;
-  nuage.position.y = 0;
-  nuage.position.z = 0;
-  //nuage.name='nuage';
-  scene.add(nuage);
+        // create the ground plane Terre
+        var sphereGeometry = new THREE.SphereGeometry(8, 60, 60);
+        terre = new THREE.Mesh (sphereGeometry, materialTerre);
+        terre.receiveShadow = true;
+        terre.position.x = 0;
+        terre.position.y = 0;
+        terre.position.z = 0;
+        terre.name='Terre';
+        scene.add(terre);
+
+
+        //create nuage
+        var nuageGeometry = new THREE.SphereGeometry(8.1, 60, 60);
+        nuage = new THREE.Mesh (nuageGeometry, materialNuage);
+        nuage.position.x = 0;
+        nuage.position.y = 0;
+        nuage.position.z = 0;
+        //nuage.name='nuage';
+        scene.add(nuage);
 
 
         // add ambient light
@@ -149,12 +149,8 @@
         renderer.render(scene, camera);
 
 
-
-
         // render using requestAnimationFrame
         requestAnimationFrame(render);
-
-
     }
 
 

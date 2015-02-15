@@ -34,9 +34,6 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
@@ -49,11 +46,9 @@
     function init() {
 
 
-
-
-  //texture du soleil
-  var matextureSun = THREE.ImageUtils.loadTexture("../assets/textures/planets/sun.jpg");
-  var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
+        //texture du soleil
+        var matextureSun = THREE.ImageUtils.loadTexture("../assets/textures/planets/sun.jpg");
+        var materialSun = new THREE.MeshBasicMaterial({map: matextureSun, transparent: false});
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -69,33 +64,33 @@
         renderer.shadowMapEnabled = true;
 
 
-  //add soleil
-  var soleilGeometry = new THREE.SphereGeometry(8, 60, 60);
-  soleil = new THREE.Mesh (soleilGeometry, materialSun);
-  soleil.position.x = 0;
-  soleil.position.y = 0;
-  soleil.position.z = 0;
-  soleil.name='soleil';
-  scene.add(soleil);
+        //add soleil
+        var soleilGeometry = new THREE.SphereGeometry(8, 60, 60);
+        soleil = new THREE.Mesh (soleilGeometry, materialSun);
+        soleil.position.x = 0;
+        soleil.position.y = 0;
+        soleil.position.z = 0;
+        soleil.name='soleil';
+        scene.add(soleil);
 
-/*************************************************************/
-/**************           CUSTOM SUN             *************/
-/*************************************************************/
+        /*************************************************************/
+        /**************           CUSTOM SUN             *************/
+        /*************************************************************/
 
-  // SUPER SIMPLE GLOW EFFECT
-  // use sprite because it appears the same from all angles
-  var spriteMaterial = new THREE.SpriteMaterial(
-  {
-    map: new THREE.ImageUtils.loadTexture( '../assets/textures/planets/sun_halo.png' ),
+        // SUPER SIMPLE GLOW EFFECT
+        // use sprite because it appears the same from all angles
+        var spriteMaterial = new THREE.SpriteMaterial(
+        {
+        map: new THREE.ImageUtils.loadTexture( '../assets/textures/planets/sun_halo.png' ),
 
-    color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
-  });
-  var sprite = new THREE.Sprite( spriteMaterial );
-  sprite.scale.set(26, 26, 1.0);
-  soleil.add(sprite); // this centers the glow at the mesh
+        color: 0xfcdc12, transparent: false, blending: THREE.AdditiveBlending
+        });
+        var sprite = new THREE.Sprite( spriteMaterial );
+        sprite.scale.set(26, 26, 1.0);
+        soleil.add(sprite); // this centers the glow at the mesh
 
 
-/*************************************************************/
+        /*************************************************************/
 
         // add ambient light
         ambientLight = new THREE.AmbientLight(0x111111,1);
@@ -139,9 +134,9 @@
     function render() {
 
         //update camera
-  var rotSun = 0.000036935;
+        var rotSun = 0.000036935;
 
-  soleil.rotation.y = soleil.rotation.y+ rotSun;
+        soleil.rotation.y = soleil.rotation.y+ rotSun;
 
         camera.lookAt(scene.position);
 

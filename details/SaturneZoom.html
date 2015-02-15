@@ -34,13 +34,10 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
+    var Saturn;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -49,15 +46,15 @@
     function init() {
 
 
-  //texture saturn
-  var matextureSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnmap.jpg");
-  var bumpMapSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnbumpMap.jpg");
-  var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
-  materialSaturn.bumpMap =bumpMapSaturn;
+        //texture saturn
+        var matextureSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnmap.jpg");
+        var bumpMapSaturn = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnbumpMap.jpg");
+        var materialSaturn = new THREE.MeshPhongMaterial({map: matextureSaturn, transparent: false});
+        materialSaturn.bumpMap =bumpMapSaturn;
 
 
-  var matextureAnneau = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnring.jpg");
-  var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
+        var matextureAnneau = THREE.ImageUtils.loadTexture("../assets/textures/planets/saturnring.jpg");
+        var materialAnneau = new THREE.MeshPhongMaterial({map: matextureAnneau, transparent: true, opacity : 0.3});
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -72,25 +69,25 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add saturn
-  var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
-  saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
-  saturn.receiveShadow = true;
-  saturn.position.x = 0;
-  saturn.position.y = 0;
-  saturn.position.z = 0;
-  saturn.name='saturn';
-  scene.add(saturn);
+        //add saturn
+        var saturnGeometry = new THREE.SphereGeometry(8, 60, 60);
+        saturn = new THREE.Mesh (saturnGeometry, materialSaturn);
+        saturn.receiveShadow = true;
+        saturn.position.x = 0;
+        saturn.position.y = 0;
+        saturn.position.z = 0;
+        saturn.name='saturn';
+        scene.add(saturn);
 
-  //add anneau saturn
-  var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
-  anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
-  anneau.receiveShadow = false;
-  anneau.position.x = 0;
-  anneau.position.y = 0;
-  anneau.position.z = 0;
-  //anneau.name='anneau';
-  scene.add(anneau);
+        //add anneau saturn
+        var anneauGeometry = new THREE.CylinderGeometry( 8, 20, 1, 50 );
+        anneau = new THREE.Mesh (anneauGeometry, materialAnneau);
+        anneau.receiveShadow = false;
+        anneau.position.x = 0;
+        anneau.position.y = 0;
+        anneau.position.z = 0;
+        //anneau.name='anneau';
+        scene.add(anneau);
 
 
         // add ambient light
@@ -135,11 +132,11 @@
     function render() {
 
         //update camera
-  var rotSaturn= 0.002338904;
-  var rotAnneau= 0.01;
+        var rotSaturn= 0.002338904;
+        var rotAnneau= 0.01;
 
-  saturn.rotation.y= saturn.rotation.y+rotSaturn;
-  anneau.rotation.y= anneau.rotation.y+rotAnneau;
+        saturn.rotation.y= saturn.rotation.y+rotSaturn;
+        anneau.rotation.y= anneau.rotation.y+rotAnneau;
 
 
         camera.lookAt(scene.position);

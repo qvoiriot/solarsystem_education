@@ -34,13 +34,10 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
+    var neptune
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -49,11 +46,11 @@
     function init() {
 
 
-  //texture neptune
-  var matextureNeptune = THREE.ImageUtils.loadTexture("../assets/textures/planets/neptunemap.jpg");
-  var bumpMapNeptune = THREE.ImageUtils.loadTexture("../assets/textures/planets/neptunebumpMap.jpg");
-  var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: false});
-    materialNeptune.bumpMap = bumpMapNeptune;
+        //texture neptune
+        var matextureNeptune = THREE.ImageUtils.loadTexture("../assets/textures/planets/neptunemap.jpg");
+        var bumpMapNeptune = THREE.ImageUtils.loadTexture("../assets/textures/planets/neptunebumpMap.jpg");
+        var materialNeptune = new THREE.MeshPhongMaterial({map: matextureNeptune, transparent: false});
+        materialNeptune.bumpMap = bumpMapNeptune;
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -67,15 +64,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add neptune
-  var neptuneGeometry = new THREE.SphereGeometry(8, 60, 60);
-  neptune = new THREE.Mesh (neptuneGeometry, materialNeptune);
-  neptune.receiveShadow = true;
-  neptune.position.x = 0;
-  neptune.position.y = 0;
-  neptune.position.z = 0;
-  neptune.name='neptune';
-  scene.add(neptune);
+        //add neptune
+        var neptuneGeometry = new THREE.SphereGeometry(8, 60, 60);
+        neptune = new THREE.Mesh (neptuneGeometry, materialNeptune);
+        neptune.receiveShadow = true;
+        neptune.position.x = 0;
+        neptune.position.y = 0;
+        neptune.position.z = 0;
+        neptune.name='neptune';
+        scene.add(neptune);
 
 
         // add ambient light
@@ -120,14 +117,14 @@
     function render() {
 
         //update camera
-  var rotNeptune = 0.001246563;
+        var rotNeptune = 0.001246563;
 
-  neptune.rotation.y = neptune.rotation.y+ rotNeptune;
+        neptune.rotation.y = neptune.rotation.y+ rotNeptune;
 
 
         camera.lookAt(scene.position);
 
-    //update the camera
+        //update the camera
         cameraControl.update();
         renderer.render(scene, camera);
 

@@ -34,13 +34,10 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
+    var pluton;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -49,11 +46,11 @@
     function init() {
 
 
-    //texture pluton
-  var matexturePluton = THREE.ImageUtils.loadTexture("../assets/textures/planets/plutonmap.jpg");
-  var bumpMapPluton = THREE.ImageUtils.loadTexture("../assets/textures/planets/PlutonBumpMap.jpg");
-  var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
-  materialPluton.bumpMap = bumpMapPluton;
+        //texture pluton
+        var matexturePluton = THREE.ImageUtils.loadTexture("../assets/textures/planets/plutonmap.jpg");
+        var bumpMapPluton = THREE.ImageUtils.loadTexture("../assets/textures/planets/PlutonBumpMap.jpg");
+        var materialPluton = new THREE.MeshPhongMaterial({map: matexturePluton, transparent: false});
+        materialPluton.bumpMap = bumpMapPluton;
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
         scene = new THREE.Scene();
@@ -67,15 +64,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add pluton
-  var plutonGeometry = new THREE.SphereGeometry(8, 60, 60);
-  pluton = new THREE.Mesh (plutonGeometry, materialPluton);
-  pluton.receiveShadow = true;
-  pluton.position.x = 0;
-  pluton.position.y = 0;
-  pluton.position.z = 0;
-  pluton.name='pluton';
-  scene.add(pluton);
+        //add pluton
+        var plutonGeometry = new THREE.SphereGeometry(8, 60, 60);
+        pluton = new THREE.Mesh (plutonGeometry, materialPluton);
+        pluton.receiveShadow = true;
+        pluton.position.x = 0;
+        pluton.position.y = 0;
+        pluton.position.z = 0;
+        pluton.name='pluton';
+        scene.add(pluton);
 
 
         // add ambient light
@@ -119,14 +116,14 @@
     function render() {
 
         //update camera
-  var rotPluton = 0.000156431;
+        var rotPluton = 0.000156431;
 
-  pluton.rotation.y = pluton.rotation.y+ rotPluton;
+        pluton.rotation.y = pluton.rotation.y+ rotPluton;
 
 
         camera.lookAt(scene.position);
 
-       //update the camera
+        //update the camera
         cameraControl.update();
         renderer.render(scene, camera);
 

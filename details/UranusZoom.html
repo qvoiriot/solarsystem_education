@@ -33,13 +33,10 @@
     var stats;
     var cameraControl;
     var directionalLight;
-    var sphere;
-    var nuage;
-    var lune;
     var cameraBG;
     var composer;
     var sceneBG;
-    var jupiter;
+    var uranus;
 
     /**
      * Initializes the scene, camera and objects. Called when the window is
@@ -47,14 +44,11 @@
      */
     function init() {
 
-
-
-
-  //texture uranus
-  var matextureUranus = THREE.ImageUtils.loadTexture("../assets/textures/planets/uranusmap.jpg");
-  var bumpMapUranus = THREE.ImageUtils.loadTexture("../assets/textures/planets/uranusbumpMap.jpg");
-  var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: false});
-  materialUranus.bumpMap = bumpMapUranus;
+        //texture uranus
+        var matextureUranus = THREE.ImageUtils.loadTexture("../assets/textures/planets/uranusmap.jpg");
+        var bumpMapUranus = THREE.ImageUtils.loadTexture("../assets/textures/planets/uranusbumpMap.jpg");
+        var materialUranus = new THREE.MeshPhongMaterial({map: matextureUranus, transparent: false});
+        materialUranus.bumpMap = bumpMapUranus;
 
 
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -69,15 +63,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMapEnabled = true;
 
-  //add uranus
-  var uranusGeometry = new THREE.SphereGeometry(8, 60, 60);
-  uranus = new THREE.Mesh (uranusGeometry, materialUranus);
-  uranus.receiveShadow = true;
-  uranus.position.x = 0;
-  uranus.position.y = 0;
-  uranus.position.z = 0;
-  uranus.name='uranus';
-  scene.add(uranus);
+        //add uranus
+        var uranusGeometry = new THREE.SphereGeometry(8, 60, 60);
+        uranus = new THREE.Mesh (uranusGeometry, materialUranus);
+        uranus.receiveShadow = true;
+        uranus.position.x = 0;
+        uranus.position.y = 0;
+        uranus.position.z = 0;
+        uranus.name='uranus';
+        scene.add(uranus);
 
 
         // add ambient light
@@ -122,9 +116,9 @@
     function render() {
 
         //update camera
-  var rotUranus = 0.001337095;
+        var rotUranus = 0.001337095;
 
-  uranus.rotation.x = uranus.rotation.x+ rotUranus;
+        uranus.rotation.x = uranus.rotation.x+ rotUranus;
 
 
         camera.lookAt(scene.position);
