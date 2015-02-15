@@ -43,7 +43,7 @@ function systeme(){
 
   // texture de la lune
   var matextureLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonmap_light.jpg");
-  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpmap_light.jpg");
+  var bumpMapLune = THREE.ImageUtils.loadTexture("assets/textures/planets/moonbumpMap_light.jpg");
   var materialLune = new THREE.MeshPhongMaterial({map: matextureLune, transparent: false});
   materialLune.bumpMap = bumpMapLune;
 
